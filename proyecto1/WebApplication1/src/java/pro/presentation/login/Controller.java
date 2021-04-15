@@ -97,6 +97,7 @@ public class Controller extends HttpServlet {
 
         try {
             usuario real = domainModel.recuperar( model.getUsuario().getId());
+            
             //Persona cl = domainModel.PersonaFind(real);
             session.setAttribute("usuario", real);
             String viewUrl;
