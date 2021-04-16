@@ -9,11 +9,12 @@
     </head>
     <body>
         <%@ include file="/header.jsp" %>
+        
         <form action="/Proyecto1/presentation/login" method="post">    
             <div>
                 <div>
                     <label for="username">Nombre Usuario:</label>
-                    <input type="text" name="usernameText" placeholder="Numero de Cedula" required="" >
+                    <input type="number" name="usernameText" placeholder="Numero de Cedula" required="" >
                 </div>
                 <div>
                     <label for="password">Password:</label>

@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
 import pro.logic.usuario.Usuario;
-import pro.logic.usuario.UsuarioDAO;
+import pro.logic.usuario.estudiante.EstudianteDAO;
+
+
 @WebServlet(name = "Controller", urlPatterns = {"/presentation/login", "/presentation/logout"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("model", new Model());
+                Model model = new Model();
+        request.setAttribute("model", model);
 
         String viewUrl = "";
         switch (request.getServletPath()) {
@@ -84,26 +85,37 @@ public class Controller extends HttpServlet {
 
     void updateModel(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        model.getUsuario().setCedula(request.getParameter("usernameText"));
+        int cedula = Integer.parseInt(request.getParameter("usernameText"));
+        model.getUsuario().setCedula(cedula);
         model.getUsuario().setPassword(request.getParameter("passwordText"));
     }
     
     public String loginAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        UsuarioDAO dao = UsuarioDAO.obtenerInstancia();
+        
+        EstudianteDAO dao = EstudianteDAO.obtenerInstancia();
+        
+        
         HttpSession session = request.getSession(true);
         String viewUrl;
 
         try {
             Usuario real = dao.recuperar(model.getUsuario().getCedula());
             
+            
+            
             //Persona cl = domainModel.PersonaFind(real);
             session.setAttribute("usuario", real);
             model.setUsuario(real);
             
+            if (real == null)
+                viewUrl = "/index.jsp";
+            else
+                viewUrl = "/presentation/usuario/usuarioView.jsp";
+            
             //session.setAttribute("cliente", cl);
             
-            viewUrl = "/presentation/usuario/usuarioView.jsp";
+            
             return viewUrl;
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();

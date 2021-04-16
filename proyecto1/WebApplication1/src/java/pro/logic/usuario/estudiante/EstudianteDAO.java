@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pro.logic.usuario;
+package pro.logic.usuario.estudiante;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,44 +19,51 @@ import pro.logic.Database;
  *
  * @author flore
  */
-public class UsuarioDAO {
+public class EstudianteDAO {
     
     
-    private UsuarioDAO(){
+    private EstudianteDAO(){
         db = Database.instance();
     }
     
-    public static UsuarioDAO obtenerInstancia(){
+    public static EstudianteDAO obtenerInstancia(){
         if (instancia == null)
-            instancia = new UsuarioDAO();
+            instancia = new EstudianteDAO();
         return instancia;
     }
     
-    public Usuario recuperar(String id) {
-        Usuario resultado = null;
+    public Estudiante recuperar(int id) {
+        Estudiante resultado = null;
         try {
             try (Connection cnx = db.getConnection();
-                    PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_RECUPERAR)) {
+                    PreparedStatement stm = cnx.prepareStatement(EstudianteCRUD.CMD_RECUPERAR)) {
                 stm.clearParameters();
-                stm.setString(1, id);
+                stm.setInt(1, id);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
-                        resultado = new Usuario(
-                                rs.getString("cedula"),
+                        resultado = new Estudiante(
+                                rs.getInt("idEstudiante"),
                                 rs.getString("nombre"),
+                                rs.getString("apellido1"),
+                                rs.getString("apellido2"),
+                                rs.getString("correo"),
+                                rs.getString("numero"),
+                                rs.getString("direccion"),
                                 rs.getString("password")
                         );
                     }
                 }
             } catch (URISyntaxException | IOException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return resultado;
             }
         } catch (SQLException ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return resultado;
         }
         return resultado;
     }
     
     private Database db;
-    private static UsuarioDAO instancia;
+    private static EstudianteDAO instancia;
 }

@@ -7,8 +7,11 @@ package pro.presentation.login;
 
 import pro.logic.usuario.Usuario;
 
-public class Model {
-    
+/**
+ *
+ * @author flore
+ */
+public final class Model {
     private Usuario usuario;
 
     public Model() {

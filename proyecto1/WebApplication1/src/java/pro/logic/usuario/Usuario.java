@@ -1,31 +1,30 @@
-package pro.logic;
+package pro.logic.usuario;
 
-public class estudiante {
+public class Usuario {
 
-    String cedula;
+    int cedula;
     String nombre;
     String apellido1;
     String apellido2;
     String correo;
     String numero;
-    String direccion;
     String password;
 
-    public estudiante() {
+    public Usuario() {
+        
     }
 
-    public estudiante(String cedula, String nombre, String apellido1, String apellido2, String correo, String numero, String direccion, String password) {
+    public Usuario(int cedula, String nombre, String apellido1, String apellido2, String correo, String numero, String password) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.correo = correo;
         this.numero = numero;
-        this.direccion = direccion;
         this.password = password;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
@@ -49,15 +48,11 @@ public class estudiante {
         this.numero = numero;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
@@ -81,17 +76,13 @@ public class estudiante {
         return numero;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
     public String getPassword() {
         return password;
     }
 
     @Override
     public String toString() {
-        return "estudiante{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo=" + correo + ", numero=" + numero + ", direccion=" + direccion + ", password=" + password + '}';
+        return "estudiante{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo=" + correo + ", numero=" + numero + ", password=" + password + '}';
     }
 
 }

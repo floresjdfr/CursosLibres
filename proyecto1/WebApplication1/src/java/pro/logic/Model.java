@@ -5,7 +5,6 @@
  */
 package pro.logic;
 
-import pro.logic.usuario.Usuario;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -57,33 +56,33 @@ public class Model {
 //        }
 //    }
 //    
-    public Usuario recuperar(String id) {
-        Usuario resultado = null;
-
-        try (Connection cnx = Database.instance().getConnection();
-                PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_RECUPERAR)) {
-            stm.clearParameters();
-            stm.setString(1, id);
-            try (ResultSet rs = stm.executeQuery()) {
-                if (rs.next()) {
-                    resultado = new Usuario(
-                            rs.getString("cedula"),
-                            rs.getString("nombre"),
-                            rs.getString("password")
-                    );
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.printf("Excepción: '%s'%n", ex.getMessage());
-        } catch (URISyntaxException ex) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return resultado;
-
-    }
+//    public Usuario recuperar(String id) {
+//        Usuario resultado = null;
+//
+//        try (Connection cnx = Database.instance().getConnection();
+//                PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_RECUPERAR)) {
+//            stm.clearParameters();
+//            stm.setString(1, id);
+//            try (ResultSet rs = stm.executeQuery()) {
+//                if (rs.next()) {
+//                    resultado = new Usuario(
+//                            rs.getString("cedula"),
+//                            rs.getString("nombre"),
+//                            rs.getString("password")
+//                    );
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+//        } catch (URISyntaxException ex) {
+//            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        return resultado;
+//
+//    }
 
 //    public void update(Cliente o) throws Exception{
 //        String sql="update Cliente set nombre=? "+
@@ -147,29 +146,29 @@ public class Model {
 //
 //    public  void close(){
 //    }
-    private Usuario from(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public class UsuarioCRUD {
-
-        protected static final String CMD_LISTAR
-                = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
-                + "ORDER BY nombre_Completo; ";
-        protected static final String CMD_AGREGAR
-                = "INSERT INTO usuario (nombre, nombre_Completo, clave, ultimoAcceso) "
-                + "VALUES (?, ?, ?, ?); ";
-
-        protected static final String CMD_RECUPERAR
-                = "SELECT cedula, nombre, password FROM usuario "
-                + "WHERE cedula = ?; ";
-        protected static final String CMD_ACTUALIZAR
-                = "UPDATE usuario SET nombre_completo = ?, clave = ?, ultimoAcceso = ? "
-                + "WHERE nombre = ?; ";
-        protected static final String CMD_ELIMINAR
-                = "DELETE FROM usuario "
-                + "WHERE nombre = ?; ";
-    }
+//    private Usuario from(ResultSet rs) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public class UsuarioCRUD {
+//
+//        protected static final String CMD_LISTAR
+//                = "SELECT nombre, nombre_Completo, clave, ultimoAcceso FROM usuario "
+//                + "ORDER BY nombre_Completo; ";
+//        protected static final String CMD_AGREGAR
+//                = "INSERT INTO usuario (nombre, nombre_Completo, clave, ultimoAcceso) "
+//                + "VALUES (?, ?, ?, ?); ";
+//
+//        protected static final String CMD_RECUPERAR
+//                = "SELECT cedula, nombre, password FROM usuario "
+//                + "WHERE cedula = ?; ";
+//        protected static final String CMD_ACTUALIZAR
+//                = "UPDATE usuario SET nombre_completo = ?, clave = ?, ultimoAcceso = ? "
+//                + "WHERE nombre = ?; ";
+//        protected static final String CMD_ELIMINAR
+//                = "DELETE FROM usuario "
+//                + "WHERE nombre = ?; ";
+//    }
 
     private Database db;
     private static Model uniqueInstance = null;
