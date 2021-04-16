@@ -4,6 +4,9 @@ package pro.logic;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,23 +14,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Database {
     private static Database theInstance;
     public static Database instance(){
         if (theInstance==null){ 
-            theInstance=new Database();
+            try {
+                theInstance=new Database();
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return theInstance;
     }
     public static final String PROPERTIES_FILE_NAME="/db.properties";        
     Connection cnx;
-    public Database(){
+    public Database() throws URISyntaxException, IOException{
         cnx=this.getConnection();            
     }
-    public Connection getConnection(){
-        try {
+    public Connection getConnection() throws URISyntaxException, FileNotFoundException, IOException{
+      
+        try{
             Properties prop = new Properties();
             URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
             File file = new File(resourceUrl.toURI());            
@@ -40,13 +52,15 @@ public class Database {
             String database = prop.getProperty("database_name");
             
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC";            
+                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&autoReconnect=true&useSSL=false";    
             Class.forName(driver).newInstance();
             return DriverManager.getConnection(URL_conexion);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            System.exit(-1);
-        } 
+        }
+                    
+        catch (InstantiationException | IllegalAccessException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return null;
     }
     

@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import pro.logic.usuario.Usuario;
+import pro.logic.usuario.estudiante.EstudianteDAO;
 
-import pro.presentation.login.Model;
 
-
-import pro.logic.usuario;
 @WebServlet(name = "Controller", urlPatterns = {"/presentation/login", "/presentation/logout"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("model", new Model());
+                Model model = new Model();
+        request.setAttribute("model", model);
 
         String viewUrl = "";
         switch (request.getServletPath()) {
@@ -28,7 +28,6 @@ public class Controller extends HttpServlet {
 
             case "/presentation/login":
                 viewUrl = this.login(request);
-                System.out.print("picha me mamo");
                 break;
             case "/presentation/logout":
                 viewUrl = this.logout(request);
@@ -86,29 +85,45 @@ public class Controller extends HttpServlet {
 
     void updateModel(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        model.getUsuario().setId(request.getParameter("usernameText"));
+        int cedula = Integer.parseInt(request.getParameter("usernameText"));
+        model.getUsuario().setCedula(cedula);
         model.getUsuario().setPassword(request.getParameter("passwordText"));
     }
     
     public String loginAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        pro.logic.Model domainModel = pro.logic.Model.instance();
+        
+        EstudianteDAO dao = EstudianteDAO.obtenerInstancia();
+        
+        
         HttpSession session = request.getSession(true);
+        String viewUrl;
 
         try {
-            usuario real = domainModel.recuperar( model.getUsuario().getId());
+            Usuario real = dao.recuperar(model.getUsuario().getCedula());
+            
+            
+            
             //Persona cl = domainModel.PersonaFind(real);
             session.setAttribute("usuario", real);
-            String viewUrl;
+            model.setUsuario(real);
+            
+            if (real == null)
+                viewUrl = "/index.jsp";
+            else
+                viewUrl = "/presentation/usuario/usuarioView.jsp";
+            
             //session.setAttribute("cliente", cl);
-           
-            return viewUrl = "/index.jsp";
+            
+            
+            return viewUrl;
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
             errores.put("cedulaFld", "Usuario o clave incorrectos");
             errores.put("claveFld", "Usuario o clave incorrectos");
-            return "/index.jsp";
+            viewUrl = "/index.jsp";
+            return viewUrl;
         }
     }
 

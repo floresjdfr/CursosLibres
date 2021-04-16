@@ -7,6 +7,6 @@
         <title>footer</title>
     </head>
     <body>
-        <h1>esta parte es el footer</h1>
+        <h4>Footer</h4>
     </body>
 </html>
