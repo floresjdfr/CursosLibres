@@ -52,18 +52,12 @@ public class Database {
             String database = prop.getProperty("database_name");
             
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC";    
+                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC&autoReconnect=true&useSSL=false";    
             Class.forName(driver).newInstance();
-            return DriverManager.getConnection(URL_conexion, user, password);
+            return DriverManager.getConnection(URL_conexion);
         }
                     
-        catch (InstantiationException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        catch (InstantiationException | IllegalAccessException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         

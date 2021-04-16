@@ -5,6 +5,7 @@
  */
 package pro.logic;
 
+import pro.logic.usuario.Usuario;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -56,8 +57,8 @@ public class Model {
 //        }
 //    }
 //    
-    public usuario recuperar(String id) {
-        usuario resultado = null;
+    public Usuario recuperar(String id) {
+        Usuario resultado = null;
 
         try (Connection cnx = Database.instance().getConnection();
                 PreparedStatement stm = cnx.prepareStatement(UsuarioCRUD.CMD_RECUPERAR)) {
@@ -65,8 +66,9 @@ public class Model {
             stm.setString(1, id);
             try (ResultSet rs = stm.executeQuery()) {
                 if (rs.next()) {
-                    resultado = new usuario(
+                    resultado = new Usuario(
                             rs.getString("cedula"),
+                            rs.getString("nombre"),
                             rs.getString("password")
                     );
                 }
@@ -145,7 +147,7 @@ public class Model {
 //
 //    public  void close(){
 //    }
-    private usuario from(ResultSet rs) {
+    private Usuario from(ResultSet rs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

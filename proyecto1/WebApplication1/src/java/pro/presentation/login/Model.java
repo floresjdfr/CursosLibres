@@ -5,25 +5,25 @@
  */
 package pro.presentation.login;
 
-import pro.logic.usuario;
+import pro.logic.usuario.Usuario;
 
 public class Model {
     
-    private usuario usuario;
+    private Usuario usuario;
 
     public Model() {
         this.reset();
     }
 
-    public usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
   
     public void reset(){
-        setUsuario(new usuario());        
+        setUsuario(new Usuario());        
     } 
 }

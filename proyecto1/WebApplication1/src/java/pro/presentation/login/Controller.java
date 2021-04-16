@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import pro.presentation.login.Model;
 
-
-import pro.logic.usuario;
+import pro.logic.usuario.Usuario;
+import pro.logic.usuario.UsuarioDAO;
 @WebServlet(name = "Controller", urlPatterns = {"/presentation/login", "/presentation/logout"})
 public class Controller extends HttpServlet {
 
@@ -28,7 +27,6 @@ public class Controller extends HttpServlet {
 
             case "/presentation/login":
                 viewUrl = this.login(request);
-                System.out.print("picha me mamo");
                 break;
             case "/presentation/logout":
                 viewUrl = this.logout(request);
@@ -86,30 +84,34 @@ public class Controller extends HttpServlet {
 
     void updateModel(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        model.getUsuario().setId(request.getParameter("usernameText"));
+        model.getUsuario().setCedula(request.getParameter("usernameText"));
         model.getUsuario().setPassword(request.getParameter("passwordText"));
     }
     
     public String loginAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        pro.logic.Model domainModel = pro.logic.Model.instance();
+        UsuarioDAO dao = UsuarioDAO.obtenerInstancia();
         HttpSession session = request.getSession(true);
+        String viewUrl;
 
         try {
-            usuario real = domainModel.recuperar( model.getUsuario().getId());
+            Usuario real = dao.recuperar(model.getUsuario().getCedula());
             
             //Persona cl = domainModel.PersonaFind(real);
             session.setAttribute("usuario", real);
-            String viewUrl;
+            model.setUsuario(real);
+            
             //session.setAttribute("cliente", cl);
-           
-            return viewUrl = "/index.jsp";
+            
+            viewUrl = "/presentation/usuario/usuarioView.jsp";
+            return viewUrl;
         } catch (Exception ex) {
             Map<String, String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
             errores.put("cedulaFld", "Usuario o clave incorrectos");
             errores.put("claveFld", "Usuario o clave incorrectos");
-            return "/index.jsp";
+            viewUrl = "/index.jsp";
+            return viewUrl;
         }
     }
 
