@@ -6,7 +6,7 @@ CursosLibres/dist/
 CursosLibres/nbdist/
 CursosLibres/nbactions.xml
 CursosLibres/nb-configuration.xml
-!CursosLibres/web/WEB-INF
+
 
 # Class Files #
 *.class
