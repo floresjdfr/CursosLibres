@@ -19,7 +19,7 @@ import logic.usuario.administrador.AdministradorDAO;
 import logic.usuario.estudiante.EstudianteDAO;
 import logic.usuario.profesor.ProfesorDAO;
 
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
+@WebServlet(name = "Login", urlPatterns = {"/Login" , "/Logout", "/loginShow"})
 public class Login extends HttpServlet {
 
     /**
@@ -42,12 +42,24 @@ public class Login extends HttpServlet {
                 URL = show(request);
                 break;
             }
+            case "/Logout": {
+                URL = Logout(request);
+                break;
+            }
+            case "/loginShow": {
+                URL = loginShow(request);
+                break;
+            }
             default:
                 URL = "/index.jsp";
         }
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(URL).forward(request, response);
 
+    }
+    
+    public String loginShow(HttpServletRequest request) {
+        return "/presentation/login/login.jsp";
     }
 
     public String show(HttpServletRequest request) {
@@ -67,6 +79,19 @@ public class Login extends HttpServlet {
 
     }
 
+    public String Logout(HttpServletRequest request){
+    return this.logoutAction(request);
+    
+    }
+    
+     public String logoutAction(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("usr");
+        session.invalidate();
+        return "/index.jsp";
+    }
+    
+    
     private String showAction(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
         Usuario DBuser;
