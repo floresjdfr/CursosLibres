@@ -26,7 +26,7 @@
             </div>
         </form>
         
-        <%@ include file="/footer.jsp" %>
+        s
 
     </body>
 
