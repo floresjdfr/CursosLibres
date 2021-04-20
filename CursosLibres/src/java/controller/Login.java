@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.usuario.Model;
 import logic.usuario.Usuario;
+import logic.usuario.administrador.AdministradorDAO;
 import logic.usuario.estudiante.EstudianteDAO;
+import logic.usuario.profesor.ProfesorDAO;
 
-/**
- *
- * @author josedf
- */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
@@ -59,12 +57,11 @@ public class Login extends HttpServlet {
 
     void updateModel(HttpServletRequest request) {
         Model model = (Model) request.getAttribute("model");
-        
+
         String auxCedula = (String) request.getParameter("usernameText");
         int aux = Integer.parseInt(auxCedula);
         String auxPassword = (String) request.getParameter("passwordText");
-        
-        
+
         model.getUsr().setPassword(auxPassword);
         model.getUsr().setCedula(aux);
 
@@ -81,6 +78,24 @@ public class Login extends HttpServlet {
                 session.setAttribute("usr", DBuser);
                 return "/presentation/usuario/usuarioView.jsp";
                 //return "/index.jsp";
+            }
+        } else {
+            DBuser = AdministradorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+        }
+        if (DBuser != null) {
+            if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
+                session.setAttribute("usr", DBuser);
+                return "/presentation/usuario/usuarioView.jsp";
+                //return "/index.jsp";
+            }
+        } else {
+            DBuser = ProfesorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+            if (DBuser != null) {
+                if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
+                    session.setAttribute("usr", DBuser);
+                    return "/presentation/usuario/usuarioView.jsp";
+                    //return "/index.jsp";
+                }
             }
         }
 
