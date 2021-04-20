@@ -1,11 +1,11 @@
 # NetBeans specific #
-/proyecto1/WebApplication1/nbproject/private/
-/proyecto1/WebApplication1/build/
-/proyecto1/WebApplication1/nbbuild/
-/proyecto1/WebApplication1/dist/
-/proyecto1/WebApplication1/nbdist/
-/proyecto1/WebApplication1/nbactions.xml
-/proyecto1/WebApplication1/nb-configuration.xml
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
 # Class Files #
 *.class
