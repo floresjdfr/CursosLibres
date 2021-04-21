@@ -21,18 +21,12 @@ import java.util.List;
  * @author Escinf
  */
 public class Service {
-    private static Service uniqueInstance;
 
-    public static Service instance(){
-        if (uniqueInstance == null){
-            uniqueInstance = new Service();
-        }
-        return uniqueInstance; 
-    }
+    
 
     List<Curso> cursos;
 
-    private Service(){
+    public Service(){
         cursos = new ArrayList();
     }
 

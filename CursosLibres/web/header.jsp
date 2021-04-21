@@ -23,7 +23,7 @@
                         Login
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/CursosLibres/index.jsp">Inicio</a>
+                        <a class="dropdown-item" href="/CursosLibres/CursoDisplay">Inicio</a>
                         <a class="dropdown-item" href="/CursosLibres/loginShow">Login</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
