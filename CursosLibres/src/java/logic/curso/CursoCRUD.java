@@ -2,8 +2,7 @@ package logic.curso;
 
 public class CursoCRUD {
     protected static final String CMD_LISTAR
-            = "SELECT codigo, nombre, tematica, costo, oferta FROM curso "
-            + "ORDER BY nombre";
+            = "SELECT * FROM Curso";
     
     protected static final String CMD_AGREGAR
             = "INSERT INTO curso (codigo, nombre, tematica, costo, oferta) "

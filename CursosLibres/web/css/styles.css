@@ -1,0 +1,12 @@
+.dropdown:hover > .dropdown-menu{
+    display:block;
+    border: none;
+}
+
+button{
+    border: none !important;
+}
+
+button:focus {
+    box-shadow: none !important;
+}

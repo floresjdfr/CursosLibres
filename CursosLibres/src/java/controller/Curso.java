@@ -13,14 +13,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.curso.CursoCRUD;
+import logic.curso.CursoDAO;
+import logic.curso.Service;
 import logic.usuario.Usuario;
 
 /**
  *
  * @author josedf
  */
-@WebServlet(name = "Index", urlPatterns = {"/Index"})
-public class Index extends HttpServlet {
+@WebServlet(name = "CursoDisplay", urlPatterns = {"/CursoDisplay"})
+public class Curso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,13 +36,22 @@ public class Index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String URL = "";
+        switch (request.getServletPath()) {
+            case "/CursoDisplay": {
+                URL = display(request);
+                break;
+            }
+            default:
+                URL = "/CursosLibres/index.jsp";
+                break;
+        }
         
-        request.getRequestDispatcher("/CursosLibres/index.jsp").forward(request, response);
-        
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher(URL).forward(request, response);
 
     }
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -80,6 +92,15 @@ public class Index extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    public String display(HttpServletRequest request) {
+
+        CursoDAO dao = CursoDAO.obtenerInstancia();
+        Service listaCursos = dao.listarCursos();
+
+        request.setAttribute("listaCursos", listaCursos);
+        
+        return "/index.jsp";
+
+    }
 
 }

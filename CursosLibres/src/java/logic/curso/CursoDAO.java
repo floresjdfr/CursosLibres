@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Database;
@@ -51,6 +53,35 @@ public class CursoDAO {
             return resultado;
         }
         return resultado;
+    }
+    
+    public Service listarCursos(){
+        Service listaCursos = Service.instance();
+        Curso auxCurso;
+        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(CursoCRUD.CMD_LISTAR)){
+            
+            try(ResultSet rs = stm.executeQuery()){
+                while (rs.next()){
+                    auxCurso = new Curso(
+                                rs.getInt("codigo"),
+                                rs.getString("nombre"),
+                                rs.getString("tematica"),
+                                rs.getFloat("costo"),
+                                rs.getBoolean("oferta")
+                    );
+                    
+                    listaCursos.cursosAdd(auxCurso);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaCursos;
+        
     }
     
     private Database db;
