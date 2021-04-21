@@ -14,8 +14,7 @@
 
         <p>Cedula <%=usr.getCedula()%> Ver</p>
         <p>Nombre: <%=usr.getNombre()%> Ver</p>
-        <p>Password: <%=usr.getPassword()%> Ver</p>
-        <%@include file="/footer.jsp"%>        
+        <p>Password: <%=usr.getPassword()%> Ver</p>     
     </body>
 </html>
 

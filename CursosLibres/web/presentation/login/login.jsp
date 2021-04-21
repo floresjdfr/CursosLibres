@@ -15,7 +15,7 @@
     <body style="height: 800px;background: rgb(21, 11, 33);">
         <%@ include file="/header.jsp" %>
         <section class="login-dark" style="height: 800px;">
-            <form action="/CursosLibres/Login" method="post">
+            <form name="form" action="/CursosLibres/Login" method="post">
                 <h2 class="sr-only">Login Form</h2>
                 <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
                 <div class="form-group"><input class="form-control" type="number" name="usernameText" placeholder="Cedula"></div>
