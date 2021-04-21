@@ -4,29 +4,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Login</title>
+        <link rel="stylesheet" href="/CursosLibres/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/CursosLibres/fonts/ionicons.min.css">
+        <link rel="stylesheet" href="/CursosLibres/css/Login-Form-Dark.css">
+        <link rel="stylesheet" href="/CursosLibres/css/styles.css">
     </head>
-    <body>
+    <body style="height: 800px;background: rgb(21, 11, 33);">
         <%@ include file="/header.jsp" %>
-        
-        <form name="form" action="/CursosLibres/Login" method="post">    
-            <div>
-                <div>
-                    <label for="username">Nombre Usuario:</label>
-                    <input type="number" name="usernameText" placeholder="Numero de Cedula" required="" >
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" name="passwordText" placeholder="Contrasena" required="" >
-                </div>
-                <div>
-                    <button type="submit">LogIn</button>
-                </div>
-            </div>
-        </form>
-        
-        s
+        <section class="login-dark" style="height: 800px;">
+            <form action="/CursosLibres/Login" method="post">
+                <h2 class="sr-only">Login Form</h2>
+                <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+                <div class="form-group"><input class="form-control" type="number" name="usernameText" placeholder="Cedula"></div>
+                <div class="form-group"><input class="form-control" type="password" name="passwordText" placeholder="Password"></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+            </form>
+        </section>
+        <script src="/CursosLibres/js/jquery.min.js"></script>
+        <script src="/CursosLibres/bootstrap/js/bootstrap.min.js"></script>
 
     </body>
 
