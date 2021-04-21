@@ -1,8 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
 <%@page import="logic.curso.Curso"%>
 <%@page import="logic.curso.Service"%>
 
-
+<%
+    Service lista = (Service) request.getAttribute("listaCursos");
+%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +20,7 @@
     </head>
     <body style="background: rgb(21, 11, 33);">
         <%@ include file="header.jsp" %>
-        
+
         <div style="margin-top: 81px;">
             <div class="container text-left" style="max-width: 1700px;">
                 <div class="row">
@@ -24,18 +28,27 @@
                         <div>
                             <h1 style="color: var(--white);">Cursos</h1>
                             <div class="table-responsive">
-                                <table class="table table-borderless">
+                                <table class="table">
                                     <thead>
-                                        <%
-                                            Service listaCursos = (Service) request.getAttribute("listaCursos");
-                                            if (listaCursos != null){
-                                                for (Curso c: listaCursos.cursosList()){%>
-                                                <th style="color: var(--white);font-size: 25px;"><%c.getNombre();%></th>
-                                                <th style="color: var(--white);font-size: 25px;"><%c.getCosto();%></th>
-                                            <%}%>
-                                            <%}%>
-                                            
-                                         
+                                        <tr>
+                                            <th style="color: var(--white);font-size: 25px;">Curso</th>
+                                            <th style="color: var(--white);font-size: 25px;">Precio</th>
+                                            <th style="color: var(--white);font-size: 25px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <% if (lista.cursosList() != null) {%>
+                                            <%for (Curso c : lista.cursosList()) {%>
+                                        <tr>
+                                            <td style="color: var(--white);"><%=c.getNombre()%></td>
+                                            <td style="color: var(--white);"><%=c.getCosto()%></td>
+                                            <td style="color: var(--white);"><button class="btn btn-primary d-flex" type="button">Button</button></td>
+                                        </tr>
+                                        <%}%>
+                                        <%}%>
+
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -46,7 +59,7 @@
         </div>
 
 
-        
+
         <script src="js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>

@@ -56,7 +56,7 @@ public class CursoDAO {
     }
     
     public Service listarCursos(){
-        Service listaCursos = Service.instance();
+        Service listaCursos = new Service();
         Curso auxCurso;
         try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(CursoCRUD.CMD_LISTAR)){
             
