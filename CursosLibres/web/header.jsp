@@ -1,3 +1,7 @@
+<%@page import="logic.usuario.Usuario"%>
+<%@page import="logic.usuario.estudiante.Estudiante"%>
+<%@page import="logic.usuario.profesor.Profesor"%>
+<%@page import="logic.usuario.administrador.Administrador"%>
 
 <header class="d-flex flex-row" style="margin-top: 70px;margin-left: 30px;border-style: none;">
     <div class="container">
@@ -8,24 +12,42 @@
                 </div>
             </div>
             <div class="col">
-                <!-- 
-                <div>
-                    comment 
-                    <div class="dropdown show">
-                        <button class="btn btn-primary dropdown-toggle" aria-expanded="true" data-toggle="dropdown" type="button" style="color: var(--light);background: rgb(81, 0, 44);">Menu&nbsp;</button>
-                        <div class="dropdown-menu show">
-                            <a class="dropdown-item" href="/CursosLibres/index.jsp">Inicio</a>
-                            <a class="dropdown-item" href="/CursosLibres/loginShow">Login</a></div>
-                    </div>
-                -->
+               
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" name="Login" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: var(--light);background: rgb(81, 0, 44);">
-                        Login
+                    <button class="btn btn-primary dropdown-toggle" name="Menu" type="button" id="dropdownMenuButton" 
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                            style="color: var(--light);background: rgb(81, 0, 44);">
+                        Menu
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <% Usuario usuario = (Usuario) session.getAttribute("usr"); %>
+                        
                         <a class="dropdown-item" href="/CursosLibres/CursoDisplay">Inicio</a>
-                        <a class="dropdown-item" href="/CursosLibres/loginShow">Login</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        
+                        
+                        <% if (usuario!=null){ %>
+                        
+                        <% String tipoUsr = usuario.getClass().getSimpleName(); %>
+                        <% if (usuario.getClass().getSimpleName().equals("Estudiante")){ %>
+                            <a class="dropdown-item" href="#">Matricular</a>
+                            <a class="dropdown-item" href="#">Ver cursos actuales</a>
+                            <a class="dropdown-item" href="#">Ver historial</a>
+                            <a class="dropdown-item" href="/CursosLibres/Logout">Logout</a>
+                        <% } %>
+                        <% if (tipoUsr.equals("Profesor")){%>
+                            <a class="dropdown-item" href="#">Grupos y cursos</a>
+                            <a class="dropdown-item" href="/CursosLibres/Logout">Logout</a>
+                        <% }%>  
+                        <% if (tipoUsr.equals("Administrador")){%>
+                            <a class="dropdown-item" href="/CursosLibres/Cursos">Administrar Cursos y Grupos</a>
+                            <a class="dropdown-item" href="#">Administrar Estudiantes</a>
+                            <a class="dropdown-item" href="#">Administrar Profesores</a>
+                            <a class="dropdown-item" href="/CursosLibres/Logout">Logout</a>
+                        <% }%>  
+                        <% } else {%> 
+                             <a class="dropdown-item" href="/CursosLibres/loginShow">Login</a>
+                        <% }%>
+
                     </div>
 
                 </div>

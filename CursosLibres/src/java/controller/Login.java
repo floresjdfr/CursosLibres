@@ -88,7 +88,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usr");
         session.invalidate();
-        return "/index.jsp";
+        return "/CursoDisplay";
     }
     
     
@@ -101,7 +101,7 @@ public class Login extends HttpServlet {
         if (DBuser != null) {
             if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                 session.setAttribute("usr", DBuser);
-                return "/presentation/usuario/usuarioView.jsp";
+                return "/CursoDisplay";
                 //return "/index.jsp";
             }
         } else {
@@ -110,7 +110,7 @@ public class Login extends HttpServlet {
         if (DBuser != null) {
             if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                 session.setAttribute("usr", DBuser);
-                return "/presentation/usuario/usuarioView.jsp";
+                return "/CursoDisplay";
                 //return "/index.jsp";
             }
         } else {
@@ -118,7 +118,7 @@ public class Login extends HttpServlet {
             if (DBuser != null) {
                 if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                     session.setAttribute("usr", DBuser);
-                    return "/presentation/usuario/usuarioView.jsp";
+                    return "/CursoDisplay";
                     //return "/index.jsp";
                 }
             }
