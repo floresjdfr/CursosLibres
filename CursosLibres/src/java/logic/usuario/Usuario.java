@@ -11,7 +11,7 @@ public class Usuario {
     String password;
 
     public Usuario() {
-        
+
     }
 
     public Usuario(int cedula, String nombre, String apellido1, String apellido2, String correo, String numero, String password) {
@@ -78,11 +78,6 @@ public class Usuario {
 
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String toString() {
-        return "estudiante{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo=" + correo + ", numero=" + numero + ", password=" + password + '}';
     }
 
 }

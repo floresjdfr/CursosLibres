@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package logic.usuario.estudiante;
 
 import logic.usuario.estudiante.EstudianteCRUD;
@@ -15,25 +11,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import logic.Database;
+import logic.matricula.MatriculaCRUD;
+import logic.matricula.Matricula;
+import logic.matricula.MatriculaDAO;
+import logic.matricula.Service;
 
 /**
  *
  * @author flore
  */
 public class EstudianteDAO {
-    
-    
-    private EstudianteDAO(){
+
+    private EstudianteDAO() {
         db = Database.instance();
     }
-    
-    public static EstudianteDAO obtenerInstancia(){
-        if (instancia == null)
+
+    public static EstudianteDAO obtenerInstancia() {
+        if (instancia == null) {
             instancia = new EstudianteDAO();
+        }
         return instancia;
     }
-    
+
     public Estudiante recuperar(int id) {
         Estudiante resultado = null;
         try {
@@ -65,7 +66,30 @@ public class EstudianteDAO {
         }
         return resultado;
     }
-    
+
+    public void crear(HttpServletRequest request) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_AGREGAR);
+        stm.setInt(1, (int) request.getAttribute("idEstudiante"));
+        stm.setString(2, (String) request.getAttribute("nombre"));
+        stm.setString(3, (String) request.getAttribute("apellido1"));
+        stm.setString(4, (String) request.getAttribute("apellido2"));
+        stm.setString(5, (String) request.getAttribute("correo"));
+        stm.setString(6, (String) request.getAttribute("telefono"));
+        stm.setString(7, (String) request.getAttribute("direccion"));
+        stm.setString(8, (String) request.getAttribute("password"));
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+
+    public void matricular(HttpServletRequest request) throws Exception{
+        
+        logic.matricula.Service srv = new Service();
+        srv.matricular(request);
+    }
+
     private Database db;
     private static EstudianteDAO instancia;
 }
