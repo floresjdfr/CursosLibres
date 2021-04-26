@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Cursos
-    Created on : Apr 25, 2021, 1:55:44 AM
-    Author     : josedf
---%>
 
 <%@page import="logic.curso.Curso"%>
 <%@page import="logic.curso.Service"%>

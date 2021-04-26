@@ -1,8 +1,7 @@
-<%-- 
-    Document   : informacion-registro
-    Created on : Apr 26, 2021, 1:24:20 PM
-    Author     : josedf
---%>
+<%@page import="logic.usuario.estudiante.Estudiante"%>
+<%@page import="logic.usuario.estudiante.Service"%>
+
+<% Service lista = (Service) request.getAttribute("estudiante");%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,27 +17,28 @@
 <body>
         <div class="main-container">
             <%@include file="/header.jsp"%>
+            
 
             <div class="curso-container">
                 <div class = "tabla-info-cursos">
                     <table>
+                        <% if (lista.estudiantesList() != null) %>
+                        <% for (Estudiante e : lista.estudiantesList()){ %>
+                        
                         <tr>
                             <td class="curso-izquierda">Usuario:</td>
-                            <td class="curso-derecha">Aqui va la cedula</td>
+                            <td class="curso-derecha" ><%= e.getCedula() %></td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Password:</td>
-                            <td class="curso-derecha">Aqui va la contraseña aleatoria</td>
+                            <td class="curso-izquierda">Password Temporal</td>
+                            <td class="curso-derecha"><%= e.getPassword() %></td>
+                            <%}%>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Nueva contraseña:</td>
+                            <td class="curso-izquierda">Se recomienda cambiar esta password en el perfil</td>
+                          
+                        </tr>
                         
-                            <td class="curso-derecha">
-                                <form method="POST">
-                                    <input type="text">
-                                </form>
-                            </td>
-                        </tr>
                     </table>
 
                 </div>
@@ -46,9 +46,8 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='#'">Guardar</button>
+                <button class="table-btn" onclick="location.href='/CursosLibres/CursoDisplay'">Inicio</button>
             </div>
-        
         </div>
     </body>
 </html>

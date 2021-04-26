@@ -1,4 +1,3 @@
-
 package logic.usuario.estudiante;
 
 import logic.usuario.estudiante.EstudianteCRUD;
@@ -18,10 +17,6 @@ import logic.matricula.Matricula;
 import logic.matricula.MatriculaDAO;
 import logic.matricula.Service;
 
-/**
- *
- * @author flore
- */
 public class EstudianteDAO {
 
     private EstudianteDAO() {
@@ -67,27 +62,49 @@ public class EstudianteDAO {
         return resultado;
     }
 
+   
     public void crear(HttpServletRequest request) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_AGREGAR);
-        stm.setInt(1, (int) request.getAttribute("idEstudiante"));
-        stm.setString(2, (String) request.getAttribute("nombre"));
-        stm.setString(3, (String) request.getAttribute("apellido1"));
-        stm.setString(4, (String) request.getAttribute("apellido2"));
-        stm.setString(5, (String) request.getAttribute("correo"));
-        stm.setString(6, (String) request.getAttribute("telefono"));
-        stm.setString(7, (String) request.getAttribute("direccion"));
-        stm.setString(8, (String) request.getAttribute("password"));
+        int aux=Integer.parseInt(request.getParameter("idEstudiante"));
+        
+        stm.setInt(1, aux);
+        stm.setString(2, (String) request.getParameter("nombre"));
+        stm.setString(3, (String) request.getParameter("apellido1"));
+        stm.setString(4, (String) request.getParameter("apellido2"));
+        stm.setString(5, (String) request.getParameter("correo"));
+        stm.setString(6, (String) request.getParameter("telefono"));
+        stm.setString(7, (String) request.getParameter("direccion"));
+        stm.setString(8, randomPassword());
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
 
-    public void matricular(HttpServletRequest request) throws Exception{
-        
+    public void matricular(HttpServletRequest request) throws Exception {
+
         logic.matricula.Service srv = new Service();
         srv.matricular(request);
+    }
+
+    public String randomPassword() {
+
+        String pswd = "";
+        String key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+        for (int i = 0; i < 5; i++) {
+            pswd += (key.charAt((int) (Math.random() * key.length())));
+        }
+
+        return pswd;
+    }
+
+    public void updatePassword(HttpServletRequest request) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_ACTUALIZARPass);
+        stm.setInt(1, (int) request.getAttribute("idEstudiante"));
+        stm.setString(2, (String) request.getAttribute("password"));
     }
 
     private Database db;
