@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.grupo.GrupoDAO;
 import logic.usuario.estudiante.EstudianteDAO;
 
-@WebServlet(name = "Profesor", urlPatterns = {"/notas", "/grupos"})
+@WebServlet(name = "Profesor", urlPatterns = {"/notas"})
 public class Profesor extends HttpServlet {
 
     /**
