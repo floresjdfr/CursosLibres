@@ -53,7 +53,7 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='#'">Registrar</button>
+                <button class="table-btn" onclick="location.href='informacion_registro.jsp'">Registrar</button>
             </div>
             <div class="enviar-btn">
                 <button class="table-btn" onclick="location.href='login.jsp'">Volver</button>
