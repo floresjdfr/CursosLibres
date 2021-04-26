@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="/CursosLibres/fonts/ionicons.min.css">
         <link rel="stylesheet" href="/CursosLibres/css/Login-Form-Dark.css">
         <link rel="stylesheet" href="/CursosLibres/css/styles.css">
+        <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
     </head>
     <body style="height: 800px;background: rgb(21, 11, 33);">
         <%@ include file="/header.jsp" %>
