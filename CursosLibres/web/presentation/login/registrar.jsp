@@ -29,6 +29,18 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="curso-izquierda">Primer apellido:</td>
+                            <td class="curso-derecha" class="input-curso">
+                                <input class = "curso-derecha" name="apellido1-alumno" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Segundo apellido:</td>
+                            <td class="curso-derecha" class="input-curso">
+                                <input class = "curso-derecha" name="apellido2-alumno" type="text">
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="curso-izquierda">Cédula:</td>
                             <td class="curso-derecha " class="input-curso">
                                 <input class = "curso-derecha" name="cedula-alumno" type="text">
