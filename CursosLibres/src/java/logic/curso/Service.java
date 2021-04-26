@@ -5,21 +5,11 @@
  */
 package logic.curso;
 
-/**
- *
- * @author josedf
- */
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- *
- * @author Escinf
- */
 public class Service {
 
     

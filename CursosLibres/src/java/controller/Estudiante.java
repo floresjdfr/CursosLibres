@@ -1,31 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import logic.curso.CursoCRUD;
 import logic.curso.CursoDAO;
 import logic.curso.Service;
-import logic.usuario.Usuario;
+import logic.usuario.estudiante.EstudianteDAO;
+import logic.grupo.GrupoDAO;
 
-/**
- *
- * @author josedf
- */
-@WebServlet(name = "CursoDisplay", urlPatterns = {"/CursoDisplay"})
-public class Curso extends HttpServlet {
+
+@WebServlet(name = "Estudiante", urlPatterns = {"/signin", "/signup", "/grupos"})
+public class Estudiante extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +28,60 @@ public class Curso extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
+        String opcion = request.getServletPath();
         String URL = "";
-        switch (request.getServletPath()) {
-            case "/CursoDisplay": {
-                URL = display(request);
+        switch (opcion) {
+            case "/signin": {
+                URL = Singin(request);
+                break;
+            }
+
+            case "/singup": {
+                URL = Singup(request);
+                break;
+            }
+
+            case "/grupos": {
+                //URL = "/presentation/usuario/Estudiante/Cursos.jsp";
+                URL = displayGrupos(request);
                 break;
             }
             default:
-                URL = "/CursosLibres/index.jsp";
                 break;
         }
-
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(URL).forward(request, response);
 
+    }
+
+    public String displayGrupos(HttpServletRequest request) {
+
+        GrupoDAO dao = GrupoDAO.obtenerInstancia();
+        logic.grupo.Service listaGrupos = dao.listarGrupos();
+        request.setAttribute("listaGrupos", listaGrupos);
+        return "/presentation/usuario/Estudiante/Cursos.jsp";
+
+    }
+
+    public String Singin(HttpServletRequest request) {
+
+        return "/presentation/usuario/Estudiante/Signin.jsp";
+    }
+
+    public String Singup(HttpServletRequest request) {
+        String URL = "index.jsp";
+        try {
+            EstudianteDAO.obtenerInstancia().crear(request);
+
+        } catch (Exception ex) {
+            if (ex.getMessage().equals("duplicado")) {
+                URL = "/presentation/usuario/Estudiante/Signin.jsp";
+            }
+            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return URL;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,16 +122,5 @@ public class Curso extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    public String display(HttpServletRequest request) {
-
-        CursoDAO dao = CursoDAO.obtenerInstancia();
-        Service listaCursos = dao.listarCursos();
-
-        request.setAttribute("listaCursos", listaCursos);
-
-        return "/index.jsp";
-
-    }
 
 }
