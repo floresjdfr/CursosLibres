@@ -122,7 +122,11 @@ public class Login extends HttpServlet {
                     //return "/index.jsp";
                 }
             }
+        } 
+        if(DBuser==null){
+                return "/presentation/login/login.jsp";
         }
+        
 
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
