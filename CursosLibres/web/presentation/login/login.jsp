@@ -21,6 +21,7 @@
                 <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
                 <div class="form-group"><input class="form-control" type="number" name="usernameText" placeholder="Cedula"></div>
                 <div class="form-group"><input class="form-control" type="password" name="passwordText" placeholder="Password"></div>
+                <div class="form-group"> <a href="/CursosLibres/presentation/login/registrar.jsp" >Registrar</a> </div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
             </form>
         </section>
