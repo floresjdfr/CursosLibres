@@ -19,7 +19,7 @@ import logic.usuario.administrador.AdministradorDAO;
 import logic.usuario.estudiante.EstudianteDAO;
 import logic.usuario.profesor.ProfesorDAO;
 
-@WebServlet(name = "Login", urlPatterns = {"/Login" , "/Logout", "/loginShow"})
+@WebServlet(name = "Login", urlPatterns = {"/Login", "/Logout", "/loginShow"})
 public class Login extends HttpServlet {
 
     /**
@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
         request.getRequestDispatcher(URL).forward(request, response);
 
     }
-    
+
     public String loginShow(HttpServletRequest request) {
         return "/presentation/login/login.jsp";
     }
@@ -79,56 +79,58 @@ public class Login extends HttpServlet {
 
     }
 
-    public String Logout(HttpServletRequest request){
-    return this.logoutAction(request);
-    
+    public String Logout(HttpServletRequest request) {
+        return this.logoutAction(request);
+
     }
-    
-     public String logoutAction(HttpServletRequest request) {
+
+    public String logoutAction(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         session.removeAttribute("usr");
         session.invalidate();
         return "/CursoDisplay";
     }
-    
-    
-    private String showAction(HttpServletRequest request) {
-        Model model = (Model) request.getAttribute("model");
-        Usuario DBuser;
-        HttpSession session = request.getSession(true);
 
-        DBuser = EstudianteDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
-        if (DBuser != null) {
-            if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
-                session.setAttribute("usr", DBuser);
-                return "/CursoDisplay";
-                //return "/index.jsp";
-            }
-        } else {
-            DBuser = AdministradorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
-        }
-        if (DBuser != null) {
-            if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
-                session.setAttribute("usr", DBuser);
-                return "/CursoDisplay";
-                //return "/index.jsp";
-            }
-        } else {
-            DBuser = ProfesorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+    private String showAction(HttpServletRequest request) {
+        try {
+            Model model = (Model) request.getAttribute("model");
+            Usuario DBuser;
+            HttpSession session = request.getSession(true);
+
+            DBuser = EstudianteDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
             if (DBuser != null) {
                 if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                     session.setAttribute("usr", DBuser);
                     return "/CursoDisplay";
                     //return "/index.jsp";
                 }
+            } else {
+                DBuser = AdministradorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
             }
-        } 
-        if(DBuser==null){
-                return "/Login";
+            if (DBuser != null) {
+                if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
+                    session.setAttribute("usr", DBuser);
+                    return "/CursoDisplay";
+                    //return "/index.jsp";
+                }
+            } else {
+                DBuser = ProfesorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+                if (DBuser != null) {
+                    if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
+                        session.setAttribute("usr", DBuser);
+                        return "/CursoDisplay";
+                        //return "/index.jsp";
+                    }
+                }
+            }
+            return "/loginShow";
         }
-      
-        return "/CursoDiaplay";
+        catch(Exception e){
+            return "/loginShow";
+        }
+
         
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

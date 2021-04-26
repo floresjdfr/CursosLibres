@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Editar_Curso
-    Created on : Apr 25, 2021, 7:04:08 PM
+    Document   : registrr
+    Created on : Apr 26, 2021, 1:02:49 PM
     Author     : josedf
 --%>
 
@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
-        <title>Editar Curso</title>
+        <title>Registrar</title>
     </head>
 
     <body>
@@ -23,27 +23,27 @@
                 <div class = "tabla-info-cursos">
                     <table>
                         <tr>
-                            <td class="curso-izquierda">Nombre del curso:</td>
+                            <td class="curso-izquierda">Nombre:</td>
                             <td class="curso-derecha" class="input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="nombre-alumno" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">ID del curso:</td>
+                            <td class="curso-izquierda">Cédula:</td>
                             <td class="curso-derecha " class="input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="cedula-alumno" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Nombre del Profesor:</td>
+                            <td class="curso-izquierda">Correo:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="correo-alumno" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Cantidad de alumnos:</td>
+                            <td class="curso-izquierda">Teléfono:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="telefono-alumno" type="text">
                             </td>
                         </tr>
                     </table>
@@ -53,10 +53,10 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='Ver_Grupo.jsp'">Guardar</button>
+                <button class="table-btn" onclick="location.href='#'">Registrar</button>
             </div>
             <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='Ver_Grupo.jsp'">Volver</button>
+                <button class="table-btn" onclick="location.href='login.jsp'">Volver</button>
             </div>
 
         </div>
