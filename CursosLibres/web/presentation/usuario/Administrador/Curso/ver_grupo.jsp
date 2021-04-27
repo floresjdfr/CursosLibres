@@ -39,13 +39,10 @@
                         <td class="curso-derecha">25</td>
                     </tr>
                 </table>
-
             </div>
-            
         </div>
-
         <div class="volver-btn">
-            <button class="table-btn" onclick="location.href='Grupos.jsp'">Volver</button>
+            <button class="table-btn" onclick="location.href='/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
         </div>
         
     </div>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : informacion-registro
-    Created on : Apr 26, 2021, 1:24:20 PM
+    Document   : borrar_curso
+    Created on : Apr 26, 2021, 3:23:18 PM
     Author     : josedf
 --%>
 
@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
-        <title>Informacion Registro</title>
+        <title>Eliminar Curso</title>
     </head>
 
     <body>
@@ -23,14 +23,9 @@
                 <div class = "tabla-info-cursos">
                     <table>
                         <tr>
-                            <td class="curso-izquierda">Usuario:</td>
-                            <td class="curso-derecha">Aqui va la cedula</td>
+                            <td class="curso-izquierda">¿Desea eliminar curso?:</td>
+                            <td class="curso-derecha">Aqui va el nombre del curso a eliminar</td>
                         </tr>
-                        <tr>
-                            <td class="curso-izquierda">Password:</td>
-                            <td class="curso-derecha">Aqui va la contraseña aleatoria</td>
-                        </tr>
-                        
                     </table>
 
                 </div>
@@ -38,7 +33,10 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='/CursosLibres/CursoDisplay'">Inicio</button>
+                <button class="table-btn" onclick="location.href='#'">Aceptar</button>
+            </div>
+            <div class="enviar-btn">
+                <button class="table-btn" onclick="location.href='#'">Cancelar</button>
             </div>
         
         </div>

@@ -40,13 +40,13 @@
                             <tr>
                                 <td><%=c.getNombre()%></td>
                                 <td>
-                                    <button onclick="location.href='presentation/usuario/Administrador/Grupos.jsp'" class="table-btn">Ver Grupos</button>
+                                    <button onclick="location.href='presentation/misc/Grupos.jsp'" class="table-btn">Ver Grupos</button>
                                 </td>
                                 <td>
-                                    <button class="table-btn">Editar</button>
+                                    <button class="table-btn" onclick="location.href='/CursosLibres/presentation/usuario/Administrador/Curso/editar_curso.jsp'">Editar</button>
                                 </td>
                                 <td>
-                                    <button class="table-btn">Eliminar</button>
+                                    <button class="table-btn" onclick="location.href='/CursosLibres/presentation/usuario/Administrador/Curso/borrar_curso.jsp'" >Eliminar</button>
                                 </td>
                             </tr>
                         <%}%>
@@ -54,6 +54,9 @@
                     
 
                 </table>
+            </div>
+            <div class="volver-btn">
+            <button class="table-btn" onclick="location.href='/CursosLibres/presentation/usuario/Administrador/Curso/agregar_curso.jsp'">Agregar</button>
             </div>
         </div>
     </body>  

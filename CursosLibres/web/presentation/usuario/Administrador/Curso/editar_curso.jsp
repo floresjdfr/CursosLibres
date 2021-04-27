@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Editar_Curso
-    Created on : Apr 25, 2021, 7:04:08 PM
+    Document   : editar_curso
+    Created on : Apr 26, 2021, 3:26:37 PM
     Author     : josedf
 --%>
 
@@ -19,45 +19,44 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
-            <div class="curso-container">
-                <div class = "tabla-info-cursos">
+            <form class="formulario-container">
+                <div class = "formulario-form">
                     <table>
                         <tr>
-                            <td class="curso-izquierda">Nombre del curso:</td>
+                            <td class="curso-izquierda">Nombre:</td>
                             <td class="curso-derecha" class="input-curso">
                                 <input class = "curso-derecha" name="nombre-curso" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">ID del curso:</td>
+                            <td class="curso-izquierda">Tematica:</td>
                             <td class="curso-derecha " class="input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="tematica-curso" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Nombre del Profesor:</td>
+                            <td class="curso-izquierda">Costo:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="costo-curso" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Cantidad de alumnos:</td>
+                            <td class="curso-izquierda">Imagen:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="imagen-curso" type="file">
                             </td>
                         </tr>
                     </table>
-
                 </div>
+                
+                <div class="formulario-buttons">
+                    <button class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/Cursos'">Guardar</button>
+                    <button class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
+                </div>
+               
+            </form>
 
-            </div>
 
-            <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='Ver_Grupo.jsp'">Guardar</button>
-            </div>
-            <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='Ver_Grupo.jsp'">Volver</button>
-            </div>
 
         </div>
     </body>
