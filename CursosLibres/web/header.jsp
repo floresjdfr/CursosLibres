@@ -26,7 +26,6 @@
                 <% }%>  
                 <% if (tipoUsr.equals("Administrador")){%>
                     <a href="/CursosLibres/Cursos">Administrar Cursos y Grupos</a>
-                    <a href="#">Administrar Estudiantes</a>
                     <a href="#">Administrar Profesores</a>
                     <a href="/CursosLibres/Logout">Logout</a>
                 <% }%>  
