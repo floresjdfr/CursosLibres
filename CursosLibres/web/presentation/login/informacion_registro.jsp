@@ -14,7 +14,7 @@
         <title>Informacion Registro</title>
     </head>
 
-<body>
+    <body>
         <div class="main-container">
             <%@include file="/header.jsp"%>
             

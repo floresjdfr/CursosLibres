@@ -49,7 +49,7 @@ public class Administrador extends HttpServlet {
 
         request.setAttribute("listaCursos", listaCursos);
         
-        return "/presentation/usuario/Administrador/Cursos.jsp";
+        return "/presentation/usuario/Administrador/Curso/cursos.jsp";
 
     }
 

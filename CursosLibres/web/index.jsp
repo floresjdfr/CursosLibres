@@ -35,7 +35,7 @@
                 <tr>
                     <td><%=c.getNombre()%></td>
                     <td><%=c.getCosto()%></td>
-                    <td><button class="table-btn">Ver</button></td>
+                    <td><button class="table-btn" onclick="location.href='presentation/misc/Grupos.jsp'">Ver</button></td>
                 </tr>
                 <%}%>
                 <%}%>

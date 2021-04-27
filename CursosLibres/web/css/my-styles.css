@@ -41,17 +41,17 @@ h1{
     border: none;
     cursor: pointer;
     width: 150px;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     grid-column: span 5;
     position: relative;
     display: inline-block;
     align-self: center;
     justify-self: center;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     border-radius: 8px;
     position: absolute;
@@ -59,61 +59,61 @@ h1{
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-  }
-  
-  .dropdown-content a{
+}
+
+.dropdown-content a{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {
-      
+}
+
+.dropdown-content a:hover {
+
     background-color: #f1f1f1;
     border-radius: 8px;
 
-    }
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
+}
+
+.dropdown:hover .dropbtn {
     background-color: #950052;
-  }
+}
 
 
-  /********     Table styles         */
+/********     Table styles         */
 
-  .table-container{
-      grid-column: 3/10;
-      justify-self: center;
-      width: 100%;
-      height: 100%;
-  }
+.table-container{
+    grid-column: 3/10;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
+}
 
-  table {
+table {
     border-collapse: collapse;
     width: 100%;
     color: #fff;
-  }
-  
-  th, td {
+}
+
+th, td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-  }
+}
 
-  tr th{
+tr th{
     text-align: left;
     font-size: 26px;
-  }
-  
-  tr:hover {
+}
+
+tr:hover {
     background-color:#776C7A;
 
-    }
+}
 
 .table-btn{
     background-color:#51002c;
@@ -137,33 +137,34 @@ h1{
 /*******  Informacion curso*/
 
 .curso-container{
-  grid-column: 4/9;
-  justify-self: center;
-  width: 100%;
-  border-radius: 8px;
+    grid-column: 4/9;
+    justify-self: center;
+    width: 100%;
+    border-radius: 8px;
 }
 
 .tabla-info-cursos{
-  padding: 50px;
-  justify-self: center;
+    padding: 50px;
+    justify-self: center;
 }
 
 td{
-  padding: 25px;
+    padding: 25px;
 }
 
 .tabla-info-cursos .curso-izquierda{
-  text-align: end;
+    text-align: end;
 }
 
 .tabla-info-cursos .curso-derecha{
-  text-align: start;
+    text-align: start;
 }
 
 .volver-btn{
-  grid-row: 3;
-  grid-column: 9;
-  justify-self: end;
+    padding-top: 30px;
+    grid-row: 3;
+    grid-column: 9;
+    justify-self: end;
 }
 
 
@@ -171,23 +172,93 @@ td{
 /*******  Editar informacion curso*/
 
 .enviar-btn{
-  grid-row: 3;
-  grid-column: 8;
-  justify-self: end;
+    padding-top: 30px;
+    grid-row: 3;
+    grid-column: 8;
+    justify-self: end;
 }
 
 input[type="text"]{
-  height: 40px;
-  width: 400px;
-  border-radius: 8px;
-  font-size: 20px;
-  border: none;
+    height: 40px;
+    width: 400px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: none;
 }
 
 input[type="text"]:focus{
-  outline: none;
+    outline: none;
 }
 
 .tabla-info-cursos td{
-  border: none;
+    border: none;
+}
+
+/*******     Formularios edicion/agregar    */
+.formulario-container{
+    grid-column: 4/9;
+    justify-self: center;
+    width: 100%;
+    
+    display: grid;
+    grid-template: repeat(12, 1fr);
+    grid-auto-rows: minmax(auto, auto); 
+}
+
+.formulario-form{
+    grid-column: 1/13;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+}
+
+.formulario-buttons{
+    grid-column: 1/13;
+    grid-row: 3/4;
+    width: 100%;
+    height: 50px;
+    
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.formulario-btn1{
+    
+    margin-top: 10px;
+    align-self: center;
+    grid-column: 10/11;
+}
+
+.formulario-btn2{
+    
+    margin-top: 10px;
+    align-self: center;
+    grid-column: 12/13;
+    justify-self: end;
+    
+}
+
+.container {
+  height: 200px;
+  position: relative;
+  border: 3px solid green;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+
+/********    Botones parte inferior     */
+
+.btn-formularios{
+    padding: 30px;
+    grid-row: 4;
+    grid-column: 8;
+    justify-self: end;
 }
