@@ -13,13 +13,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import logic.curso.CursoDAO;
 import logic.curso.Service;
+import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 
-@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso"})
+@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow"
+
+})
 public class Administrador extends HttpServlet {
 
     /**
@@ -46,6 +50,12 @@ public class Administrador extends HttpServlet {
             case "/agregarCurso": {
 
                 URL = agregaCurso(request);
+                break;
+            }
+            
+            case "/agregarCursoShow": {
+
+                URL = agregaCursoShow(request);
                 break;
             }
 
@@ -136,6 +146,25 @@ public class Administrador extends HttpServlet {
         return URL;
 
     }
+    
+    private Boolean validarUsr(HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        Usuario usr = (Usuario) session.getAttribute("usr");
+        if (usr != null){
+            String tipoUsuario = usr.getClass().getSimpleName();
+            if (tipoUsuario.equals("Administrador"))
+                return true;
+            return false;
+        }
+        return false;
+            
+    }
+    private String agregaCursoShow(HttpServletRequest request) {
+        if (validarUsr(request)){
+            return "/presentation/usuario/Administrador/Curso/agregar_curso.jsp";
+        }
+        return "/loginShow";
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -175,5 +204,7 @@ public class Administrador extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }
