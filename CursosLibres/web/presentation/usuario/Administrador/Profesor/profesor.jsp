@@ -22,6 +22,7 @@
             <%@ include file="/header.jsp" %>
 
             <div class="table-container">
+                
                 <table>
                     <tr>
                         <th>Profesores</th>
@@ -30,7 +31,7 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td>Jose Sanchez</td>
+                        <td></td>
                         <td>
                             <button onclick="location.href = 'ver_profesor.jsp'" class="table-btn">Ver informacion</button>
                         </td>
@@ -60,6 +61,7 @@
 
 
                 </table>
+                   
             </div>
             <div class="volver-btn">
                 <button class="table-btn" onclick="location.href = 'agregar_profesor.jsp'">Agregar</button>
