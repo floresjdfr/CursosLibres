@@ -31,7 +31,7 @@
                             <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp'" >Ver Informacion de Grupo</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = '#'">Matricular</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Estudiante/confirmar_matricula.jsp'">Matricular</button>
                         </td>
                         <td>
                             <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/editar_grupo.jsp'">Editar</button>

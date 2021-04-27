@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="fonts/ionicons.min.css">
         <link rel="stylesheet" href="css/Login-Form-Dark.css">
     </head>
-    <body>
+    <body class="main-container-simple">
         <%@ include file="header.jsp" %>
 
     <div class="main-container">

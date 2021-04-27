@@ -15,6 +15,11 @@ h1{
     margin-bottom: 50px;
 }
 
+.main-container-simple{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 /********     Header styles         */
 
 .header-container{
@@ -150,12 +155,16 @@ td{
     padding: 25px;
 }
 
-.tabla-info-cursos .curso-izquierda{
+.curso-izquierda{
     text-align: end;
 }
 
-.tabla-info-cursos .curso-derecha{
+.curso-derecha{
     text-align: start;
+}
+
+.curso-centro{
+    text-align: center;
 }
 
 .volver-btn{
@@ -184,13 +193,16 @@ input[type="text"]{
     border: none;
 }
 
-input[type="number"]{
+
+input[type="number"]:not(.form-control){
     height: 40px;
     width: 400px;
     border-radius: 8px;
     font-size: 20px;
     border: none;
 }
+
+
 
 input[type="file"]{
     height: 40px;
@@ -218,7 +230,7 @@ input[type="number"]:focus{
     grid-column: 4/9;
     justify-self: center;
     width: 100%;
-    
+
     display: grid;
     grid-template: repeat(12, 1fr);
     grid-auto-rows: minmax(auto, auto); 
@@ -241,33 +253,33 @@ input[type="number"]:focus{
 }
 
 .formulario-btn1{
-    
+
     margin-top: 10px;
     align-self: center;
     grid-column: 10/11;
 }
 
 .formulario-btn2{
-    
+
     margin-top: 10px;
     align-self: center;
     grid-column: 12/13;
     justify-self: end;
-    
+
 }
 
 .container {
-  height: 200px;
-  position: relative;
-  border: 3px solid green;
+    height: 200px;
+    position: relative;
+    border: 3px solid green;
 }
 
 .vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 
