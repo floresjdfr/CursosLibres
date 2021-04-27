@@ -19,7 +19,7 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
-            <form  class="formulario-container" method="POST" action="#">
+            <form  class="formulario-container" method="POST" action="/CursosLibres/agregarProfesor">
 
                 <div class = "formulario-form">
                     <table>
@@ -30,9 +30,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="curso-izquierda">Primer apellido:</td>
+                            <td class="curso-derecha">
+                                <input class = "curso-derecha" name="apellido1" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Segundo apellido:</td>
+                            <td class="curso-derecha">
+                                <input class = "curso-derecha" name="apellido2" type="text">
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="curso-izquierda">Cedula:</td>
                             <td class="curso-derecha ">
-                                <input class = "curso-derecha" name="cedula" type="text">
+                                <input class = "curso-derecha" name="idProfesor" type="text">
                             </td>
                         </tr>
                         <tr>
@@ -53,11 +65,17 @@
                                 <input class = "curso-derecha" name="especialidad" type="text">
                             </td>
                         </tr>
+                        <tr>
+                            <td class="curso-izquierda">Password</td>
+                            <td class="curso-derecha ">
+                                <input class = "curso-derecha" name="password" type="text">
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
                 <div class="formulario-buttons"> 
-                    <button type="submit" class="table-btn formulario-btn1" onclick="location.href = '#'">Guardar</button>
+                    <button type="submit" class="table-btn formulario-btn1" >Guardar</button>
 
                     <button type="button" class="table-btn formulario-btn2" onclick="location.href = 'profesor.jsp'">Volver</button>
                 </div>

@@ -80,4 +80,9 @@ public class Usuario {
         return password;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo=" + correo + ", numero=" + numero + ", password=" + password + '}';
+    }
+
 }

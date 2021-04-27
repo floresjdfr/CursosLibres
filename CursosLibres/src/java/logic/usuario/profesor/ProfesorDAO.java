@@ -27,24 +27,42 @@ public class ProfesorDAO {
     }
        
     
-    public void crear(HttpServletRequest request) throws Exception {
+    public void crear(Profesor p) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(ProfesorCRUD.CMD_AGREGAR);
-        int aux=Integer.parseInt(request.getParameter("idProfesor"));
+        //int aux=Integer.parseInt(request.getParameter("idProfesor"));
         
-        stm.setInt(1, aux);
-        stm.setString(2, (String) request.getParameter("nombre"));
-        stm.setString(3, (String) request.getParameter("apellido1"));
-        stm.setString(4, (String) request.getParameter("apellido2"));
-        stm.setString(5, (String) request.getParameter("correo"));
-        stm.setString(6, (String) request.getParameter("telefono"));
-        stm.setString(7, (String) request.getParameter("especiaidad"));
-        stm.setString(8, (String) request.getParameter("password"));
+        stm.setInt(1, p.getCedula());
+        stm.setString(2, p.getNombre());
+        stm.setString(3, p.getApellido1());
+        stm.setString(4, p.getApellido2());
+        stm.setString(5, p.getCorreo());
+        stm.setString(6, p.getNumero());
+        stm.setString(7, p.getEspecialidad());
+        stm.setString(8, p.getPassword());
+        
+//        stm.setInt(1, p.getCedula());
+//        stm.setString(2, (String) request.getParameter("nombre"));
+//        stm.setString(3, (String) request.getParameter("apellido1"));
+//        stm.setString(4, (String) request.getParameter("apellido2"));
+//        stm.setString(5, (String) request.getParameter("correo"));
+//        stm.setString(6, (String) request.getParameter("telefono"));
+//        stm.setString(7, (String) request.getParameter("especiaidad"));
+//        stm.setString(8, (String) request.getParameter("password"));
+//        
+//        System.out.print(request.getParameter("nombre"));
+//        System.out.print(request.getParameter("apellido1"));
+//        System.out.print(request.getParameter("apellido2"));
+//        System.out.print(request.getParameter("correo"));
+//        System.out.print(request.getParameter("telefono"));
+//        System.out.print(request.getParameter("especialidad"));
+//        System.out.print(request.getParameter("password"));
+//        
        
         int count = Database.instance().executeUpdate(stm);
-        if (count == 0) {
-            throw new Exception("duplicado");
-        }
+//        if (count == 0) {
+//            throw new Exception("duplicado");
+//        }
     }
     
     

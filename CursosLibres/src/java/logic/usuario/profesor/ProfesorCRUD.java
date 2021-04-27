@@ -7,7 +7,7 @@ public class ProfesorCRUD {
             + "ORDER BY apellido1, nombre;";
     
     protected static final String CMD_AGREGAR
-            = "INSERT INTO profesor (idProfesor, apellido1, apellido2, correo, telefono, especialidad, password) "
+            = "INSERT INTO profesor (idProfesor, nombre, apellido1, apellido2, correo, telefono, especialidad, password) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
