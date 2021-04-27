@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="/CursosLibres/css/styles.css">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
     </head>
-    <body style="height: 800px;background: rgb(21, 11, 33);">
+    <body class="main-container-simple"">
         <%@ include file="/header.jsp" %>
         <section class="login-dark" style="height: 800px;">
             <form name="form" action="/CursosLibres/Login" method="post">

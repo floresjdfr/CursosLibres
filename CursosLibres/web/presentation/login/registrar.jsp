@@ -34,7 +34,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Cédula:</td>
+                            <td class="curso-izquierda input-number">Cédula:</td>
                             <td class="curso-derecha "> <input class = "curso-derecha" name="idEstudiante" type="number">
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
 
                 <div class="formulario-buttons">
                     <button class="table-btn formulario-btn1" type="submit">Registrar</button>
-                    <button class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/loginShow'">Volver</button>
+                    <button type="button"class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/loginShow'">Volver</button>
                 </div>
                 
             </form>
