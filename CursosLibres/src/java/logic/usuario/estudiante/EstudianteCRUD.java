@@ -16,7 +16,7 @@ public class EstudianteCRUD {
             + "ORDER BY apellido1, nombre;";
     
     protected static final String CMD_AGREGAR
-            = "INSERT INTO estudiante (idEstudiantenombre, apellido1, apellido2, correo, numero, direccion, password) "
+            = "INSERT INTO estudiante (idEstudiante, nombre, apellido1, apellido2, correo, telefono, direccion, password) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
@@ -30,4 +30,9 @@ public class EstudianteCRUD {
     protected static final String CMD_ELIMINAR
             = "DELETE FROM estudiante "
             + "WHERE idEstudiante = ?; ";
+    
+    
+     protected static final String CMD_ACTUALIZARPass
+            = "UPDATE estudiante SET password = ?"
+            + "WHERE idEstudiante = ?;";
 }

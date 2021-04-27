@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.curso.CursoDAO;
-import logic.curso.Service;
+import logic.usuario.estudiante.Service;
 import logic.usuario.estudiante.EstudianteDAO;
 import logic.grupo.GrupoDAO;
 
-
-@WebServlet(name = "Estudiante", urlPatterns = {"/signin", "/signup", "/grupos"})
+@WebServlet(name = "Estudiante", urlPatterns = {"/signin", "/signup", "/grupos", "/update"})
 public class Estudiante extends HttpServlet {
 
     /**
@@ -38,7 +37,7 @@ public class Estudiante extends HttpServlet {
                 break;
             }
 
-            case "/singup": {
+            case "/signup": {
                 URL = Singup(request);
                 break;
             }
@@ -46,6 +45,12 @@ public class Estudiante extends HttpServlet {
             case "/grupos": {
                 //URL = "/presentation/usuario/Estudiante/Cursos.jsp";
                 URL = displayGrupos(request);
+                break;
+
+            }
+            case "/update": { //update contrasena inicial
+                //URL = "/presentation/usuario/Estudiante/Cursos.jsp";
+                URL = updatePassword(request);
                 break;
             }
             default:
@@ -71,6 +76,34 @@ public class Estudiante extends HttpServlet {
     }
 
     public String Singup(HttpServletRequest request) {
+        String URL = "index.jsp";
+        try {
+            
+            
+            EstudianteDAO.obtenerInstancia().crear(request);
+            URL = muesttatemporal(request);
+            
+        } catch (Exception ex) {
+            if (ex.getMessage().equals("duplicado")) {
+                URL = "/presentation/login/registrar.jsp";
+            }
+            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return URL;
+    }
+
+    public String muesttatemporal(HttpServletRequest request) {
+        
+        int id = Integer.parseInt(request.getParameter("idEstudiante"));
+        Service srv = new Service();
+
+        logic.usuario.estudiante.Estudiante aux = EstudianteDAO.obtenerInstancia().recuperar(id);
+        srv.estudiantesAdd(aux);
+        request.setAttribute("estudiante", srv);
+        return "/presentation/login/informacion_registro.jsp";
+    }
+
+    public String updatePassword(HttpServletRequest request) {
         String URL = "index.jsp";
         try {
             EstudianteDAO.obtenerInstancia().crear(request);
