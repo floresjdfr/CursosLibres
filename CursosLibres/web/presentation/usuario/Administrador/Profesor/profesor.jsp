@@ -62,7 +62,7 @@
                 </table>
             </div>
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/agregar_curso.jsp'">Agregar</button>
+                <button class="table-btn" onclick="location.href = 'agregar_profesor.jsp'">Agregar</button>
             </div>
         </div>
     </body>  
