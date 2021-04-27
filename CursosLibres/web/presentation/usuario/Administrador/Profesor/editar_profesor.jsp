@@ -25,31 +25,31 @@
                         <tr>
                             <td class="curso-izquierda">Nombre:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="nombre" type="text">
+                                <input class = "curso-derecha" name="nombre" type="text" value="Aqui va el nombre">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Cedula:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="cedula" type="text">
+                                <input class = "curso-derecha" name="cedula" type="text" value="Aqui va la cedula">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Correo:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="correo" type="text">
+                                <input class = "curso-derecha" name="correo" type="text" value="Aqui va el correo">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Telefono:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="telefono" type="text">
+                                <input class = "curso-derecha" name="telefono" type="text" value="Aqui va el telefono">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Especialidad</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="especialidad" type="text">
+                                <input class = "curso-derecha" name="especialidad" type="text" value="Aqui va la especialidad">
                             </td>
                         </tr>
                     </table>
