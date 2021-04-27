@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import logic.curso.CursoDAO;
 import logic.curso.Service;
+import logic.usuario.profesor.ProfesorDAO;
+import logic.usuario.profesor.Profesor;
 
-@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/Profesores", "/Estudiantes", "/agregarCurso"})
+@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -46,7 +48,13 @@ public class Administrador extends HttpServlet {
                 URL = agregaCurso(request);
                 break;
             }
-            
+
+            case "/agregarProfesor": {
+
+                URL = agregarProfesor(request);
+                break;
+            }
+
 //            case "/image": {
 //
 //                URL = image(request, response);
@@ -73,7 +81,7 @@ public class Administrador extends HttpServlet {
 
     private String image(HttpServletRequest request, HttpServletResponse response) {
         String codigo = request.getParameter("nombre");
-        Path path = FileSystems.getDefault().getPath("/imagenes", codigo+".jpg");
+        Path path = FileSystems.getDefault().getPath("/imagenes", codigo + ".jpg");
         try (OutputStream out = response.getOutputStream()) {
             Files.copy(path, out);
             out.flush();
@@ -100,6 +108,33 @@ public class Administrador extends HttpServlet {
             Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
         return URL;
+    }
+
+    public String agregarProfesor(HttpServletRequest request) {
+        String URL = "index.jsp";
+        int aux=Integer.parseInt(request.getParameter("idProfesor"));
+        String n=request.getParameter("nombre");
+        String n1=request.getParameter("apellido1");
+        String n2=request.getParameter("apellido2");
+        String n3=request.getParameter("correo");
+        String n4=request.getParameter("telefono");
+        String n5=request.getParameter("especialidad");
+        String n6=request.getParameter("password");
+        
+        Profesor p= new Profesor(aux,n,n1,n2,n3,n4,n5,n6);
+     
+        try {
+            ProfesorDAO.obtenerInstancia().crear(p);
+            URL = "/profesor.jsp";
+
+        } catch (Exception ex) {
+            if (ex.getMessage().equals("duplicado")) {
+                URL = "/agregar_profesor.jsp";
+            }
+            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return URL;
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
