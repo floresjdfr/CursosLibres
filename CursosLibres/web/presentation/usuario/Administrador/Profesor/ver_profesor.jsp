@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href = 'profesor.jsp'">Volver</button>
+                <button class="table-btn" onclick="location.href = '/CursosLibres/mostrarProfesor'">Volver</button>
             </div>
 
         </div>

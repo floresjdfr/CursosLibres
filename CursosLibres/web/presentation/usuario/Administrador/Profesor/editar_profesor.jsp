@@ -58,7 +58,7 @@
 
                 <div class="formulario-buttons">
                     <button type="submit" class="table-btn formulario-btn1">Guardar</button>
-                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = 'profesor.jsp'">Volver</button>
+                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/mostrarProfesor'">Volver</button>
                 </div>
                 
 

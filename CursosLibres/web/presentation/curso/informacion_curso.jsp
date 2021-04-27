@@ -1,8 +1,3 @@
-<%-- 
-    Document   : informacion_curso
-    Created on : Apr 26, 2021, 1:47:55 PM
-    Author     : josedf
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
