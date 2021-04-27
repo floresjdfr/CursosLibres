@@ -19,40 +19,46 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
-            <form  class="formulario-container" method="POST" action="/CursosLibres/Cursos">
+            <form  class="formulario-container" method="POST" action="/CursosLibres/agregarCurso">
 
                 <div class = "formulario-form">
                     <table>
                         <tr>
                             <td class="curso-izquierda">Nombre:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="nombre-curso" type="text">
+                                <input class = "curso-derecha" name="nombre" type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Tematica:</td>
                             <td class="curso-derecha ">
-                                <input class = "curso-derecha" name="tematica-curso" type="text">
+                                <input class = "curso-derecha" name="tematica" type="text">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Costo:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="costo-curso" type="text">
+                                <input class = "curso-derecha" name="costo" type="text">
                             </td>
                         </tr>
                         <tr>
-                            <td class="curso-izquierda">Imagen:</td>
+                            <td class="curso-izquierda">Oferta:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="imagen-curso" type="file">
+                                <input class = "curso-derecha" name="oferta" type="text">
                             </td>
                         </tr>
+                        <%--<tr>
+                            <td class="curso-izquierda">Imagen:</td>
+                            <td class="curso-derecha">
+                                <input class = "curso-derecha" name="imagen" type="file">
+                            </td>
+                        </tr>--%>
                     </table>
                 </div>
 
                 <div class="formulario-buttons">
 
-                    <button type="submit" class="formulario-btn1 table-btn"type="submit">Guardar</button>
+                    <button class="formulario-btn1 table-btn" type="submit">Guardar</button>
 
                     <button type="button" class="formulario-btn2 table-btn" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
 

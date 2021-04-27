@@ -31,14 +31,13 @@ public class CursoDAO {
      public void crear(HttpServletRequest request) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
-        int aux=Integer.parseInt(request.getParameter("codigo"));
-        boolean b=Boolean.parseBoolean(request.getParameter("oferta"));
         
-        stm.setInt(1, aux);
-        stm.setString(2, (String) request.getParameter("nombre"));
-        stm.setString(3, (String) request.getParameter("tematica"));
-        stm.setString(4, (String) request.getParameter("costo"));
-        stm.setBoolean(5, b);
+        int b=Integer.parseInt(request.getParameter("oferta"));
+       
+        stm.setString(1, (String) request.getParameter("nombre"));
+        stm.setString(2, (String) request.getParameter("tematica"));
+        stm.setString(3, (String) request.getParameter("costo"));
+        stm.setInt(4, b);
        
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
