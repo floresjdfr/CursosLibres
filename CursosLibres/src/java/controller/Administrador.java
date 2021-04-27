@@ -21,8 +21,9 @@ import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 
-@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow"
 
+@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
+"/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminiarProfeShow"
 })
 public class Administrador extends HttpServlet {
 
@@ -64,7 +65,38 @@ public class Administrador extends HttpServlet {
                 URL = agregarProfesor(request);
                 break;
             }
+            
+            case "/agregarProfesorShow": {
 
+                URL = displayProfesorAgregar(request);
+                break;
+            }
+            
+            case "/mostrarProfesor": {
+
+                URL = displayProfesor(request);
+                break;
+            }
+
+            
+            case "/editarProfeShow": {
+
+                URL = displayProfesorEditar(request);
+                break;
+            }
+            
+             case "/verProfeShow": {
+
+                URL = displayProfesorVer(request);
+                break;
+            }
+             
+              case "/eliminiarProfeShow": {
+
+                URL = displayProfesorEliminar(request);
+                break;
+            }
+            
 //            case "/image": {
 //
 //                URL = image(request, response);
@@ -135,18 +167,18 @@ public class Administrador extends HttpServlet {
      
         try {
             ProfesorDAO.obtenerInstancia().crear(p);
-            URL = "/profesor.jsp";
+            URL = "/mostrarProfesor";
 
         } catch (Exception ex) {
             if (ex.getMessage().equals("duplicado")) {
-                URL = "/agregar_profesor.jsp";
+                URL = "/presentation/usuario/Administrador/Profesor/agregar_profesor.jsp";
             }
             Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
         return URL;
 
     }
-    
+
     private Boolean validarUsr(HttpServletRequest request){
         HttpSession session = request.getSession(true);
         Usuario usr = (Usuario) session.getAttribute("usr");
@@ -165,7 +197,34 @@ public class Administrador extends HttpServlet {
         }
         return "/loginShow";
     }
+  public String displayProfesorAgregar(HttpServletRequest request){
+    
+    return "/presentation/usuario/Administrador/Profesor/agregar_profesor.jsp";
+    }
+    
+     public String displayProfesorVer(HttpServletRequest request){
+    
+    return "/presentation/usuario/Administrador/Profesor/ver_profesor.jsp";
+    }
+     
+      public String displayProfesorEliminar(HttpServletRequest request){
+    
+    return "/presentation/usuario/Administrador/Profesor/borrar_profesor.jsp";
+    }
+      
+       public String displayProfesorEditar(HttpServletRequest request){
+    
+    return "/presentation/usuario/Administrador/Profesor/editar_profesor.jsp";
+    }
 
+     public String displayProfesor(HttpServletRequest request) {
+        ProfesorDAO dao = ProfesorDAO.obtenerInstancia();
+        logic.usuario.profesor.Service listaProfes = dao.listarProfes();
+        request.setAttribute("listaProfesores", listaProfes);
+         return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
+    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

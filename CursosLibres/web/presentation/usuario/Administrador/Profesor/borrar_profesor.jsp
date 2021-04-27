@@ -1,8 +1,4 @@
-<%-- 
-    Document   : borrar_curso
-    Created on : Apr 26, 2021, 3:23:18 PM
-    Author     : josedf
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,7 +33,7 @@
                 <button class="table-btn" onclick="location.href='profesor.jsp'">Aceptar</button>
             </div>
             <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='profesor.jsp'">Cancelar</button>
+                <button class="table-btn" onclick="location.href='/CursosLibres/mostrarProfesor'">Cancelar</button>
             </div>
         
         </div>

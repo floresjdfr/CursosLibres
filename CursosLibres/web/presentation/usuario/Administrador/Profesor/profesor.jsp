@@ -1,8 +1,8 @@
-<%//@page import="logic.usuario.profesor.Profesor"%>
-<%//@page import="logic.profesor.Service"%>
+<%@page import="logic.usuario.profesor.Profesor"%>
+<%@page import="logic.usuario.profesor.Service"%>
 
 <%
-    //Service lista = (Service) request.getAttribute("listaProfesores");
+    Service lista = (Service) request.getAttribute("listaProfesores");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,7 +22,7 @@
             <%@ include file="/header.jsp" %>
 
             <div class="table-container">
-                
+
                 <table>
                     <tr>
                         <th>Profesores</th>
@@ -30,41 +30,29 @@
                         <th></th>
                         <th></th>
                     </tr>
+                    <% if (lista.profesoresList() != null) {%>
+                    <% for (Profesor c : lista.profesoresList()) {%>
                     <tr>
-                        <td></td>
+                        <td><%=c.getNombre()%></td>
                         <td>
-                            <button onclick="location.href = 'ver_profesor.jsp'" class="table-btn">Ver informacion</button>
+                            <button onclick="location.href = '/CursosLibres/verProfeShow'" class="table-btn">Ver informacion</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = 'editar_profesor.jsp'">Editar</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/editarProfeShow'">Editar</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = 'borrar_profesor.jsp'" >Eliminar</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/eliminiarProfeShow'" >Eliminar</button>
                         </td>
                     </tr>
-                    <%// if (lista.cursosList() != null) {%>
-                    <%//for (Profesor c : listaProfesores.profesoresList()) {%>
-                    <tr>
-                        <td><%//=c.getNombre()%></td>
-                        <td>
-                            <button onclick="location.href = 'ver_profesor.jsp'" class="table-btn">Ver informacion</button>
-                        </td>
-                        <td>
-                            <button class="table-btn" onclick="location.href = 'editar_profesor.jsp'">Editar</button>
-                        </td>
-                        <td>
-                            <button class="table-btn" onclick="location.href = 'borrar_profesor.jsp'" >Eliminar</button>
-                        </td>
-                    </tr>
-                    <%//}%>
-                    <%//}%>
+                    <%}%>
+                    <%}%>
 
 
                 </table>
-                   
+
             </div>
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href = 'agregar_profesor.jsp'">Agregar</button>
+                <button class="table-btn" onclick="location.href = '/CursosLibres/agregarProfesorShow'">Agregar</button>
             </div>
         </div>
     </body>  
