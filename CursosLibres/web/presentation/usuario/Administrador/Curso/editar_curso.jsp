@@ -19,7 +19,7 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
-            <form class="formulario-container">
+            <form method="POST" action="#" class="formulario-container">
                 <div class = "formulario-form">
                     <table>
                         <tr>
@@ -50,8 +50,8 @@
                 </div>
                 
                 <div class="formulario-buttons">
-                    <button class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/Cursos'">Guardar</button>
-                    <button class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
+                    <button type="submit"class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/Cursos'">Guardar</button>
+                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
                 </div>
                
             </form>

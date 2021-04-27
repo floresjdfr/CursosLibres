@@ -52,9 +52,9 @@
 
                 <div class="formulario-buttons">
 
-                    <button class="formulario-btn1 table-btn"type="submit">Guardar</button>
+                    <button type="submit" class="formulario-btn1 table-btn"type="submit">Guardar</button>
 
-                    <button class="formulario-btn2 table-btn" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
+                    <button type="button" class="formulario-btn2 table-btn" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
 
                 </div>
 

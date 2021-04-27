@@ -12,10 +12,8 @@ h1{
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(auto, auto);
     margin-top: 50px;
+    margin-bottom: 50px;
 }
-
-
-
 
 /********     Header styles         */
 
@@ -24,7 +22,7 @@ h1{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: minmax(100px, auto);
-    margin-bottom: 75px;
+    margin-bottom: 50px;
 }
 .header-h1{
     grid-column: span 7;
@@ -186,7 +184,28 @@ input[type="text"]{
     border: none;
 }
 
+input[type="number"]{
+    height: 40px;
+    width: 400px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: none;
+}
+
+input[type="file"]{
+    height: 40px;
+    width: 400px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: none;
+}
+
+
 input[type="text"]:focus{
+    outline: none;
+}
+
+input[type="number"]:focus{
     outline: none;
 }
 
@@ -217,7 +236,6 @@ input[type="text"]:focus{
     grid-row: 3/4;
     width: 100%;
     height: 50px;
-    
     display: grid;
     grid-template-columns: repeat(12, 1fr);
 }
