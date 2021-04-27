@@ -21,9 +21,8 @@ import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 
-
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
-"/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminiarProfeShow"
+    "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminiarProfeShow", "/editarProfeAction"
 })
 public class Administrador extends HttpServlet {
 
@@ -53,7 +52,7 @@ public class Administrador extends HttpServlet {
                 URL = agregaCurso(request);
                 break;
             }
-            
+
             case "/agregarCursoShow": {
 
                 URL = agregaCursoShow(request);
@@ -65,38 +64,42 @@ public class Administrador extends HttpServlet {
                 URL = agregarProfesor(request);
                 break;
             }
-            
+
             case "/agregarProfesorShow": {
 
                 URL = displayProfesorAgregar(request);
                 break;
             }
-            
+
             case "/mostrarProfesor": {
 
                 URL = displayProfesor(request);
                 break;
             }
 
-            
             case "/editarProfeShow": {
 
                 URL = displayProfesorEditar(request);
                 break;
             }
-            
-             case "/verProfeShow": {
+
+            case "/verProfeShow": {
 
                 URL = displayProfesorVer(request);
                 break;
             }
-             
-              case "/eliminiarProfeShow": {
+
+            case "/eliminiarProfeShow": {
 
                 URL = displayProfesorEliminar(request);
                 break;
             }
             
+            case "/editarProfeAction":{
+                URL = editarProfeAction(request);
+                break;
+            }
+
 //            case "/image": {
 //
 //                URL = image(request, response);
@@ -154,17 +157,17 @@ public class Administrador extends HttpServlet {
 
     public String agregarProfesor(HttpServletRequest request) {
         String URL = "index.jsp";
-        int aux=Integer.parseInt(request.getParameter("idProfesor"));
-        String n=request.getParameter("nombre");
-        String n1=request.getParameter("apellido1");
-        String n2=request.getParameter("apellido2");
-        String n3=request.getParameter("correo");
-        String n4=request.getParameter("telefono");
-        String n5=request.getParameter("especialidad");
-        String n6=request.getParameter("password");
-        
-        Profesor p= new Profesor(aux,n,n1,n2,n3,n4,n5,n6);
-     
+        int aux = Integer.parseInt(request.getParameter("idProfesor"));
+        String n = request.getParameter("nombre");
+        String n1 = request.getParameter("apellido1");
+        String n2 = request.getParameter("apellido2");
+        String n3 = request.getParameter("correo");
+        String n4 = request.getParameter("telefono");
+        String n5 = request.getParameter("especialidad");
+        String n6 = request.getParameter("password");
+
+        Profesor p = new Profesor(aux, n, n1, n2, n3, n4, n5, n6);
+
         try {
             ProfesorDAO.obtenerInstancia().crear(p);
             URL = "/mostrarProfesor";
@@ -179,52 +182,62 @@ public class Administrador extends HttpServlet {
 
     }
 
-    private Boolean validarUsr(HttpServletRequest request){
+    private Boolean validarUsr(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         Usuario usr = (Usuario) session.getAttribute("usr");
-        if (usr != null){
+        if (usr != null) {
             String tipoUsuario = usr.getClass().getSimpleName();
-            if (tipoUsuario.equals("Administrador"))
+            if (tipoUsuario.equals("Administrador")) {
                 return true;
+            }
             return false;
         }
         return false;
-            
+
     }
+
     private String agregaCursoShow(HttpServletRequest request) {
-        if (validarUsr(request)){
+        if (validarUsr(request)) {
             return "/presentation/usuario/Administrador/Curso/agregar_curso.jsp";
         }
         return "/loginShow";
     }
-  public String displayProfesorAgregar(HttpServletRequest request){
-    
-    return "/presentation/usuario/Administrador/Profesor/agregar_profesor.jsp";
-    }
-    
-     public String displayProfesorVer(HttpServletRequest request){
-    
-    return "/presentation/usuario/Administrador/Profesor/ver_profesor.jsp";
-    }
-     
-      public String displayProfesorEliminar(HttpServletRequest request){
-    
-    return "/presentation/usuario/Administrador/Profesor/borrar_profesor.jsp";
-    }
-      
-       public String displayProfesorEditar(HttpServletRequest request){
-    
-    return "/presentation/usuario/Administrador/Profesor/editar_profesor.jsp";
+
+    public String displayProfesorAgregar(HttpServletRequest request) {
+
+        return "/presentation/usuario/Administrador/Profesor/agregar_profesor.jsp";
     }
 
-     public String displayProfesor(HttpServletRequest request) {
+    public String displayProfesorVer(HttpServletRequest request) {
+
+        return "/presentation/usuario/Administrador/Profesor/ver_profesor.jsp";
+    }
+
+    public String displayProfesorEliminar(HttpServletRequest request) {
+
+        return "/presentation/usuario/Administrador/Profesor/borrar_profesor.jsp";
+    }
+
+    public String displayProfesorEditar(HttpServletRequest request) {
+
+        if (validarUsr(request)) {
+
+            String idProfesorString = request.getParameter("idProfesor");
+            int profesorID = Integer.parseInt(idProfesorString);
+            Profesor profesor = ProfesorDAO.obtenerInstancia().recuperar(profesorID);
+            request.setAttribute("profesor_editar", profesor);
+            return "/presentation/usuario/Administrador/Profesor/editar_profesor.jsp";
+        }
+        return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
+    }
+
+    public String displayProfesor(HttpServletRequest request) {
         ProfesorDAO dao = ProfesorDAO.obtenerInstancia();
         logic.usuario.profesor.Service listaProfes = dao.listarProfes();
         request.setAttribute("listaProfesores", listaProfes);
-         return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
+        return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
     }
-    
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -264,6 +277,26 @@ public class Administrador extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String editarProfeAction(HttpServletRequest request) {
+        String cedulaString = request.getParameter("cedula");
+        int cedula = Integer.parseInt(cedulaString);
+        String nombre = request.getParameter("nombre");
+        String apellido1 = request.getParameter("apellido1");
+        String apellido2 = request.getParameter("apellido2");
+        String correo = request.getParameter("correo");
+        String telefono = request.getParameter("telefono");
+        String especialidad = request.getParameter("especialidad");
+        String password = request.getParameter("password");
+
+        Profesor p = new Profesor(cedula, nombre, apellido1, apellido2, correo, telefono, especialidad, password);
     
+        try {
+            ProfesorDAO.obtenerInstancia().actualizar(p);
+            return "/verProfeShow";
+        } catch (Exception ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            return "/verProfeShow";
+        }
+    }
 
 }

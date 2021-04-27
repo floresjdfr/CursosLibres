@@ -30,18 +30,22 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    <% if (lista.profesoresList() != null) {%>
-                    <% for (Profesor c : lista.profesoresList()) {%>
+                    <% if (lista.profesoresList() != null) {
+                            for (Profesor c : lista.profesoresList()) {
+                                String URLeditar = "/CursosLibres/editarProfeShow?idProfesor=" + c.getCedula();
+                                String URLeliminar = "/CursosLibres/eliminarProfeShow?idProfesor=" + c.getCedula();
+                    %>
                     <tr>
                         <td><%=c.getNombre()%></td>
                         <td>
-                            <button onclick="location.href = '/CursosLibres/verProfeShow'" class="table-btn">Ver informacion</button>
+                            <button type="button" onclick="location.href = '/CursosLibres/verProfeShow'" class="table-btn">Ver informacion</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/editarProfeShow'">Editar</button>
+
+                            <button type="button" class="table-btn" onclick="location.href = '<%=URLeditar%>'">Editar</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/eliminiarProfeShow'" >Eliminar</button>
+                            <button type="button" class="table-btn" onclick="location.href = '<%=URLeliminar%>'" >Eliminar</button>
                         </td>
                     </tr>
                     <%}%>

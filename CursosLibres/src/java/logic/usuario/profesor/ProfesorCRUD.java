@@ -15,7 +15,7 @@ public class ProfesorCRUD {
             + "WHERE idProfesor = ?; ";
     
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE profesor SET idProfesor = ?, nombre = ?, apellido1 = ?, apellido2 = ?, correo = ?, telefono = ?, especialidad = ?, password = ?"
+            = "UPDATE profesor SET nombre = ?, apellido1 = ?, apellido2 = ?, correo = ?, telefono = ?, especialidad = ?, password = ?"
             + "WHERE idProfesor = ?;";
     
     protected static final String CMD_ELIMINAR

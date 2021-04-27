@@ -21,6 +21,13 @@ public class Profesor extends Usuario {
         this.especialidad = especialidad;
     }
 
+    public Profesor(String especialidad, String nombre, String apellido1, String apellido2, String correo, String numero, String password) {
+        super(nombre, apellido1, apellido2, correo, numero, password);
+        this.especialidad = especialidad;
+    }
+    
+    
+
     public Profesor(int cedula, String nombre, String apellido1, String apellido2, String correo, String numero, String especialidad, String password) {
         super(cedula, nombre, apellido1, apellido2, correo, numero, password);
         this.especialidad = especialidad;

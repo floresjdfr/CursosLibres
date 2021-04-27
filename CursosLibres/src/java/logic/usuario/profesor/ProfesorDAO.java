@@ -47,6 +47,25 @@ public class ProfesorDAO {
         }
     }
     
+    public void actualizar(Profesor p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(ProfesorCRUD.CMD_ACTUALIZAR);
+  
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getApellido1());
+        stm.setString(3, p.getApellido2());
+        stm.setString(4, p.getCorreo());
+        stm.setString(5, p.getNumero());
+        stm.setString(6, p.getEspecialidad());
+        stm.setString(7, p.getPassword());
+        stm.setInt(8, p.getCedula());
+ 
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+    
     
     
     
