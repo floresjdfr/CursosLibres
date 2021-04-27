@@ -39,9 +39,9 @@
                 </div>
 
                 <div class="formulario-buttons"> 
-                    <button class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/Cursos'">Guardar</button>
+                    <button type="submit" class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/Cursos'">Guardar</button>
 
-                    <button class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
+                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
                 </div>
             </form>
 
