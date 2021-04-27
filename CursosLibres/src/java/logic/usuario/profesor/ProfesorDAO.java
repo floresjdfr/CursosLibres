@@ -66,6 +66,19 @@ public class ProfesorDAO {
         }
     }
     
+    public void eliminar(int p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(ProfesorCRUD.CMD_ELIMINAR);
+  
+
+        stm.setInt(1, p);
+ 
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+    
     
     
     

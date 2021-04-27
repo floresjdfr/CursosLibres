@@ -22,7 +22,7 @@ import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
-    "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminiarProfeShow", "/editarProfeAction"
+    "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction"
 })
 public class Administrador extends HttpServlet {
 
@@ -89,14 +89,18 @@ public class Administrador extends HttpServlet {
                 break;
             }
 
-            case "/eliminiarProfeShow": {
+            case "/eliminarProfeShow": {
 
                 URL = displayProfesorEliminar(request);
                 break;
             }
-            
-            case "/editarProfeAction":{
+
+            case "/editarProfeAction": {
                 URL = editarProfeAction(request);
+                break;
+            }
+            case "/eliminarProfeAction": {
+                URL = eliminarProfeAction(request);
                 break;
             }
 
@@ -215,7 +219,15 @@ public class Administrador extends HttpServlet {
 
     public String displayProfesorEliminar(HttpServletRequest request) {
 
-        return "/presentation/usuario/Administrador/Profesor/borrar_profesor.jsp";
+        if (validarUsr(request)) {
+
+            String idProfesorString = request.getParameter("idProfesor");
+            int profesorID = Integer.parseInt(idProfesorString);
+            Profesor profesor = ProfesorDAO.obtenerInstancia().recuperar(profesorID);
+            request.setAttribute("profesor_eliminar", profesor);
+            return "/presentation/usuario/Administrador/Profesor/borrar_profesor.jsp";
+        }
+        return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
     }
 
     public String displayProfesorEditar(HttpServletRequest request) {
@@ -278,25 +290,44 @@ public class Administrador extends HttpServlet {
     }// </editor-fold>
 
     private String editarProfeAction(HttpServletRequest request) {
-        String cedulaString = request.getParameter("cedula");
-        int cedula = Integer.parseInt(cedulaString);
-        String nombre = request.getParameter("nombre");
-        String apellido1 = request.getParameter("apellido1");
-        String apellido2 = request.getParameter("apellido2");
-        String correo = request.getParameter("correo");
-        String telefono = request.getParameter("telefono");
-        String especialidad = request.getParameter("especialidad");
-        String password = request.getParameter("password");
+        if (validarUsr(request)) {
+            String cedulaString = request.getParameter("cedula");
+            int cedula = Integer.parseInt(cedulaString);
+            String nombre = request.getParameter("nombre");
+            String apellido1 = request.getParameter("apellido1");
+            String apellido2 = request.getParameter("apellido2");
+            String correo = request.getParameter("correo");
+            String telefono = request.getParameter("telefono");
+            String especialidad = request.getParameter("especialidad");
+            String password = request.getParameter("password");
 
-        Profesor p = new Profesor(cedula, nombre, apellido1, apellido2, correo, telefono, especialidad, password);
-    
-        try {
-            ProfesorDAO.obtenerInstancia().actualizar(p);
-            return "/verProfeShow";
-        } catch (Exception ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-            return "/verProfeShow";
+            Profesor p = new Profesor(cedula, nombre, apellido1, apellido2, correo, telefono, especialidad, password);
+
+            try {
+                ProfesorDAO.obtenerInstancia().actualizar(p);
+                return "/verProfeShow";
+            } catch (Exception ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                return "/verProfeShow";
+            }
         }
+        return "/verProfeShow";
+    }
+
+    private String eliminarProfeAction(HttpServletRequest request) {
+        if (validarUsr(request)) {
+            String p = (String) request.getParameter("idProfesor");
+            int cedula = Integer.parseInt(p);
+            try {
+                ProfesorDAO.obtenerInstancia().eliminar(cedula);
+            } catch (Exception ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                return "/mostrarProfesor";
+            }
+            return "/mostrarProfesor";
+        }
+        return "/mostrarProfesor";
+
     }
 
 }
