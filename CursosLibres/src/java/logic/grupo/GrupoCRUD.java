@@ -6,15 +6,15 @@ public class GrupoCRUD {
             = "SELECT * FROM grupo";
     
     protected static final String CMD_AGREGAR
-            = "INSERT INTO grupo (codigo, Profesor_Cedula, Curso_Codigo) "
-            + "VALUES (?, ?, ?); ";
+            = "INSERT INTO grupo (codigo, Curso_codigo,profesor_idProfesor,fecha) "
+            + "VALUES (?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
-            = "SELECT codigo, Profesor_Cedula, Curso_Codigo FROM grupo "
+            = "SELECT codigo, Curso_codigo,profesor_idProfesor,fecha FROM grupo "
             + "WHERE nombre = ?; ";
     
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE grupo SET codigo = ?, Profesor_Cedula = ?, Curso_Codigo = ?"
+            = "UPDATE grupo SET codigo = ?, Curso_codigo = ?, profesor_idProfesor = ?,fecha = ?"
             + "WHERE codigo = ?;";
     
     protected static final String CMD_ELIMINAR

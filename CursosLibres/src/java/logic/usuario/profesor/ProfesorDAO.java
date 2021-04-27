@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import logic.Database;
+
 
 
 public class ProfesorDAO {
@@ -24,6 +26,30 @@ public class ProfesorDAO {
         return instancia;
     }
        
+    
+    public void crear(HttpServletRequest request) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(ProfesorCRUD.CMD_AGREGAR);
+        int aux=Integer.parseInt(request.getParameter("idProfesor"));
+        
+        stm.setInt(1, aux);
+        stm.setString(2, (String) request.getParameter("nombre"));
+        stm.setString(3, (String) request.getParameter("apellido1"));
+        stm.setString(4, (String) request.getParameter("apellido2"));
+        stm.setString(5, (String) request.getParameter("correo"));
+        stm.setString(6, (String) request.getParameter("telefono"));
+        stm.setString(7, (String) request.getParameter("especiaidad"));
+        stm.setString(8, (String) request.getParameter("password"));
+       
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+    
+    
+    
+    
     public Profesor recuperar(int id) {
         Profesor resultado = null;
         try {

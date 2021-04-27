@@ -37,7 +37,8 @@ public class GrupoDAO {
                         resultado = new Grupo(
                                 rs.getInt("codigo"),
                                 rs.getInt("profeid"),
-                                rs.getInt("cursoid")
+                                rs.getInt("cursoid"),
+                                rs.getString("fecha")
                         );
                     }
                 }
@@ -62,7 +63,8 @@ public class GrupoDAO {
                     auxGrupo = new Grupo(
                             rs.getInt("codigo"),
                             rs.getInt("profeid"),
-                            rs.getInt("cursoid")
+                            rs.getInt("cursoid"),
+                            rs.getString("fecha")
                     );
 
                     listaGrupos.gruposAdd(auxGrupo);

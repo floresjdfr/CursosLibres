@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import logic.Database;
+import logic.usuario.profesor.ProfesorCRUD;
 
 
 public class CursoDAO {
@@ -25,6 +27,25 @@ public class CursoDAO {
             instancia = new CursoDAO();
         return instancia;
     }
+    
+     public void crear(HttpServletRequest request) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
+        int aux=Integer.parseInt(request.getParameter("codigo"));
+        boolean b=Boolean.parseBoolean(request.getParameter("oferta"));
+        
+        stm.setInt(1, aux);
+        stm.setString(2, (String) request.getParameter("nombre"));
+        stm.setString(3, (String) request.getParameter("tematica"));
+        stm.setString(4, (String) request.getParameter("costo"));
+        stm.setBoolean(5, b);
+       
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+    
     
     public Curso recuperar(int id) {
         Curso resultado = null;

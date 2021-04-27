@@ -86,8 +86,11 @@ public class MatriculaDAO {
     public void matricular(HttpServletRequest request) throws Exception{
     
      PreparedStatement stm = Database.instance().prepareStatement(MatriculaCRUD.CMD_AGREGAR);
-        stm.setInt(1, (int) request.getAttribute("Curso_Codigo"));
-        stm.setInt(2, (int) request.getAttribute("estudiante_idEstudiante"));
+        int aux= Integer.parseInt(request.getParameter("Curso_Codigo"));
+        int aux2=Integer.parseInt(request.getParameter("estudiante_idEstudiante"));
+       
+        stm.setInt(1, aux);
+        stm.setInt(2, aux2);
         
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {

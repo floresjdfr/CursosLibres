@@ -8,8 +8,8 @@ public class AdministradorCRUD {
             + "ORDER BY apellido1, nombre;";
     
     protected static final String CMD_AGREGAR
-            = "INSERT INTO administrador (idAdministrador, apellido1, apellido2, correo, telefono, password) "
-            + "VALUES (?, ?, ?, ?, ?, ?); ";
+            = "INSERT INTO administrador (idAdministrador, nombre,  apellido1, apellido2, correo, telefono, password) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
             = "SELECT idAdministrador, nombre, apellido1, apellido2, correo, telefono, password FROM administrador "

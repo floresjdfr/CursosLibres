@@ -6,47 +6,56 @@ import javax.servlet.http.HttpServletRequest;
 
 public class Grupo {
     int codigo;
-    int profeid;
-    int cursoid;
+    int Curso_codigo;
+    int profesor_idPreofesor;
+    String fecha;
 
     public Grupo() {
     }
 
-    public Grupo(int codigo, int profeid, int cursoid) {
+    public Grupo(int codigo, int Curso_codigo, int profesor_idPreofesor, String fecha) {
         this.codigo = codigo;
-        this.profeid = profeid;
-        this.cursoid = cursoid;
+        this.Curso_codigo = Curso_codigo;
+        this.profesor_idPreofesor = profesor_idPreofesor;
+        this.fecha = fecha;
     }
 
-    public Grupo(int codigo, int cursoid) {
+    public Grupo(int codigo, int Curso_codigo) {
         this.codigo = codigo;
-        this.cursoid = cursoid;
-    }
-
-    
-    
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setProfeid(int profeid) {
-        this.profeid = profeid;
-    }
-
-    public void setCursoid(int cursoid) {
-        this.cursoid = cursoid;
+        this.Curso_codigo = Curso_codigo;
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public int getProfeid() {
-        return profeid;
+    public int getCurso_codigo() {
+        return Curso_codigo;
     }
 
-    public int getCursoid() {
-        return cursoid;
+    public int getProfesor_idPreofesor() {
+        return profesor_idPreofesor;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setCurso_codigo(int Curso_codigo) {
+        this.Curso_codigo = Curso_codigo;
+    }
+
+    public void setProfesor_idPreofesor(int profesor_idPreofesor) {
+        this.profesor_idPreofesor = profesor_idPreofesor;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     
 }
