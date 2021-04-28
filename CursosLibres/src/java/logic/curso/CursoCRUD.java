@@ -6,14 +6,14 @@ public class CursoCRUD {
     
     protected static final String CMD_AGREGAR
             = "INSERT INTO curso (nombre, tematica, costo, oferta) "
-            + "VALUES (?, ?, ?, ?);";
+            + "VALUES (?, ?, ?, ?)";
 
     protected static final String CMD_RECUPERAR
             = "SELECT codigo, nombre, tematica, costo, oferta FROM curso "
             + "WHERE codigo = ?; ";
     
     protected static final String CMD_ACTUALIZAR
-            = "UPDATE curso SET nombre = ?"
+            = "UPDATE curso SET nombre = ?, tematica = ?, costo = ?, oferta = ? "
             + "WHERE codigo = ?;";
     
    

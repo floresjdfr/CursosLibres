@@ -115,28 +115,21 @@ public class CursoDAO {
 
     public void actualizar(Curso p) throws Exception {
 
-        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ACTUALIZAR);
 
-        stm.setString(1, "Test");
-        stm.setInt(4, 9);
+        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ACTUALIZAR);
+      
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getTematica());
+        stm.setString(3, p.getCosto());
+        stm.setInt(4, p.getOferta());
+        stm.setInt(5, p.getCodigo());
+        
+       
+
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
-
-//        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
-//
-//        int b = Integer.parseInt("1");
-//
-//        stm.setString(1, "Hola");
-//        stm.setString(2, "Hola");
-//        stm.setString(3, "Hola");
-//        stm.setInt(4, b);
-//
-//        int count = Database.instance().executeUpdate(stm);
-//        if (count == 0) {
-//            throw new Exception("duplicado");
-//        }
     }
 
     private Database db;

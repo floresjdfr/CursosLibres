@@ -397,11 +397,11 @@ public class Administrador extends HttpServlet {
 
             } catch (Exception ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/CursosLibres/Curso";
+                return "/Curso";
             }
-            return "/CursosLibres/Cursos";
+            return "/Cursos";
         }
-        return "/CursosLibres/Cursos";
+        return "/Cursos";
 
     }
 
@@ -415,7 +415,7 @@ public class Administrador extends HttpServlet {
             request.setAttribute("curso_editar", c);
             return "/presentation/usuario/Administrador/Curso/editar_curso.jsp";
         }
-        return "/Curso";
+        return "/Cursos";
 
     }
 
