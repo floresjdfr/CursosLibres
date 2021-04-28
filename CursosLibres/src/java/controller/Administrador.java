@@ -415,7 +415,7 @@ public class Administrador extends HttpServlet {
             request.setAttribute("curso_editar", c);
             return "/presentation/usuario/Administrador/Curso/editar_curso.jsp";
         }
-        return "/presentation/usuario/Administrador/Curso/curso.jsp";
+        return "/Curso";
 
     }
 
@@ -434,14 +434,15 @@ public class Administrador extends HttpServlet {
             Curso c = new Curso(codigo, nombre, tematica, costo, oferta);
 
             try {
-                CursoDAO.obtenerInstancia().actualizar(c);
-                return "/verProfeShow";
+                CursoDAO dao = CursoDAO.obtenerInstancia();
+                dao.actualizar(c);
+                return "/Cursos";
             } catch (Exception ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/verProfeShow";
+                return "/Cursos";
             }
         }
-        return "/verProfeShow";
+        return "/Cursos";
     }
 
 }

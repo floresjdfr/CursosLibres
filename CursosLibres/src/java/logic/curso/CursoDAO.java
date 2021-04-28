@@ -14,38 +14,36 @@ import javax.servlet.http.HttpServletRequest;
 import logic.Database;
 import logic.usuario.profesor.ProfesorCRUD;
 
-
 public class CursoDAO {
-    
-    
-    private CursoDAO(){
+
+    private CursoDAO() {
         db = Database.instance();
     }
-    
-    public static CursoDAO obtenerInstancia(){
-        if (instancia == null)
+
+    public static CursoDAO obtenerInstancia() {
+        if (instancia == null) {
             instancia = new CursoDAO();
+        }
         return instancia;
     }
-    
-     public void crear(HttpServletRequest request) throws Exception {
+
+    public void crear(HttpServletRequest request) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
-        
-        int b=Integer.parseInt(request.getParameter("oferta"));
-       
+
+        int b = Integer.parseInt(request.getParameter("oferta"));
+
         stm.setString(1, (String) request.getParameter("nombre"));
         stm.setString(2, (String) request.getParameter("tematica"));
         stm.setString(3, (String) request.getParameter("costo"));
         stm.setInt(4, b);
-       
+
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
-    
-    
+
     public Curso recuperar(int id) {
         Curso resultado = null;
         try {
@@ -74,65 +72,73 @@ public class CursoDAO {
         }
         return resultado;
     }
-    
-    public Service listarCursos(){
+
+    public Service listarCursos() {
         Service listaCursos = new Service();
         Curso auxCurso;
-        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(CursoCRUD.CMD_LISTAR)){
-            
-            try(ResultSet rs = stm.executeQuery()){
-                while (rs.next()){
+        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(CursoCRUD.CMD_LISTAR)) {
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
                     auxCurso = new Curso(
-                                rs.getInt("codigo"),
-                                rs.getString("nombre"),
-                                rs.getString("tematica"),
-                                rs.getString("costo"),
-                                rs.getInt("oferta")
+                            rs.getInt("codigo"),
+                            rs.getString("nombre"),
+                            rs.getString("tematica"),
+                            rs.getString("costo"),
+                            rs.getInt("oferta")
                     );
-                    
+
                     listaCursos.cursosAdd(auxCurso);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         } catch (URISyntaxException | IOException | SQLException ex) {
             Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return listaCursos;
-        
+
     }
-    
-    
-     public void eliminar(int p) throws Exception {
+
+    public void eliminar(int p) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ELIMINAR);
         stm.setInt(1, p);
- 
+
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");
         }
     }
-    
-     
-      public void actualizar(Curso p) throws Exception {
+
+    public void actualizar(Curso p) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ACTUALIZAR);
-  
-        stm.setInt(1, p.getCodigo());
-        stm.setString(2, p.getNombre());
-        stm.setString(3, p.getTematica());
-        stm.setString(4, p.getCosto());
-        stm.setInt(5, p.getOferta());
-         Database.instance().executeUpdate(stm);
+
+        stm.setString(1, "Test");
+        stm.setInt(4, 9);
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+
+//        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
+//
+//        int b = Integer.parseInt("1");
+//
+//        stm.setString(1, "Hola");
+//        stm.setString(2, "Hola");
+//        stm.setString(3, "Hola");
+//        stm.setInt(4, b);
+//
+//        int count = Database.instance().executeUpdate(stm);
 //        if (count == 0) {
 //            throw new Exception("duplicado");
 //        }
     }
-    
-    
+
     private Database db;
-    private static  CursoDAO instancia;
+    private static CursoDAO instancia;
 }
