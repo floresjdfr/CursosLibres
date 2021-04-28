@@ -34,13 +34,13 @@
                         <%for (Curso c : lista.cursosList()) {
                         String URLeditar = "/CursosLibres/editarCursoShow?idCurso=" + c.getCodigo();
                                 String URLeliminar = "/CursosLibres/eliminarCursoShow?idCurso=" + c.getCodigo();
-                                String URLver="/CursosLibres/verCursoShow?idCurso=" + c.getCodigo();
+                                String urlVer="/CursosLibres/ListarGrupos?idCurso=" + c.getCodigo();
                         
                         %>
                             <tr>
                                 <td><%=c.getNombre()%></td>
                                 <td>
-                                    <button onclick="location.href='presentation/misc/Grupos.jsp'" class="table-btn">Ver Grupos</button>
+                                    <button onclick="location.href='<%=urlVer%>'" class="table-btn">Ver Grupos</button>
                                 </td>
                                 <td>
                                     <button class="table-btn" onclick="location.href='<%=URLeditar%>'">Editar</button>

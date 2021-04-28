@@ -52,6 +52,25 @@ public class GrupoDAO {
         }
         return resultado;
     }
+    
+    public Service listarGrupos(String codigoCurso){
+        try {
+            Service listaGrupos = new Service();
+            int codigoCursoInt = Integer.parseInt(codigoCurso);
+            Connection connection = db.getConnection();
+            PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
+            stm.setInt(1, codigoCursoInt);
+            ResultSet result = stm.executeQuery();
+            while(result.next()){
+                Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
+                listaGrupos.gruposAdd(aux);
+            }
+            return listaGrupos;
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
     public Service listarGrupos() {
         

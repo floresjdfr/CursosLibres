@@ -16,18 +16,13 @@ public class Service {
         grupos.add(grupo);
     }
 
-    public void gruposAddVal(Grupo grupo) {
-        grupos.add(grupo);
-        //hay que iterar sobre una lista 
-    }
+    
     
     public List<Grupo> gruposList() {
         return grupos;
     }
 
-    public List<Grupo> GruposList() {
-        return grupos;
-    }
+    
     // nosotros sabiamos que esto iba a dar error y se nos olvido donde estaba la vara :v atte: rando y chupepo 
 
     public void matricular(HttpServletRequest request) throws Exception {

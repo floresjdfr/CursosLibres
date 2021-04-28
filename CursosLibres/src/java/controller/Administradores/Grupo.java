@@ -88,9 +88,12 @@ public class Grupo extends HttpServlet {
 
     private String listarGrupos(HttpServletRequest request) {
         if (validarAdmin(request)){
-            Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos();
+            String idCursoString = request.getParameter("idCurso");
+            Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
+            request.setAttribute("listaGrupos", listaGrupos);
+            return "/presentation/misc/Grupos.jsp";
         }
-        return "#";
+        return "/Cursos";
     }
     
     private Boolean validarAdmin(HttpServletRequest request){
