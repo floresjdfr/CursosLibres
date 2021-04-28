@@ -1,12 +1,19 @@
-<%-- 
-    Document   : borrar_curso
-    Created on : Apr 26, 2021, 3:23:18 PM
-    Author     : josedf
---%>
 
+<%@page import="logic.curso.Curso"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
+    <%
+        Curso curso=(Curso) request.getAttribute("curso_editar");
+        int codigo= curso.getCodigo();
+        String nombre= curso.getNombre();
+        String tematica = curso.getTematica();
+        String costo = curso.getCosto();
+        int oferta = curso.getOferta();    
+    %>
+    
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +31,8 @@
                     <table>
                         <tr>
                             <td class="curso-izquierda">¿Desea eliminar curso?:</td>
-                            <td class="curso-derecha">Aqui va el nombre del curso a eliminar</td>
+                            <td class="curso-derecha"><%=nombre%></td>
+                            <td class="curso-derecha"><%=tematica%></td>
                         </tr>
                     </table>
 
@@ -33,10 +41,10 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='#'">Aceptar</button>
+                <button class="table-btn" onclick="location.href='/CursosLibres/eliminarCursoAction?idCurso=<%=codigo%>'">Aceptar</button>
             </div>
             <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='#'">Cancelar</button>
+                <button class="table-btn" onclick="location.href='/CursosLibres/Cursos'">Cancelar</button>
             </div>
         
         </div>

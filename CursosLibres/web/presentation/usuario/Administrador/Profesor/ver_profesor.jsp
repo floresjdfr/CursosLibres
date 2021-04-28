@@ -1,12 +1,24 @@
-<%-- 
-    Document   : ver_informacion
-    Created on : Apr 26, 2021, 10:41:11 PM
-    Author     : josedf
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
+     <%
+        Profesor profesor = (Profesor) request.getAttribute("Profemostrar");
+        String nombre = profesor.getNombre();
+        String apellido1 = profesor.getApellido1();
+        String apellido2 = profesor.getApellido2();
+        int cedula = profesor.getCedula();
+        String cedulaString = String.valueOf(cedula);
+        String correo = profesor.getCorreo();
+        String telefono = profesor.getNumero();
+        String especialidad = profesor.getEspecialidad();
+        String password = profesor.getPassword();
+    %>
+    
+    
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,23 +36,31 @@
                     <table>
                         <tr>
                             <td class="curso-izquierda">Nombre:</td>
-                            <td class="curso-derecha">Aqui va el nombre</td>
+                            <td class="curso-derecha"><%=nombre%></td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Primer Apellido:</td>
+                            <td class="curso-derecha"><%=apellido1%></td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Segundo Apellisod:</td>
+                            <td class="curso-derecha"><%=apellido2%></td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Cedula:</td>
-                            <td class="curso-derecha">Aqui va la cedula</td>
+                            <td class="curso-derecha"><%=cedulaString%></td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Correo:</td>
-                            <td class="curso-derecha">Aqui va el correo</td>
+                            <td class="curso-derecha"><%=correo%></td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Telefono:</td>
-                            <td class="curso-derecha">Aqui va el telefono</td>
+                            <td class="curso-derecha"><%=telefono%></td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Especialidad:</td>
-                            <td class="curso-derecha">Aqui va la especialidad</td>
+                            <td class="curso-derecha"><%=especialidad%></td>
                         </tr>
                     </table>
                 </div>

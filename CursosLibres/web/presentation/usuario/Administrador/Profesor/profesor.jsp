@@ -34,11 +34,12 @@
                             for (Profesor c : lista.profesoresList()) {
                                 String URLeditar = "/CursosLibres/editarProfeShow?idProfesor=" + c.getCedula();
                                 String URLeliminar = "/CursosLibres/eliminarProfeShow?idProfesor=" + c.getCedula();
+                                String URLver="/CursosLibres/verProfeShow?idProfesor=" + c.getCedula();
                     %>
                     <tr>
                         <td><%=c.getNombre()%></td>
                         <td>
-                            <button type="button" onclick="location.href = '/CursosLibres/verProfeShow'" class="table-btn">Ver informacion</button>
+                            <button type="button" onclick="location.href = '<%=URLver%>'" class="table-btn">Ver informacion</button>
                         </td>
                         <td>
 

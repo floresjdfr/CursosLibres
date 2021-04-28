@@ -59,8 +59,8 @@ public class CursoDAO {
                                 rs.getInt("codigo"),
                                 rs.getString("nombre"),
                                 rs.getString("tematica"),
-                                rs.getFloat("costo"),
-                                rs.getBoolean("oferta")
+                                rs.getString("costo"),
+                                rs.getInt("oferta")
                         );
                     }
                 }
@@ -86,8 +86,8 @@ public class CursoDAO {
                                 rs.getInt("codigo"),
                                 rs.getString("nombre"),
                                 rs.getString("tematica"),
-                                rs.getFloat("costo"),
-                                rs.getBoolean("oferta")
+                                rs.getString("costo"),
+                                rs.getInt("oferta")
                     );
                     
                     listaCursos.cursosAdd(auxCurso);
@@ -103,6 +103,43 @@ public class CursoDAO {
         return listaCursos;
         
     }
+    
+    
+     public void eliminar(int p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ELIMINAR);
+        stm.setInt(1, p);
+ 
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    }
+    
+     
+      public void actualizar(Curso p) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ACTUALIZAR);
+  
+        stm.setString(1, p.getNombre());
+        stm.setString(2, p.getTematica());
+        stm.setString(3, p.getCosto());
+        stm.setInt(4, p.getOferta());
+        stm.setInt(5, p.getCodigo());
+        
+        System.out.print(p.getCodigo());
+        System.out.print(p.getCosto());
+        System.out.print(p.getNombre());
+        System.out.print(p.getOferta());
+        System.out.print(p.getTematica());
+        System.out.print("picha pal culo");
+ 
+         Database.instance().executeQuery(stm);
+//        if (count == 0) {
+//            throw new Exception("duplicado");
+//        }
+    }
+    
     
     private Database db;
     private static  CursoDAO instancia;

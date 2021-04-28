@@ -31,17 +31,22 @@
                         <th></th>
                     </tr>
                     <% if (lista.cursosList() != null) {%>
-                        <%for (Curso c : lista.cursosList()) {%>
+                        <%for (Curso c : lista.cursosList()) {
+                        String URLeditar = "/CursosLibres/editarCursoShow?idCurso=" + c.getCodigo();
+                                String URLeliminar = "/CursosLibres/eliminarCursoShow?idCurso=" + c.getCodigo();
+                                String URLver="/CursosLibres/verCursoShow?idCurso=" + c.getCodigo();
+                        
+                        %>
                             <tr>
                                 <td><%=c.getNombre()%></td>
                                 <td>
                                     <button onclick="location.href='presentation/misc/Grupos.jsp'" class="table-btn">Ver Grupos</button>
                                 </td>
                                 <td>
-                                    <button class="table-btn" onclick="location.href='/CursosLibres/presentation/usuario/Administrador/Curso/editar_curso.jsp'">Editar</button>
+                                    <button class="table-btn" onclick="location.href='<%=URLeditar%>'">Editar</button>
                                 </td>
                                 <td>
-                                    <button class="table-btn" onclick="location.href='/CursosLibres/presentation/usuario/Administrador/Curso/borrar_curso.jsp'" >Eliminar</button>
+                                    <button class="table-btn" onclick="location.href='<%=URLeliminar%>'" >Eliminar</button>
                                 </td>
                             </tr>
                         <%}%>

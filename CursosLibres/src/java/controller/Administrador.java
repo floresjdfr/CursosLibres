@@ -16,13 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import logic.curso.CursoDAO;
+import logic.curso.Curso;
 import logic.curso.Service;
 import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
-    "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction"
+    "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction",
+        "/editarCursoShow", "/eliminarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction"
 })
 public class Administrador extends HttpServlet {
 
@@ -103,7 +105,33 @@ public class Administrador extends HttpServlet {
                 URL = eliminarProfeAction(request);
                 break;
             }
+            
+            
+            case "/eliminarCursoShow": {
+                URL = displayEliminarCurso(request);
+                break;
+            }
+            
+            case "/editarCursoShow": {
+                URL = displayEditarCurso(request);
+                break;
+            }
+            
+            case "/verCursoShow": {
+                URL = eliminarProfeAction(request);
+                break;
+            }
+            
+            case "/eliminarCursoAction": {
+                URL = EliminarCursoAction(request);
+                break;
+            }
 
+            
+             case "/editarCursoAction": {
+                URL = editarCursoAction(request);
+                break;
+            }
 //            case "/image": {
 //
 //                URL = image(request, response);
@@ -214,7 +242,15 @@ public class Administrador extends HttpServlet {
 
     public String displayProfesorVer(HttpServletRequest request) {
 
-        return "/presentation/usuario/Administrador/Profesor/ver_profesor.jsp";
+       if (validarUsr(request)) {
+
+            String idProfesorString = request.getParameter("idProfesor");
+            int profesorID = Integer.parseInt(idProfesorString);
+            Profesor profesor = ProfesorDAO.obtenerInstancia().recuperar(profesorID);
+            request.setAttribute("Profemostrar", profesor);
+            return "/presentation/usuario/Administrador/Profesor/ver_profesor.jsp";
+        }
+        return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
     }
 
     public String displayProfesorEliminar(HttpServletRequest request) {
@@ -329,5 +365,79 @@ public class Administrador extends HttpServlet {
         return "/mostrarProfesor";
 
     }
+    
+   public String displayEliminarCurso(HttpServletRequest request){
+       
+       if (validarUsr(request)) {
+
+            String CodigoCurso = request.getParameter("idCurso");
+            int CursoID = Integer.parseInt(CodigoCurso);
+            Curso c = CursoDAO.obtenerInstancia().recuperar(CursoID);
+            request.setAttribute("curso_editar", c);
+            return "/presentation/usuario/Administrador/Curso/borrar_curso.jsp";
+        }
+        return "/presentation/usuario/Administrador/Curso/curso.jsp";
+   
+   }
+   
+   public String EliminarCursoAction(HttpServletRequest request){
+       
+       if (validarUsr(request)) {
+           String CodigoCurso = (String) request.getParameter("idCurso");
+           int CursoID = Integer.parseInt(CodigoCurso);
+           
+           try{
+               CursoDAO.obtenerInstancia().eliminar(CursoID);
+           
+           } catch (Exception ex){
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            return "/CursosLibres/Curso";
+           }
+            return "/CursosLibres/Cursos";
+        }
+        return "/CursosLibres/Cursos";
+   
+   }
+   
+   
+    public String displayEditarCurso(HttpServletRequest request){
+       
+       if (validarUsr(request)) {
+
+            String CodigoCurso = request.getParameter("idCurso");
+            int CursoID = Integer.parseInt(CodigoCurso);
+            Curso c = CursoDAO.obtenerInstancia().recuperar(CursoID);
+            request.setAttribute("curso_editar", c);
+            return "/presentation/usuario/Administrador/Curso/editar_curso.jsp";
+        }
+        return "/presentation/usuario/Administrador/Curso/curso.jsp";
+   
+   }
+    
+    private String editarCursoAction(HttpServletRequest request) {
+        
+        if (validarUsr(request)) {
+            
+            String idCurso = request.getParameter("idCurso");
+            int codigo = Integer.parseInt(idCurso);
+            String nombre = request.getParameter("nombre");
+            String tematica = request.getParameter("tematica");
+            String costo = request.getParameter("costo");
+            String ofe = request.getParameter("oferta");
+            int oferta = Integer.parseInt(ofe);
+            
+            Curso c= new Curso(codigo,nombre,tematica,costo,oferta);
+
+            try {
+                CursoDAO.obtenerInstancia().actualizar(c);
+                return "/verProfeShow";
+            } catch (Exception ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                return "/verProfeShow";
+            }
+        }
+        return "/verProfeShow";
+    }
+    
 
 }

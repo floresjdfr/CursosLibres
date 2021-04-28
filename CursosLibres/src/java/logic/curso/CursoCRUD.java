@@ -16,6 +16,7 @@ public class CursoCRUD {
             = "UPDATE curso SET nombre = ?, tematica = ?, costo = ?, oferta = ?"
             + "WHERE codigo = ?;";
     
+    
     protected static final String CMD_ELIMINAR
             = "DELETE FROM curso "
             + "WHERE codigo = ?; ";

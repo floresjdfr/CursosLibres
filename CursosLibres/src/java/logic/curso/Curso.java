@@ -8,18 +8,25 @@ public class Curso {
      int codigo;
      String nombre;
      String tematica;
-     Float costo;
-     boolean oferta;
+     String costo;
+     int oferta;
 
     public Curso() {
     }
 
-    public Curso(int codigo, String nombre, String tematica, Float costo, boolean oferta) {
+    public Curso(int codigo, String nombre, String tematica, String costo, int oferta) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.tematica = tematica;
         this.costo = costo;
         this.oferta = oferta;
+    }
+
+    public Curso(int codigo, String nombre, String tematica, String costo) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.tematica = tematica;
+        this.costo = costo;
     }
     
     public int getCodigo() {
@@ -34,11 +41,11 @@ public class Curso {
         return tematica;
     }
 
-    public Float getCosto() {
+    public String getCosto() {
         return costo;
     }
 
-    public boolean isOferta() {
+    public int getOferta() {
         return oferta;
     }
 
@@ -54,11 +61,11 @@ public class Curso {
         this.tematica = tematica;
     }
 
-    public void setCosto(Float costo) {
+    public void setCosto(String costo) {
         this.costo = costo;
     }
 
-    public void setOferta(boolean oferta) {
+    public void setOferta(int oferta) {
         this.oferta = oferta;
     }
      
