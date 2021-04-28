@@ -1,4 +1,9 @@
-package controller;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controller.Administradores;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,14 +11,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logic.grupo.GrupoDAO;
+import logic.grupo.Service;
+import logic.usuario.Usuario;
 
-@WebServlet(name = "Profesor", urlPatterns = {"/notas"})
-public class Profesor extends HttpServlet {
+/**
+ *
+ * @author flore
+ */
+@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos"})
+public class Grupo extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -23,61 +34,18 @@ public class Profesor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String opcion = request.getServletPath();
         String URL = "";
-        switch (opcion) {
-            case "/notas": {
-                URL = notas(request);
+        
+        switch(request.getServletPath()){
+            case "/ListarGrupos":{
+                URL = listarGrupos(request);
                 break;
             }
-            case "/grupos": {
-              
-                URL = displayGrupos(request);
-                break;
-            }
-            default:
-                break;
         }
-        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(URL).forward(request, response);
-
+        
+        
     }
-
-    
-    public String notas(HttpServletRequest request){
-    
-        return ".";
-    } 
-    
-    
-    public String displayGrupos(HttpServletRequest request) {
-
-        GrupoDAO dao = GrupoDAO.obtenerInstancia();
-        logic.grupo.Service listaGrupos = dao.listaGruposProfe(request);
-        request.setAttribute("listaGrupos", listaGrupos);
-        return "/presentation/usuario/Profesor/Grupos.jsp";
-
-    }
-
-//    public String Singin(HttpServletRequest request) {
-//
-//        return "/presentation/usuario/Estudiante/Signin.jsp";
-//    }
-//
-//    public String Singup(HttpServletRequest request) {
-//        String URL = "index.jsp";
-//        try {
-//            EstudianteDAO.obtenerInstancia().crear(request);
-//
-//        } catch (Exception ex) {
-//            if (ex.getMessage().equals("duplicado")) {
-//                URL = "/presentation/usuario/Estudiante/Signin.jsp";
-//            }
-//            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return URL;
-//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -117,5 +85,22 @@ public class Profesor extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String listarGrupos(HttpServletRequest request) {
+        if (validarAdmin(request)){
+            Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos();
+        }
+        return "#";
+    }
+    
+    private Boolean validarAdmin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Usuario usr = (Usuario) session.getAttribute("usr");
+        if (usr != null)
+            if (usr.getClass().getSimpleName().equals("Administrador"))
+                return true;
+        return false;
+        
+    }
 
 }

@@ -30,29 +30,37 @@
                             String tipoUsuario = usuario.getClass().getSimpleName();
                             switch (tipoUsuario) {
                                 case "Estudiante": {%>
-                        <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Estudiante/confirmar_matricula.jsp'">Matricular</button>
-                        </td>
-                        <%         break;
+                                    <td>
+                                        <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Estudiante/confirmar_matricula.jsp'">Matricular</button>
+                                    </td>
+                        <%      break;
                             }
-                            case "Administrador": {%>
-                                <td>
-                                    <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/editar_grupo.jsp'">Editar</button>
-                                </td>
-                                <td>
-                                    <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/borrar_grupo.jsp'" >Eliminar</button>
-                                </td>
+                                case "Administrador": {%>
+                                    <td>
+                                        <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/editar_grupo.jsp'">Editar</button>
+                                    </td>
+                                    <td>
+                                        <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/borrar_grupo.jsp'" >Eliminar</button>
+                                    </td>
                                 <%break;
-                        }
-                        }
-                        }
-                        %>
+                                }
+                            }   
+                            }
+                            %>
                     </tr>
                 </table>
             </div>
-            <div class="volver-btn">
-                <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/agregar_grupo.jsp'">Agregar</button>
-            </div>
+            <%
+                if (usuario != null){
+                    if (usuario.getClass().getSimpleName().equals("Administrador")){%>
+                        <div class="volver-btn">
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/agregar_grupo.jsp'">Agregar</button>
+                        </div>
+            <%
+                    }
+                }
+            %>
+            
         </div>
     </body>
 

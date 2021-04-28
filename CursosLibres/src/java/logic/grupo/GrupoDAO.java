@@ -54,6 +54,8 @@ public class GrupoDAO {
     }
 
     public Service listarGrupos() {
+        
+        
         Service listaGrupos = new Service();
         Grupo auxGrupo;
         try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(GrupoCRUD.CMD_LISTAR)) {

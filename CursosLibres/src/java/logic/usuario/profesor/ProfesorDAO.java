@@ -32,6 +32,7 @@ public class ProfesorDAO {
         PreparedStatement stm = Database.instance().prepareStatement(ProfesorCRUD.CMD_AGREGAR);
         
         
+        
         stm.setInt(1, p.getCedula());
         stm.setString(2, p.getNombre());
         stm.setString(3, p.getApellido1());
@@ -40,7 +41,8 @@ public class ProfesorDAO {
         stm.setString(6, p.getNumero());
         stm.setString(7, p.getEspecialidad());
         stm.setString(8, p.getPassword());
- 
+        
+        stm.executeUpdate();
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");

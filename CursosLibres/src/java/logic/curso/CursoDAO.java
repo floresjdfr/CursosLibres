@@ -121,20 +121,12 @@ public class CursoDAO {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_ACTUALIZAR);
   
-        stm.setString(1, p.getNombre());
-        stm.setString(2, p.getTematica());
-        stm.setString(3, p.getCosto());
-        stm.setInt(4, p.getOferta());
-        stm.setInt(5, p.getCodigo());
-        
-        System.out.print(p.getCodigo());
-        System.out.print(p.getCosto());
-        System.out.print(p.getNombre());
-        System.out.print(p.getOferta());
-        System.out.print(p.getTematica());
-        System.out.print("picha pal culo");
- 
-         Database.instance().executeQuery(stm);
+        stm.setInt(1, p.getCodigo());
+        stm.setString(2, p.getNombre());
+        stm.setString(3, p.getTematica());
+        stm.setString(4, p.getCosto());
+        stm.setInt(5, p.getOferta());
+         Database.instance().executeUpdate(stm);
 //        if (count == 0) {
 //            throw new Exception("duplicado");
 //        }

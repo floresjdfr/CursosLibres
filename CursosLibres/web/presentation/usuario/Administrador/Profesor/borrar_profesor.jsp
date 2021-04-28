@@ -5,7 +5,7 @@
 <html>
 
    <%
-      Profesor profesor = (Profesor) request.getAttribute("profesor_eliminar");
+      Profesor profesor = (Profesor) request.getAttribute("Profemostrar");
       String nombre = profesor.getNombre();
       String apellido1 = profesor.getApellido1();
       String apellido2 = profesor.getApellido2();
