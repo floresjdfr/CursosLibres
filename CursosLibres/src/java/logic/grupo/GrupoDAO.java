@@ -103,17 +103,15 @@ public class GrupoDAO {
 
     }
 
-    public void matricular(HttpServletRequest request) throws Exception {
+    public void matricular(int idGrupo, int idEstudiante) throws Exception {
 
-        PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_AGREGAREG);
-        stm.setInt(1, (int) request.getAttribute("grupo_codigo"));
-        stm.setInt(2, (int) request.getAttribute("grupo_Curso_codigo"));
-        stm.setInt(3, (int) request.getAttribute("grupo_profesor_idProfesor"));
-        stm.setInt(4, (int) request.getAttribute("estudiante_idEstudiante"));
+        PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_MATRICULAR);
+        stm.setInt(1, idGrupo);
+        stm.setInt(2, idEstudiante);
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
-            throw new Exception("xxxxxxxxxxxxxxxxxxxx");
+            throw new Exception("Error agregando matricula a la base de datos");
         }
     }
 

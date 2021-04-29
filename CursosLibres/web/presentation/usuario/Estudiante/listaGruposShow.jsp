@@ -33,6 +33,8 @@
                             for (Grupo g : service.gruposList()) {
                                 String urlVerInfo = "/CursosLibres/InfoGrupoShow?idGrupo=" + g.getCodigo() + 
                                         "&idCurso=" + g.getCurso_codigo() + "&idProfesor=" + g.getProfesor_idPreofesor();
+                                String urlMatricular = "/CursosLibres/MatriculaConfirmacionShow?idGrupo=" + g.getCodigo() + 
+                                        "&idCurso=" + g.getCurso_codigo();
                     
                     %>
                     <tr>
@@ -48,7 +50,7 @@
                             switch (tipoUsuario) {
                                 case "Estudiante": {%>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Estudiante/confirmar_matricula.jsp'">Matricular</button>
+                            <button class="table-btn" onclick="location.href = '<%=urlMatricular%>'">Matricular</button>
                         </td>
                         <%break;
                                         }

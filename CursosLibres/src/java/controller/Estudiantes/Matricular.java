@@ -16,8 +16,10 @@ import logic.curso.Curso;
 import logic.curso.CursoDAO;
 import logic.curso.Service;
 import logic.grupo.Grupo;
+import logic.grupo.GrupoCRUD;
 import logic.grupo.GrupoDAO;
 import logic.usuario.Usuario;
+import logic.usuario.estudiante.Estudiante;
 import logic.usuario.profesor.Profesor;
 import logic.usuario.profesor.ProfesorDAO;
 
@@ -30,7 +32,8 @@ import logic.usuario.profesor.ProfesorDAO;
     "/MatricularAction",
     "/GruposMatricularShow",
     "/InfoGrupoShow",
-    "/MatricularAction"
+    "/MatricularAction",
+    "/MatriculaConfirmacionShow"
 })
 public class Matricular extends HttpServlet {
 
@@ -63,6 +66,10 @@ public class Matricular extends HttpServlet {
             }
             case "/MatricularAction":{
                 URL = matricularAction(request);
+                break;
+            }
+            case "/MatriculaConfirmacionShow":{
+                URL = matriculaConfirmacionShow(request);
                 break;
             }
             
@@ -195,12 +202,9 @@ public class Matricular extends HttpServlet {
             if (validarEstudiante(request)) {
                 String idGrupo = request.getParameter("idGrupo");
                 int idGrupoInt = Integer.parseInt(idGrupo);
-                Curso curso = CursoDAO.obtenerInstancia().recuperar(idGrupoInt);
-                if (curso != null){
-                    //HttpSession
-                }
-                throw new Exception("Error al recuperar curso de la base de datos");               
-
+                Estudiante estudiante = (Estudiante) request.getSession().getAttribute("usr");
+                GrupoDAO.obtenerInstancia().matricular(idGrupoInt, estudiante.getCedula());
+                return "/MatricularShow";
             }
             throw new Exception("Debe iniciar sesion como estudiante para poder matricular");
         } catch (Exception ex) {
@@ -209,6 +213,27 @@ public class Matricular extends HttpServlet {
             return "/loginShow";
         }
         
+    }
+
+    private String matriculaConfirmacionShow(HttpServletRequest request) {
+        try {
+            if (validarEstudiante(request)) {
+                String idGrupo = request.getParameter("idGrupo");
+                String idCurso = request.getParameter("idCurso");
+                int idCursoInt = Integer.parseInt(idCurso);
+                Curso curso = CursoDAO.obtenerInstancia().recuperar(idCursoInt);
+                
+                request.setAttribute("idGrupo", idGrupo);
+                request.setAttribute("curso", curso);
+                
+                return "/presentation/usuario/Estudiante/confirmar_matricula.jsp";
+            }
+            throw new Exception("Debe iniciar sesion como estudiante para poder matricular");
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            ex.getStackTrace();
+            return "/loginShow";
+        }
     }
 
 }

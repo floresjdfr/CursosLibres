@@ -24,10 +24,11 @@ public class GrupoCRUD {
             + "WHERE codigo = ?; ";
     
     
+    
+    
+    
     // de aqui para abajo son los del grupo incluyendo a los estudiantes
-    protected static final String CMD_AGREGAREG
-            = "INSERT INTO grupo_has_estudiante (grupo_codigo, grupo_Curso_codigo, grupo_profesor_idProfesor, estudiante_idEstudiante) "
-            + "VALUES (?, ?, ?, ?); ";
+    protected static final String CMD_MATRICULAR = "INSERT INTO grupo_has_estudiante (grupo_codigo, codigo) VALUES (?, ?);";
 
     protected static final String CMD_RECUPERAREG
             = "SELECT grupo_codigo, grupo_Curso_codigo, grupo_profesor_idProfesor, estudiante_idEstudiante FROM grupo_has_estudiante "

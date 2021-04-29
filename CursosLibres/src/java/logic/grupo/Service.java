@@ -23,9 +23,5 @@ public class Service {
     }
 
     
-    // nosotros sabiamos que esto iba a dar error y se nos olvido donde estaba la vara :v atte: rando y chupepo 
-
-    public void matricular(HttpServletRequest request) throws Exception {
-        logic.grupo.GrupoDAO.obtenerInstancia().matricular(request);
-    }
+    
 }

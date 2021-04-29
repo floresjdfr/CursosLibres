@@ -4,9 +4,18 @@
     Author     : josedf
 --%>
 
+<%@page import="logic.curso.Curso"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+    <%
+        Curso curso = (Curso) request.getAttribute("curso");
+        String idGrupo = (String) request.getAttribute("idGrupo");
+
+        String urlConfirmar = "/CursosLibres/MatricularAction?idGrupo=" + idGrupo;
+        String urlCancelar = "/CursosLibres/GruposMatricularShow?idCurso=" + curso.getCodigo();
+    %>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +33,7 @@
                     <table>
                         <tr>
                             <td class="curso-izquierda">¿Desea matricular curso?:</td>
-                            <td class="curso-derecha">Aqui va el nombre del curso a matricular</td>
+                            <td class="curso-derecha"><%=curso.getNombre()%></td>
                         </tr>
                     </table>
 
@@ -33,12 +42,12 @@
             </div>
 
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href='#'">Aceptar</button>
+                <button class="table-btn" onclick="location.href = '<%=urlConfirmar%>'">Aceptar</button>
             </div>
             <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='#'">Cancelar</button>
+                <button class="table-btn" onclick="location.href = '<%=urlCancelar%>'">Cancelar</button>
             </div>
-        
+
         </div>
     </body>
 </html>
