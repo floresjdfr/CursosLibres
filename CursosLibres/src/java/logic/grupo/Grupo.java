@@ -1,10 +1,9 @@
-
 package logic.grupo;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 public class Grupo {
+
     int codigo;
     int Curso_codigo;
     int profesor_idPreofesor;
@@ -23,6 +22,12 @@ public class Grupo {
     public Grupo(int codigo, int Curso_codigo) {
         this.codigo = codigo;
         this.Curso_codigo = Curso_codigo;
+    }
+
+    public Grupo(int codigo, int Curso_codigo,String fecha) {
+        this.codigo = codigo;
+        this.Curso_codigo = Curso_codigo;
+        this.fecha = fecha;
     }
 
     public int getCodigo() {
@@ -57,5 +62,4 @@ public class Grupo {
         this.fecha = fecha;
     }
 
-    
 }

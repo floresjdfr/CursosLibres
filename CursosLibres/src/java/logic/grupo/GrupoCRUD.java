@@ -41,5 +41,9 @@ public class GrupoCRUD {
     protected static final String CMD_RECUPERARPG
             = "SELECT grupo_codigo, grupo_Curso_codigo, grupo_profesor_idProfesor, estudiante_idEstudiante FROM grupo_has_estudiante "
             + "WHERE grupo_profesor_idProfesor = ?; ";
+  
+    protected static final String CMD_ACTUALIZARG
+            = "UPDATE grupo SET Curso_codigo = ?, profesor_idProfesor = ?,fecha = ?"
+            + "WHERE codigo = ?;";
     
 }
