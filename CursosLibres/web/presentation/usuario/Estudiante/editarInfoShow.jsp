@@ -1,56 +1,76 @@
+<%@page import="logic.usuario.Usuario"%>
+<%@page import="logic.usuario.estudiante.Estudiante"%>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
-    <title>Editar Cuenta</title>
-</head>
 
-<body>
-    <div class="main-container">
+    <%
+        Estudiante temp = (Estudiante) session.getAttribute("usr");
 
-        <form method="POST" action="#" class="formulario-container">
-            <div class="formulario-form">
-                <table>
-                    <tr>
-                        <td class="curso-izquierda">Telefono:</td>
-                        <td class="curso-derecha" class="input-curso">
-                            <input class="curso-derecha" name="telefono" type="text" value="#">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda">Correo:</td>
-                        <td class="curso-derecha " class="input-curso">
-                            <input class="curso-derecha" name="correo" type="text" value="#">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="curso-izquierda">Direccion:</td>
+        int id = temp.getCedula();
+        String nombre = temp.getNombre();
+        String apellido1 = temp.getApellido1();
+        String apellido2 = temp.getApellido2();
+        String correo = temp.getCorreo();
+        String telefono = temp.getNumero();
+        String dirrecion = temp.getDireccion();
+        String password = temp.getPassword();
+
+    %>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
+        <title>Editar Cuenta</title>
+    </head>
+
+    <body>
+        <div class="main-container">
+
+            <%            String URL = "/CursosLibres/updateEstudiante?idEstudiante=" + id;
+            %>
+
+            <form method="POST" action="<%=URL%>" class="formulario-container">
+                <div class="formulario-form">
+                    <table>
+                        <tr>
+                            <td class="curso-izquierda">Telefono:</td>
+                            <td class="curso-derecha" class="input-curso">
+                                <input class="curso-derecha" name="telefono" type="text" value="<%=telefono%>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Correo:</td>
+                            <td class="curso-derecha " class="input-curso">
+                                <input class="curso-derecha" name="correo" type="text" value="<%=correo%>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="curso-izquierda">Direccion:</td>
+                            <td class="curso-derecha " class="input-curso">
+                                <input class="curso-derecha" name="dirrecion" type="text" value="<%=dirrecion%>">
+                            </td>
+                        </tr>
+                        <td class="curso-izquierda">Password:</td>
                         <td class="curso-derecha" class=" input-curso">
-                            <input class="curso-derecha" name="direccion" type="text" value="#">
+                            <input class="curso-derecha" name="password" type="text" value="<%=password%>">
                         </td>
-                    </tr>
-                    <td class="curso-izquierda">Password:</td>
-                    <td class="curso-derecha" class=" input-curso">
-                        <input class="curso-derecha" name="password" type="text" value="#">
-                    </td>
-                    </tr>
-                    
-                </table>
-            </div>
+                        </tr>
 
-            <div class="formulario-buttons">
-                <button type="submit" class="table-btn formulario-btn1">Guardar</button>
-                <button type="button" class="table-btn formulario-btn2" onclick="location.href = '#'">Volver</button>
-            </div>
+                    </table>
+                </div>
 
-        </form>
+                <div class="formulario-buttons">
+                    <button type="submit" class="table-btn formulario-btn1">Actualizar</button>
+                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
+                </div>
+
+            </form>
 
 
 
-    </div>
-</body>
+        </div>
+    </body>
 
 </html>

@@ -6,6 +6,10 @@
 package controller.Administradores;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -88,10 +92,14 @@ public class Grupo extends HttpServlet {
 
     private String listarGrupos(HttpServletRequest request) {
         if (validarAdmin(request)){
-            String idCursoString = request.getParameter("idCurso");
-            Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
-            request.setAttribute("listaGrupos", listaGrupos);
-            return "/presentation/misc/Grupos.jsp";
+            try {
+                String idCursoString = request.getParameter("idCurso");
+                Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
+                request.setAttribute("listaGrupos", listaGrupos);
+                return "/presentation/misc/Grupos.jsp";
+            } catch (IOException | URISyntaxException | SQLException ex) {
+                Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return "/Cursos";
     }

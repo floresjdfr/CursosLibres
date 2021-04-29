@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,7 @@ import logic.usuario.administrador.AdministradorDAO;
 import logic.usuario.estudiante.EstudianteDAO;
 import logic.usuario.profesor.ProfesorDAO;
 
-@WebServlet(name = "Login", urlPatterns = {"/Login", "/Logout", "/loginShow"})
+@WebServlet(name = "Login", urlPatterns = {"/Login", "/Logout", "/loginShow", "/Error"})
 public class Login extends HttpServlet {
 
     /**
@@ -50,6 +52,10 @@ public class Login extends HttpServlet {
                 URL = loginShow(request);
                 break;
             }
+            case "/Error": {
+                URL = loginError(request);
+                break;
+            }
             default:
                 URL = "/index.jsp";
         }
@@ -58,13 +64,64 @@ public class Login extends HttpServlet {
 
     }
 
+    public String loginError(HttpServletRequest request) {
+
+        Map<String, String> errores = null;
+        try {
+            errores = this.validar(request);
+            if (errores.isEmpty()) {
+                this.updateModel(request);
+                return "/presentation/login/login.jsp";
+            } else {
+                request.setAttribute("errores", errores);
+                return "/presentation/login/login.jsp";
+            }
+        } catch (Exception e) {
+            request.setAttribute("errores", errores);
+            return "/presentation/login/login.jsp";
+        }
+    }
+
+    public Map<String, String> validar(HttpServletRequest request) {
+        Map<String, String> errores = new HashMap<>();
+        
+        if (request.getParameter("usernameText").isEmpty()) {
+            errores.put("usernameText", "Cedula requerida");
+        }
+
+        if (request.getParameter("passwordText").isEmpty()) {
+            errores.put("passwordText", "Clave requerida");
+        }
+        try {
+            String a= request.getParameter("usernameText");
+           int auz= Integer.parseInt(a);
+
+        } catch(Exception ex)  {
+            errores.put("usernameText", "No se aceptan letras en el ID");
+        }
+
+        return errores;
+    }
+
     public String loginShow(HttpServletRequest request) {
         return "/presentation/login/login.jsp";
     }
 
     public String show(HttpServletRequest request) {
-        this.updateModel(request);
-        return this.showAction(request);
+
+        try {
+            Map<String, String> errores = this.validar(request);
+            if (errores.isEmpty()) {
+                this.updateModel(request);
+                return this.showAction(request);
+            } else {
+                request.setAttribute("errores", errores);
+                return "/presentation/login/login.jsp";
+            }
+        } catch (Exception e) {
+            return "/presentation/login/error.jsp";
+        }
+
     }
 
     void updateModel(HttpServletRequest request) {
@@ -92,6 +149,7 @@ public class Login extends HttpServlet {
     }
 
     private String showAction(HttpServletRequest request) {
+
         try {
             Model model = (Model) request.getAttribute("model");
             Usuario DBuser;
@@ -123,13 +181,19 @@ public class Login extends HttpServlet {
                     }
                 }
             }
-            return "/loginShow";
-        }
-        catch(Exception e){
-            return "/loginShow";
+            if (DBuser == null) {
+                throw new Exception("ex");
+            }
+        } catch (Exception ex) {
+            Map<String, String> errores = new HashMap<>();
+            request.setAttribute("errores", errores);
+            errores.put("usernameText", "Usuario o clave incorrectos /solo numeros");
+            errores.put("passwordText", "Usuario o clave incorrectos");
+            return "/presentation/login/login.jsp";
+
         }
 
-        
+        return "/CursoDiaplay";
 
     }
 

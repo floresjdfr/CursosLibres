@@ -73,6 +73,7 @@ public class Database {
             return statement.getUpdateCount();
         } catch (SQLException ex) {
             ex.printStackTrace(); 
+            System.out.print(ex.getMessage());
             return 0;
         }
     }

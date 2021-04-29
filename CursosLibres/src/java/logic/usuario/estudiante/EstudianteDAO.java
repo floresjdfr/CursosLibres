@@ -100,12 +100,29 @@ public class EstudianteDAO {
         return pswd;
     }
 
-    public void updatePassword(HttpServletRequest request) throws Exception {
+     public void actualizar(Estudiante p) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_ACTUALIZARPass);
-        stm.setInt(1, (int) request.getAttribute("idEstudiante"));
-        stm.setString(2, (String) request.getAttribute("password"));
+
+        stm.setString(1, p.getCorreo());
+        stm.setString(2, p.getNumero());
+        stm.setString(3, p.getDireccion());
+        stm.setString(4, p.getPassword());
+        stm.setInt(5, p.getCedula());
+ 
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
     }
+    
+    
+//    public void updatePassword(HttpServletRequest request) throws Exception {
+//
+//        PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_ACTUALIZARPass);
+//        stm.setInt(1, (int) request.getAttribute("idEstudiante"));
+//        stm.setString(2, (String) request.getAttribute("password"));
+//    }
 
     private Database db;
     private static EstudianteDAO instancia;

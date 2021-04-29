@@ -8,12 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logic.curso.CursoDAO;
 import logic.usuario.estudiante.Service;
 import logic.usuario.estudiante.EstudianteDAO;
 import logic.grupo.GrupoDAO;
+import logic.usuario.Model;
+import logic.usuario.Usuario;
 
-@WebServlet(name = "Estudiante", urlPatterns = {"/signin", "/signup", "/grupos", "/update"})
+
+@WebServlet(name = "Estudiante", urlPatterns = {"/signin", "/signup", "/grupos", "/updateEstudiante"})
 public class Estudiante extends HttpServlet {
 
     /**
@@ -48,8 +52,7 @@ public class Estudiante extends HttpServlet {
                 break;
 
             }
-            case "/update": { //update contrasena inicial
-                //URL = "/presentation/usuario/Estudiante/Cursos.jsp";
+            case "/updateEstudiante": {
                 URL = updatePassword(request);
                 break;
             }
@@ -102,19 +105,64 @@ public class Estudiante extends HttpServlet {
         request.setAttribute("estudiante", srv);
         return "/presentation/login/informacion_registro.jsp";
     }
+    
+    
+     private Boolean validarUsr(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        Usuario usr = (Usuario) session.getAttribute("usr");
+        if (usr != null) {
+            String tipoUsuario = usr.getClass().getSimpleName();
+            if (tipoUsuario.equals("Estudiante")) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
 
     public String updatePassword(HttpServletRequest request) {
-        String URL = "index.jsp";
-        try {
-            EstudianteDAO.obtenerInstancia().crear(request);
+        
+         if (validarUsr(request)) {
+            String cedulaString = request.getParameter("idEstudiante");
+            int cedula = Integer.parseInt(cedulaString);
+//            String nombre = request.getParameter("nombre");
+//            String apellido1 = request.getParameter("apellido1");
+//            String apellido2 = request.getParameter("apellido2");
+            String correo = request.getParameter("correo");
+            String telefono = request.getParameter("telefono");
+            String dirrecion = request.getParameter("dirrecion");
+            String password = request.getParameter("password");
 
-        } catch (Exception ex) {
-            if (ex.getMessage().equals("duplicado")) {
-                URL = "/presentation/usuario/Estudiante/Signin.jsp";
+            logic.usuario.estudiante.Estudiante p = new  logic.usuario.estudiante.Estudiante(cedula, "", "", "", correo, telefono, dirrecion, password);
+
+            try {
+                EstudianteDAO.obtenerInstancia().actualizar(p);
+                Usuario DBuser;
+                HttpSession session = request.getSession(true);
+                DBuser = EstudianteDAO.obtenerInstancia().recuperar(cedula);
+                session.setAttribute("usr", DBuser);
+                return "/MatricularShow";
+                
+            } catch (Exception ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                return "/editarInfoShow";
             }
-            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return URL;
+        return "/mostrarProfesor";
+        
+        
+//        String URL = "index.jsp";
+//        try {
+//            EstudianteDAO.obtenerInstancia().crear(request);
+//
+//        } catch (Exception ex) {
+//            if (ex.getMessage().equals("duplicado")) {
+//                URL = "/presentation/usuario/Estudiante/Signin.jsp";
+//            }
+//            Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return URL;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
