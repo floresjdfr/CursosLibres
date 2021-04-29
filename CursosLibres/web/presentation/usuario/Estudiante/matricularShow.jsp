@@ -1,6 +1,12 @@
+<%@page import="logic.curso.Curso"%>
+<%@page import="logic.curso.Service"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+    <%
+        Service lista = (Service) request.getAttribute("listaCursos");
+    %>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -17,16 +23,21 @@
             <div class="table-container">
                 <table>
                     <tr>
-                        <th>Cursos</th>
-                        <th></th>
+                        <th colspan="2">Cursos</th>
                     </tr>
-
+                    
+                    <% if (lista.cursosList() != null) {%>
+                    <%for (Curso c : lista.cursosList()) {
+                            String urlVer = "/CursosLibres/GruposMatricularShow?idCurso=" + c.getCodigo();
+                    %>
                     <tr>
-                        <td>Aqui va nombre del curso</td>
+                        <td><%=c.getNombre()%></td>
                         <td>
-                            <button onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'" class="table-btn">Ver Grupos</button>
+                            <button onclick="location.href = '<%=urlVer%>'" class="table-btn">Ver Grupos</button>
                         </td>
                     </tr>
+                    <%}%>
+                    <%}%>
 
                 </table>
             </div>

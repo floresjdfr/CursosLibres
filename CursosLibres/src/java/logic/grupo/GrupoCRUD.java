@@ -13,7 +13,7 @@ public class GrupoCRUD {
 
     protected static final String CMD_RECUPERAR
             = "SELECT codigo, Curso_codigo,profesor_idProfesor,fecha FROM grupo "
-            + "WHERE nombre = ?; ";
+            + "WHERE codigo = ?; ";
     
     protected static final String CMD_ACTUALIZAR
             = "UPDATE grupo SET codigo = ?, Curso_codigo = ?, profesor_idProfesor = ?,fecha = ?"

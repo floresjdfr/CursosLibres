@@ -6,20 +6,31 @@
 package controller.Estudiantes;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.curso.Curso;
+import logic.curso.CursoDAO;
+import logic.curso.Service;
+import logic.grupo.Grupo;
+import logic.grupo.GrupoDAO;
 import logic.usuario.Usuario;
+import logic.usuario.profesor.Profesor;
+import logic.usuario.profesor.ProfesorDAO;
 
 /**
  *
  * @author josedf
  */
-@WebServlet(name = "Matricular", urlPatterns = {"/MatricularShow", "/MatricularAction"})
+@WebServlet(name = "Matricular", urlPatterns = {
+    "/MatricularShow",
+    "/MatricularAction",
+    "/GruposMatricularShow",
+    "/InfoGrupoShow"
+})
 public class Matricular extends HttpServlet {
 
     /**
@@ -35,14 +46,22 @@ public class Matricular extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "";
-        
-        switch(request.getServletPath()){
-            case "/MatricularShow":{
+
+        switch (request.getServletPath()) {
+            case "/MatricularShow": {
                 URL = matricularShow(request);
                 break;
             }
+            case "/GruposMatricularShow": {
+                URL = GruposMatricularShow(request);
+                break;
+            }
+            case "/InfoGrupoShow": {
+                URL = InfoGrupoShow(request);
+                break;
+            }
         }
-        
+
         request.getRequestDispatcher(URL).forward(request, response);
     }
 
@@ -85,15 +104,16 @@ public class Matricular extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String matricularShow(HttpServletRequest request){
-        try{
-            if (validarEstudiante(request)){
-                
+    private String matricularShow(HttpServletRequest request) {
+        try {
+            if (validarEstudiante(request)) {
+                Service service = CursoDAO.obtenerInstancia().listarCursos();
+                request.setAttribute("listaCursos", service);
                 return "/presentation/usuario/Estudiante/matricularShow.jsp";
             }
             throw new Exception("Debe iniciar session como estudiante");
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
             return "/loginShow";
         }
     }
@@ -102,7 +122,65 @@ public class Matricular extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario usr = (Usuario) session.getAttribute("usr");
         return usr != null;
-        
+
+    }
+
+    private String GruposMatricularShow(HttpServletRequest request) {
+        try {
+            if (validarEstudiante(request)) {
+                String cursoID = request.getParameter("idCurso");
+                GrupoDAO dao = GrupoDAO.obtenerInstancia();
+                logic.grupo.Service service = dao.listarGrupos(cursoID);
+                if (service != null) {
+                    request.setAttribute("listaGrupos", service);
+                    return "/presentation/usuario/Estudiante/listaGruposShow.jsp";
+                }
+                throw new Exception("Error recuperando de base de datos");
+            }
+            throw new Exception("Debe iniciar sesion como estudiante para poder matricular");
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            ex.getStackTrace();
+            return "/loginShow";
+        }
+    }
+
+    private String InfoGrupoShow(HttpServletRequest request) {
+        try {
+            if (validarEstudiante(request)) {
+                //Obtener grupo
+
+                String grupoID = request.getParameter("idGrupo");
+                int grupoIdInt = Integer.parseInt(grupoID);
+                Grupo grupo = GrupoDAO.obtenerInstancia().recuperar(grupoIdInt);
+                if (grupo != null) {
+                    int cursoID = grupo.getCurso_codigo();
+                    Curso curso = CursoDAO.obtenerInstancia().recuperar(cursoID);
+
+                    if (curso != null) {
+                        //Utilizar el ID del grupo para obtener el profesor
+                        int idProfesor = grupo.getProfesor_idPreofesor();
+                        Profesor profesor = ProfesorDAO.obtenerInstancia().recuperar(idProfesor);
+                        if (profesor != null) {
+                            request.setAttribute("nombreCurso", curso.getNombre());
+                            request.setAttribute("nombreProfesor", profesor.getNombre() + profesor.getApellido1());
+                            request.setAttribute("horario", grupo.getFecha());
+                            
+                            return "/presentation/usuario/Estudiante/informacionGrupoShow.jsp";
+                        }
+                        throw new Exception("Error recuperando de base de datos");
+                    }
+                    throw new Exception("Error recuperando de base de datos");
+                }
+                throw new Exception("Error recuperando de base de datos");
+
+            }
+            throw new Exception("Debe iniciar sesion como estudiante para poder matricular");
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            ex.getStackTrace();
+            return "/loginShow";
+        }
     }
 
 }

@@ -36,8 +36,8 @@ public class GrupoDAO {
                     if (rs.next()) {
                         resultado = new Grupo(
                                 rs.getInt("codigo"),
-                                rs.getInt("profeid"),
-                                rs.getInt("cursoid"),
+                                rs.getInt("Curso_codigo"),
+                                rs.getInt("profesor_idProfesor"),
                                 rs.getString("fecha")
                         );
                     }
@@ -52,29 +52,24 @@ public class GrupoDAO {
         }
         return resultado;
     }
-    
-    public Service listarGrupos(String codigoCurso){
-        try {
-            Service listaGrupos = new Service();
-            int codigoCursoInt = Integer.parseInt(codigoCurso);
-            Connection connection = db.getConnection();
-            PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
-            stm.setInt(1, codigoCursoInt);
-            ResultSet result = stm.executeQuery();
-            while(result.next()){
-                Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
-                listaGrupos.gruposAdd(aux);
-            }
-            return listaGrupos;
-        } catch (URISyntaxException | IOException | SQLException ex) {
-            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+
+    public Service listarGrupos(String codigoCurso) throws IOException, URISyntaxException, SQLException {
+
+        Service listaGrupos = new Service();
+        int codigoCursoInt = Integer.parseInt(codigoCurso);
+        Connection connection = db.getConnection();
+        PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
+        stm.setInt(1, codigoCursoInt);
+        ResultSet result = stm.executeQuery();
+        while (result.next()) {
+            Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
+            listaGrupos.gruposAdd(aux);
         }
+        return listaGrupos;
     }
 
     public Service listarGrupos() {
-        
-        
+
         Service listaGrupos = new Service();
         Grupo auxGrupo;
         try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(GrupoCRUD.CMD_LISTAR)) {
@@ -126,7 +121,6 @@ public class GrupoDAO {
                     auxGrupo = new Grupo(
                             rs.getInt("grupo_codigo"),
                             rs.getInt("grupo_Curso_codigo")
-                            
                     );
 
                     listaGrupos.gruposAdd(auxGrupo);
@@ -142,8 +136,6 @@ public class GrupoDAO {
         return listaGrupos;
     }
 
-    
-    
     private Database db;
     private static GrupoDAO instancia;
 }
