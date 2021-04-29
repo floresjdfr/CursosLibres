@@ -29,7 +29,8 @@ import logic.usuario.profesor.ProfesorDAO;
     "/MatricularShow",
     "/MatricularAction",
     "/GruposMatricularShow",
-    "/InfoGrupoShow"
+    "/InfoGrupoShow",
+    "/MatricularAction"
 })
 public class Matricular extends HttpServlet {
 
@@ -60,6 +61,11 @@ public class Matricular extends HttpServlet {
                 URL = InfoGrupoShow(request);
                 break;
             }
+            case "/MatricularAction":{
+                URL = matricularAction(request);
+                break;
+            }
+            
         }
 
         request.getRequestDispatcher(URL).forward(request, response);
@@ -182,6 +188,27 @@ public class Matricular extends HttpServlet {
             ex.getStackTrace();
             return "/loginShow";
         }
+    }
+
+    private String matricularAction(HttpServletRequest request) {
+        try {
+            if (validarEstudiante(request)) {
+                String idGrupo = request.getParameter("idGrupo");
+                int idGrupoInt = Integer.parseInt(idGrupo);
+                Curso curso = CursoDAO.obtenerInstancia().recuperar(idGrupoInt);
+                if (curso != null){
+                    //HttpSession
+                }
+                throw new Exception("Error al recuperar curso de la base de datos");               
+
+            }
+            throw new Exception("Debe iniciar sesion como estudiante para poder matricular");
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            ex.getStackTrace();
+            return "/loginShow";
+        }
+        
     }
 
 }
