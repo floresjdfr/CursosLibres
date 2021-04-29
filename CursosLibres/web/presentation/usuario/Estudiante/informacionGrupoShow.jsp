@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html>
     <%
+        int cursoID = (int) request.getAttribute("cursoID");
+        String cursoIdString = String.valueOf(cursoID);
+        String urlGruposShow = "/CursosLibres/GruposMatricularShow?idCurso="+cursoIdString;
         String nombreCurso = (String) request.getAttribute("nombreCurso");
         String nombreProfesor = (String) request.getAttribute("nombreProfesor");
         String horario = (String) request.getAttribute("horario");
@@ -38,7 +41,10 @@
                 </div>
             </div>
             <div class="volver-btn">
-                <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
+                <%
+                    
+                %>
+                <button class="table-btn" onclick="location.href = '<%=urlGruposShow%>'">Volver</button>
             </div>
 
         </div>

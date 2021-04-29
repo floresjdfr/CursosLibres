@@ -33,7 +33,7 @@
                     <tr>
                         <td><%=c.getNombre()%></td>
                         <td>
-                            <button onclick="location.href = '<%=urlVer%>'" class="table-btn">Ver Grupos</button>
+                            <button onclick="location.href = '<%=urlVer%>'" class="table-btn">Matricular</button>
                         </td>
                     </tr>
                     <%}%>

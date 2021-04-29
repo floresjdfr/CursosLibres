@@ -162,6 +162,7 @@ public class Matricular extends HttpServlet {
                         int idProfesor = grupo.getProfesor_idPreofesor();
                         Profesor profesor = ProfesorDAO.obtenerInstancia().recuperar(idProfesor);
                         if (profesor != null) {
+                            request.setAttribute("cursoID", cursoID);
                             request.setAttribute("nombreCurso", curso.getNombre());
                             request.setAttribute("nombreProfesor", profesor.getNombre() + profesor.getApellido1());
                             request.setAttribute("horario", grupo.getFecha());

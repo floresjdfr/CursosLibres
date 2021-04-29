@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
-        <title>Document</title>
+        <title>Grupos</title>
     </head>
     <body>
         <div class="main-container">
@@ -23,7 +23,10 @@
             <div class="table-container">
                 <table>
                     <tr>
-                        <th colspan="4">Grupos</th>
+                        <th>Grupos</th>
+                        <th>Horario</th>
+                        <th></th><!-- comment -->
+                        <th></th>
                     </tr>
                     <%
                         if (usr != null) {
@@ -34,6 +37,7 @@
                     %>
                     <tr>
                         <td>Grupo <%=g.getCodigo()%></td>
+                        <td>Grupo <%=g.getFecha()%></td>
                         <td>
                             <button class="table-btn" onclick="location.href = '<%=urlVerInfo%>'" >Ver Informacion de Grupo</button>
                         </td>
