@@ -1,6 +1,6 @@
 package logic.matricula;
 
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
+//import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

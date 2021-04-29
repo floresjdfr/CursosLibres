@@ -53,20 +53,10 @@ public class GrupoDAO {
         return resultado;
     }
 
-    public Service listarGrupos(String codigoCurso) throws IOException, URISyntaxException, SQLException {
-
-        Service listaGrupos = new Service();
-        int codigoCursoInt = Integer.parseInt(codigoCurso);
-        Connection connection = db.getConnection();
-        PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
-        stm.setInt(1, codigoCursoInt);
-        ResultSet result = stm.executeQuery();
-        while (result.next()) {
-            Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
-            listaGrupos.gruposAdd(aux);
     public Service listarGrupos(String codigoCurso) {
+        Service listaGrupos;
         try {
-            Service listaGrupos = new Service();
+            listaGrupos = new Service();
             int codigoCursoInt = Integer.parseInt(codigoCurso);
             Connection connection = db.getConnection();
             PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
@@ -81,7 +71,7 @@ public class GrupoDAO {
             Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        return listaGrupos;
+        //return listaGrupos;
     }
 
     public Service listarGrupos() {
@@ -183,8 +173,6 @@ public class GrupoDAO {
             throw new Exception("xxxxxxxxxxxxxxxxxxxx");
         }
     }
-
->>>>>>> Stashed changes
     private Database db;
     private static GrupoDAO instancia;
 }

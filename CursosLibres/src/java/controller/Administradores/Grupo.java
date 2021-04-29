@@ -24,8 +24,7 @@ import logic.usuario.Usuario;
  *
  * @author flore
  */
-@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos"})
-@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos", "/agregarGrupo", "editarGrupo"})
+@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos", "/agregarGrupo", "/editarGrupo"})
 public class Grupo extends HttpServlet {
 
     /**
@@ -108,7 +107,7 @@ public class Grupo extends HttpServlet {
                 Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
                 request.setAttribute("listaGrupos", listaGrupos);
                 return "/presentation/misc/Grupos.jsp";
-            } catch (IOException | URISyntaxException | SQLException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
             }
         if (validarAdmin(request)) {
@@ -116,6 +115,8 @@ public class Grupo extends HttpServlet {
             Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
             request.setAttribute("listaGrupos", listaGrupos);
             return "/presentation/misc/Grupos.jsp";
+        }
+        
         }
         return "/Cursos";
     }
