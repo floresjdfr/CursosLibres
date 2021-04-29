@@ -109,14 +109,7 @@ public class Grupo extends HttpServlet {
                 return "/presentation/misc/Grupos.jsp";
             } catch (Exception ex) {
                 Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        if (validarAdmin(request)) {
-            String idCursoString = request.getParameter("idCurso");
-            Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
-            request.setAttribute("listaGrupos", listaGrupos);
-            return "/presentation/misc/Grupos.jsp";
-        }
-        
+            }       
         }
         return "/Cursos";
     }
