@@ -53,19 +53,25 @@ public class GrupoDAO {
         return resultado;
     }
 
-    public Service listarGrupos(String codigoCurso) throws IOException, URISyntaxException, SQLException {
-
-        Service listaGrupos = new Service();
-        int codigoCursoInt = Integer.parseInt(codigoCurso);
-        Connection connection = db.getConnection();
-        PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
-        stm.setInt(1, codigoCursoInt);
-        ResultSet result = stm.executeQuery();
-        while (result.next()) {
-            Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
-            listaGrupos.gruposAdd(aux);
+    public Service listarGrupos(String codigoCurso) {
+        Service listaGrupos;
+        try {
+            listaGrupos = new Service();
+            int codigoCursoInt = Integer.parseInt(codigoCurso);
+            Connection connection = db.getConnection();
+            PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_Listar_CODIGO);
+            stm.setInt(1, codigoCursoInt);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Grupo aux = new Grupo(result.getInt("codigo"), result.getInt("Curso_codigo"), result.getInt("profesor_idProfesor"), result.getString("fecha"));
+                listaGrupos.gruposAdd(aux);
+            }
+            return listaGrupos;
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return listaGrupos;
+        //return listaGrupos;
     }
 
     public Service listarGrupos() {
@@ -136,6 +142,37 @@ public class GrupoDAO {
         return listaGrupos;
     }
 
+    public void updateGrupo(Grupo g) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_ACTUALIZARG);
+        stm.setInt(1, g.getCurso_codigo());
+        stm.setInt(2, g.getProfesor_idPreofesor());
+        stm.setString(3, g.getFecha());
+        stm.setInt(4, g.getCodigo());
+
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("xxxxxxxxxxxxxxxxxxxx");
+        }
+    }
+
+    public void crearGrupo(Grupo g) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_AGREGAR);
+//        stm.setInt(1, g.getCodigo());
+//        stm.setInt(2, g.getCurso_codigo());
+//        stm.setInt(3, g.getProfesor_idPreofesor());
+//        stm.setString(4, g.getFecha());
+        stm.setInt(1, g.getCurso_codigo());
+        stm.setInt(2, g.getProfesor_idPreofesor());
+        stm.setString(3, g.getFecha());
+        
+
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("xxxxxxxxxxxxxxxxxxxx");
+        }
+    }
     private Database db;
     private static GrupoDAO instancia;
 }

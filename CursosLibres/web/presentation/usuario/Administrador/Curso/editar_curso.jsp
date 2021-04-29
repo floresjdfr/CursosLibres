@@ -3,14 +3,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
      <%
         Curso curso=(Curso) request.getAttribute("curso_editar");
         int codigo= curso.getCodigo();
         String nombre= curso.getNombre();
         String tematica = curso.getTematica();
         String costo = curso.getCosto();
-        int oferta = curso.getOferta();    
+        int oferta = curso.getOferta();
     %>
     <head>
         <meta charset="UTF-8">

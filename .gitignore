@@ -7,3 +7,6 @@ dist/
 nbdist/
 .nb-gradle/
 
+CursosLibres/nbproject/ant-deploy.xml
+CursosLibres/nbproject/ant-deploy.xml
+CursosLibres/src/java/db.properties

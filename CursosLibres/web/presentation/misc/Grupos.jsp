@@ -30,7 +30,7 @@
                             Service service = (Service) request.getAttribute("listaGrupos");
                             for (Grupo g : service.gruposList()) {%>
                     <tr>
-                        <td>Grupo <%=g.getCodigo()%></td>
+                        <td>Grupo <%=+g.getCodigo()%></td>
                         <td>
                             <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp'" >Ver Informacion de Grupo</button>
                         </td>
