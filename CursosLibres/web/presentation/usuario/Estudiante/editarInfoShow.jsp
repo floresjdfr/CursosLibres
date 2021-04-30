@@ -26,8 +26,10 @@
     </head>
 
     <body>
-        <div class="main-container">
 
+
+        <div class="main-container">
+            <%@include file="/header.jsp"%>
             <%            String URL = "/CursosLibres/updateEstudiante?idEstudiante=" + id;
             %>
 

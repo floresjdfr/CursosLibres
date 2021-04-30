@@ -22,27 +22,27 @@
     <body class="main-container-simple">
         <%@ include file="header.jsp" %>
 
-    <div class="main-container">
-        <div class="table-container">
-            <table>
-                <tr>
-                  <th>Curso</th>
-                  <th>Precio</th>
-                  <th></th>
-                </tr>
-                <% if (lista.cursosList() != null) {%>
-                <%for (Curso c : lista.cursosList()) {%>
-                <tr>
-                    <td><%=c.getNombre()%></td>
-                    <td><%=c.getCosto()%></td>
-                    
-                    <td><button class="table-btn" onclick="location.href='presentation/misc/Grupos.jsp'">Ver</button></td>
-                </tr>
-                <%}%>
-                <%}%>
-              </table>
-        </div>
-    </div>                               
+        <div class="main-container">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Curso</th>
+                        <th colspan="2">Precio</th>
+                    </tr>
+
+                    <% if (lista.cursosList() != null) {%>
+                    <%for (Curso c : lista.cursosList()) {%>
+                    <tr>
+                        <td><%=c.getNombre()%></td>
+                        <td><%=c.getCosto()%></td>
+
+                        <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
+                    </tr>
+                    <%}%>
+                    <%}%>
+                </table>
+            </div>
+        </div>                               
 
 
         <script src="js/jquery.min.js"></script>

@@ -1,9 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
+
 body{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -11,6 +6,7 @@ body{
     width: 100%;
     place-items: center;
     background: #150b21;
+    background: linear-gradient(-135deg, #1a234e, #51002c);
     /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
 }
 ::selection{
@@ -18,14 +14,14 @@ body{
     color: #fff;
 }
 
-.header-container{
-    width: 100%;
-}
+
 
 .wrapper{
+    
     grid-column: 1/13;
     grid-row: 2/3;
     justify-self:center;
+    align-self: start;
     width: 380px;
     background: #150b21;
     border-radius: 15px;
@@ -33,7 +29,6 @@ body{
 }
 .wrapper .title{
     font-size: 35px;
-    font-weight: 600;
     text-align: center;
     line-height: 100px;
     /*
@@ -79,7 +74,6 @@ form .field input:valid{
     top: 50%;
     left: 20px;
     color: #000;
-    font-weight: 400;
     font-size: 17px;
     pointer-events: none;
     transform: translateY(-50%);
@@ -121,7 +115,6 @@ form .field input[type="submit"]{
     padding-left: 0;
     margin-top: -10px;
     font-size: 20px;
-    font-weight: 500;
     cursor: pointer;
     background: linear-gradient(-135deg, #51002c, #1a234e);
     transition: all 0.3s ease;

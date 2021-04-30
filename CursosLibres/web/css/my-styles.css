@@ -1,11 +1,19 @@
+html{
+    background: linear-gradient(-135deg, #1a234e, #51002c);
+    height: 100%;
+}
+
 body{
     margin:0 auto;
     font-family: sans-serif;
-    background-color: #150b21;
+    /*background-color: #150b21;*/
+     background: transparent;
 }
 
 h1{
     color: #fff;
+    font-size: 40px;
+    font-weight : 100;
 }
 .main-container{
     display: grid;
@@ -13,16 +21,18 @@ h1{
     grid-auto-rows: minmax(auto, auto);
     margin-top: 50px;
     margin-bottom: 50px;
+    
 }
 
 .main-container-simple{
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 72px;
 }
 
 /********     Header styles         */
 
 .header-container {
+    width: 100%;
+    margin-top: 1%;
     grid-column: span 12;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -30,10 +40,12 @@ h1{
     margin-bottom: 50px;
 }
 .header-h1{
+
     grid-column: span 7;
     justify-self: center;
     align-self: center;
 }
+.dropbtn {background-image: linear-gradient(-100deg, #480048, #c14949a2)}
 
 .dropbtn {
     background-color:#51002c;
@@ -42,6 +54,7 @@ h1{
     padding: 16px;
     font-size: 16px;
     border: none;
+    background-size: 200% auto;
     cursor: pointer;
     width: 150px;
 }
@@ -83,13 +96,16 @@ h1{
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #950052;
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
 }
 
 
 /********     Table styles         */
 
 .table-container{
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
     grid-column: 3/10;
     justify-self: center;
     width: 100%;
@@ -106,11 +122,20 @@ th, td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    
 }
 
 tr th{
     text-align: left;
     font-size: 26px;
+    color: #fff;
+    user-select: none;
+    border-radius: 15px 15px 0 0;
+    
+}
+
+.main-row{
+    
 }
 
 tr:hover {
@@ -119,6 +144,7 @@ tr:hover {
 }
 
 .table-btn{
+    background-image: linear-gradient(-100deg, #480048, #c14949a2);
     background-color:#51002c;
     border-radius: 8px;
     color: white;
@@ -130,9 +156,12 @@ tr:hover {
 
 .table-btn:hover {
     background-color: #950052;
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
 }
 
 .table-btn:active {
+    background-image: linear-gradient(-100deg, #480048, #c14949a2);
     background-color: #51002c;
 }
 
@@ -234,6 +263,8 @@ input[type="number"]:focus{
     display: grid;
     grid-template: repeat(12, 1fr);
     grid-auto-rows: minmax(auto, auto); 
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
 }
 
 .formulario-form{

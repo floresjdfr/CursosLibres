@@ -14,16 +14,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Login</title>
-        <link rel="stylesheet" href="/CursosLibres/css/styles.css">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
         <link rel="stylesheet" href="/CursosLibres/css/login.css">
-        
+
     </head>
     <body>
-        <div class = "header-container">
-            <%@ include file="/header.jsp" %>
-        </div>
-        
+
+        <%@ include file="/header.jsp" %>
+
         <div class="wrapper">
             <div class="title">
                 Bienvenido</div>
