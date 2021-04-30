@@ -30,6 +30,7 @@
                         <td>Nombre del curso</td>
                         <td>Nombre del profesor</td>
                         <td>Horario</td>
+                        <td>Nota</td>
                     </tr>
                     <%
                         for (CursoActual c : listaCursos) {%>
@@ -37,6 +38,7 @@
                         <td><%=c.getNombre()%></td>
                         <td><%=c.getNombreProfesor()%> <%=c.getApellidoProfesor()%></td>
                         <td><%=c.getHorario()%></td>
+                        <td><%=c.getNota()%></td>
                     </tr>
                     
                     <%

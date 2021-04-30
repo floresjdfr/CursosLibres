@@ -14,12 +14,13 @@ public class CursoActual {
     public CursoActual() {
     }
 
-    public CursoActual(String nombre, int codigoGrupo, String nombreProfesor, String apellidoProfesor, String horario) {
+    public CursoActual(String nombre, int codigoGrupo, String nombreProfesor, String apellidoProfesor, String horario, String nota) {
         this.nombre = nombre;
         this.codigoGrupo = codigoGrupo;
         this.nombreProfesor = nombreProfesor;
         this.apellidoProfesor = apellidoProfesor;
         this.horario = horario;
+        this.nota = nota;
     }
 
     public String getNombre() {
@@ -61,6 +62,14 @@ public class CursoActual {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
     
     
     private String nombre;
@@ -68,4 +77,5 @@ public class CursoActual {
     private String nombreProfesor;
     private String apellidoProfesor;
     private String horario;
+    private String nota;
 }

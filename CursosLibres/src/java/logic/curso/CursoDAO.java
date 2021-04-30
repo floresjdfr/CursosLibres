@@ -34,9 +34,11 @@ public class CursoDAO {
                     String nombreProfesor = result.getString(3);
                     String apellidoProfesor = result.getString(4);
                     String horario = result.getString(5);
+                    int nota = result.getInt(6);
+                    String notaString = nota != 0 ? String.valueOf(nota) : "N/A";
                     
                     CursoActual cursoActual = new CursoActual(nombre, codigoGrupo,
-                    nombreProfesor, apellidoProfesor, horario);
+                    nombreProfesor, apellidoProfesor, horario, notaString);
                     
                     listaCursos.add(cursoActual);
                 }
