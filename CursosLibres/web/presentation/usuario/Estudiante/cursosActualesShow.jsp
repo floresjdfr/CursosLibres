@@ -1,7 +1,13 @@
 
+<%@page import="logic.curso.CursoActual"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+    <%
+        ArrayList<CursoActual> listaCursos = (ArrayList<CursoActual>) request.getAttribute("listaCursos");
+    %>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -18,11 +24,25 @@
             <div class="table-container">
                 <table>
                     <tr>
-                        <th>Cursos actuales</th>
+                        <th colspan="4">Cursos actuales</th>
                     </tr>
                     <tr>
-                        <td>Nombre del curso aqui</td>
+                        <td>Nombre del curso</td>
+                        <td>Nombre del profesor</td>
+                        <td>Horario</td>
                     </tr>
+                    <%
+                        for (CursoActual c : listaCursos) {%>
+                    <tr>
+                        <td><%=c.getNombre()%></td>
+                        <td><%=c.getNombreProfesor()%> <%=c.getApellidoProfesor()%></td>
+                        <td><%=c.getHorario()%></td>
+                    </tr>
+                    
+                    <%
+                        }
+                    %>
+
                 </table>
             </div>
         </div>

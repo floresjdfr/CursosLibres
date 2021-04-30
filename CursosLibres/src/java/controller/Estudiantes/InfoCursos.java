@@ -7,14 +7,19 @@ package controller.Estudiantes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import logic.curso.CursoActual;
+import logic.curso.CursoDAO;
 import logic.curso.Service;
 import logic.usuario.Usuario;
+import logic.usuario.estudiante.Estudiante;
 
 /**
  *
@@ -45,6 +50,8 @@ public class InfoCursos extends HttpServlet {
             }
 
         }
+        
+        request.getRequestDispatcher(URL).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -89,12 +96,23 @@ public class InfoCursos extends HttpServlet {
     private String listaCursosShow(HttpServletRequest request) {
         try {
             if (validarEstudiante(request)) {
-                logic.grupo.Service listaGrupos = new logic.grupo.Service();
-                Service listaCursos = new Service();
-                return "";
+                
+                List<CursoActual> listaCursos;
+                
+                Estudiante estudiante = (Estudiante) request.getSession().getAttribute("usr");
+                int idEstudiante = estudiante.getCedula();
+                
+                listaCursos = (ArrayList<CursoActual>) CursoDAO.obtenerInstancia().listarCursosActuales(idEstudiante);
+                
+                if (listaCursos != null){
+                    request.setAttribute("listaCursos", listaCursos);
+                    return "/presentation/usuario/Estudiante/cursosActualesShow.jsp";
+                }
+                    
+                throw new Exception("Error al recuperar de la base de datos");
             }
         } catch (Exception ex) {
-            return "";
+            return "/CursoDisplay";
         }
         return "";
     }

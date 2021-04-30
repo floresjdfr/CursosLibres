@@ -35,15 +35,6 @@ public class EstudianteCRUD {
             = "UPDATE estudiante SET correo = ?, telefono = ?, direccion = ?, password = ?"
             + "WHERE idEstudiante = ?;";
 
-    protected static final String CMD_LISTAR_CURSOS_ACTUALES
-            = "SELECT curso.nombre, grupo.codigo, profesor.nombre, profesor.apellido1, grupo.fecha "
-            + "from grupo_has_estudiante "
-            + "inner join grupo "
-            + "on grupo_has_estudiante.grupo_codigo = grupo.codigo "
-            + "inner join curso "
-            + "on grupo.Curso_codigo = curso.codigo "
-            + "inner join profesor "
-            + "on grupo.profesor_idProfesor = profesor.idProfesor "
-            + "where grupo_has_estudiante.codigo = ?;";
+    
 
 }

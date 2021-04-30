@@ -64,8 +64,15 @@ public class Database {
         return null;
     }
     
-    public PreparedStatement prepareStatement(String statement) throws SQLException {
-        return cnx.prepareStatement(statement);
+    public PreparedStatement prepareStatement(String statement){
+        try {
+            return cnx.prepareStatement(statement);
+        } catch (SQLException ex) {
+            ex.printStackTrace(); 
+            System.out.print(ex.getMessage());
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     public int executeUpdate(PreparedStatement statement) {
         try {

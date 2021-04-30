@@ -12,12 +12,42 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import logic.Database;
-import logic.usuario.profesor.ProfesorCRUD;
 
 public class CursoDAO {
 
     private CursoDAO() {
         db = Database.instance();
+    }
+    
+    public List<CursoActual> listarCursosActuales(int idEstudiante) throws SQLException{
+        ArrayList<CursoActual> listaCursos = new ArrayList<>();
+        
+        try(PreparedStatement stm = db.prepareStatement(CursoCRUD.CMD_LISTAR_CURSOS_ACTUALES)){
+            
+            stm.clearParameters();
+            stm.setInt(1, idEstudiante);
+            
+            try(ResultSet result = stm.executeQuery()){
+                while(result.next()){
+                    String nombre = result.getString(1);
+                    int codigoGrupo = result.getInt(2);
+                    String nombreProfesor = result.getString(3);
+                    String apellidoProfesor = result.getString(4);
+                    String horario = result.getString(5);
+                    
+                    CursoActual cursoActual = new CursoActual(nombre, codigoGrupo,
+                    nombreProfesor, apellidoProfesor, horario);
+                    
+                    listaCursos.add(cursoActual);
+                }
+                return listaCursos;
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }      
+        
     }
 
     public static CursoDAO obtenerInstancia() {

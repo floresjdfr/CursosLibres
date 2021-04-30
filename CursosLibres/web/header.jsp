@@ -16,7 +16,7 @@
                 <% String tipoUsr = usuario.getClass().getSimpleName(); %>
                 <% if (usuario.getClass().getSimpleName().equals("Estudiante")){ %>
                     <a href="/CursosLibres/MatricularShow">Matricular</a>
-                    <a href="/CursosLibres/presentation/usuario/Estudiante/cursosActualesShow.jsp">Ver cursos actuales</a>
+                    <a href="/CursosLibres/ListaCursosShow">Ver cursos actuales</a>
                     <a href="/CursosLibres/presentation/usuario/Estudiante/historial_cursos.jsp">Ver historial</a>
                     <a href="/CursosLibres/presentation/usuario/Estudiante/editarInfoShow.jsp">Actualizar Perfil</a>
                     <a href="/CursosLibres/Logout">Logout</a>
