@@ -104,6 +104,34 @@ public class CursoDAO {
         }
         return resultado;
     }
+    
+    public Service buscarPorNombre(String nombre){
+        try {
+            Service service = new Service();
+            Connection connection = db.getConnection();
+            PreparedStatement stm = connection.prepareStatement(CursoCRUD.CMD_BUSCAR_NOMBRE);
+            stm.clearParameters();
+            stm.setString(1, "%"+nombre+"%");
+            ResultSet result = stm.executeQuery();
+            
+            while(result.next()){
+                int codigo = result.getInt("codigo");
+                String nombreCurso = result.getString("nombre");
+                String costo = result.getString("costo");
+                
+                Curso curso = new Curso();
+                curso.setCodigo(codigo);
+                curso.setNombre(nombreCurso);
+                curso.setCosto(costo);
+                
+                service.cursos.add(curso);
+            }
+            return service;
+        } catch (SQLException | URISyntaxException | IOException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
     public Service listarCursos() {
         Service listaCursos = new Service();

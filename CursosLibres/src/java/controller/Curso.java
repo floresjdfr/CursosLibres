@@ -24,7 +24,7 @@ import logic.usuario.Usuario;
  *
  * @author josedf
  */
-@WebServlet(name = "CursoDisplay", urlPatterns = {"/CursoDisplay"})
+@WebServlet(name = "CursoDisplay", urlPatterns = {"/CursoDisplay", "/BuscarCursoAction"})
 public class Curso extends HttpServlet {
 
     /**
@@ -43,6 +43,11 @@ public class Curso extends HttpServlet {
         switch (request.getServletPath()) {
             case "/CursoDisplay": {
                 URL = display(request);
+                break;
+            }
+
+            case "/BuscarCursoAction": {
+                URL = buscarCursoAction(request);
                 break;
             }
             default:
@@ -103,6 +108,18 @@ public class Curso extends HttpServlet {
 
         return "/index.jsp";
 
+    }
+
+    private String buscarCursoAction(HttpServletRequest request) {
+        
+        CursoDAO dao = CursoDAO.obtenerInstancia();
+        String nombreCurso = request.getParameter("nombreCurso");
+        Service listaCursos = dao.buscarPorNombre(nombreCurso);
+                
+        request.setAttribute("listaCursos", listaCursos);
+        request.setAttribute("nombreCurso", nombreCurso);
+
+        return "/index.jsp";
     }
 
 }

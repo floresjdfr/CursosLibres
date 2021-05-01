@@ -25,6 +25,8 @@ import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 import javax.servlet.http.Part;
 
+
+
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
     "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction",
     "/editarCursoShow", "/eliminarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction", "/image"

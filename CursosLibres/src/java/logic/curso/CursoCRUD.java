@@ -34,4 +34,6 @@ public class CursoCRUD {
             + "inner join profesor "
             + "on grupo.profesor_idProfesor = profesor.idProfesor "
             + "where grupo_has_estudiante.codigo = ?;";
+    
+    protected static final String CMD_BUSCAR_NOMBRE = "SELECT codigo, nombre, costo FROM curso WHERE nombre LIKE ?;";
 }
