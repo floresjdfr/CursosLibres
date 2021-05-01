@@ -57,16 +57,16 @@ public class CursoDAO {
         return instancia;
     }
 
-    public void crear(HttpServletRequest request) throws Exception {
+    public void crear(Curso c) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(CursoCRUD.CMD_AGREGAR);
 
-        int b = Integer.parseInt(request.getParameter("oferta"));
+        
 
-        stm.setString(1, (String) request.getParameter("nombre"));
-        stm.setString(2, (String) request.getParameter("tematica"));
-        stm.setString(3, (String) request.getParameter("costo"));
-        stm.setInt(4, b);
+        stm.setString(1, c.getNombre());
+        stm.setString(2, c.getTematica());
+        stm.setString(3, c.getCosto());
+        stm.setInt(4, c.getOferta());
 
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {

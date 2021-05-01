@@ -1,14 +1,11 @@
-<%-- 
-    Document   : agregar_curso
-    Created on : Apr 26, 2021, 3:36:20 PM
-    Author     : josedf
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <%--<meta charset="UTF-8"> enctype="multipart/form-data"--%>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/CursosLibres/css/my-styles.css">
@@ -19,7 +16,7 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
-            <form  class="formulario-container" method="POST" action="/CursosLibres/agregarCurso">
+            <form  class="formulario-container" method="POST" action="/CursosLibres/agregarCurso" enctype="multipart/form-data">
 
                 <div class = "formulario-form">
                     <table>
@@ -47,12 +44,12 @@
                                 <input class = "curso-derecha" name="oferta" type="text">
                             </td>
                         </tr>
-                        <%--<tr>
+                        <tr>
                             <td class="curso-izquierda">Imagen:</td>
                             <td class="curso-derecha">
                                 <input class = "curso-derecha" name="imagen" type="file">
                             </td>
-                        </tr>--%>
+                        </tr>
                     </table>
                 </div>
 

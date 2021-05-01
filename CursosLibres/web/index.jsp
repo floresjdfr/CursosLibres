@@ -35,6 +35,7 @@
                     <tr>
                         <td><%=c.getNombre()%></td>
                         <td><%=c.getCosto()%></td>
+                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="100" height="100"> </td>
 
                         <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
                     </tr>

@@ -23,6 +23,7 @@
             <%@ include file="/header.jsp" %>
             
             <div class="table-container">
+              
                 <table>
                     <tr>
                         <th>Cursos</th>
@@ -38,7 +39,7 @@
                         
                         %>
                             <tr>
-                                <td><%=c.getNombre()%></td>
+                                <td><%=c.getNombre()%></td> <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="100" height="100"> </td>
                                 <td>
                                     <button onclick="location.href='<%=urlVer%>'" class="table-btn">Ver Grupos</button>
                                 </td>

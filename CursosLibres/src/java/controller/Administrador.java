@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.FileSystems;
@@ -9,6 +10,7 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,15 +23,20 @@ import logic.curso.Service;
 import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
+import javax.servlet.http.Part;
 
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
     "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction",
-    "/editarCursoShow", "/eliminarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction", 
+    "/editarCursoShow", "/eliminarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction", "/image"
 })
+
+@MultipartConfig(location = "C:/images")
+
 public class Administrador extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -129,11 +136,12 @@ public class Administrador extends HttpServlet {
                 URL = editarCursoAction(request);
                 break;
             }
-//            case "/image": {
-//
-//                URL = image(request, response);
-//                break;
-//            }
+            case "/image": {
+
+                URL = image(request, response);
+                break;
+            }
+
             default:
                 break;
         }
@@ -153,26 +161,33 @@ public class Administrador extends HttpServlet {
 
     }
 
-    private String image(HttpServletRequest request, HttpServletResponse response) {
-        String codigo = request.getParameter("nombre");
-        Path path = FileSystems.getDefault().getPath("/imagenes", codigo + ".jpg");
+    private String image(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String nombre = request.getParameter("nombre");
+        Path path = FileSystems.getDefault().getPath("C:/images", nombre);
         try (OutputStream out = response.getOutputStream()) {
             Files.copy(path, out);
             out.flush();
         } catch (IOException e) {
-            // handle exception
+            return e.getMessage();
         }
         return null;
     }
 
     public String agregaCurso(HttpServletRequest request) {
         String URL = "index.jsp";
-//        final Part imagen;
+        final Part imagen;
         try {
+            String nombre = request.getParameter("nombre");
+            String tematica = request.getParameter("tematica");
+            String costo = request.getParameter("costo");
+            String ofe = request.getParameter("oferta");
+            int oferta = Integer.parseInt(ofe);
+            Curso c = new Curso(nombre, tematica, costo, oferta);
+            CursoDAO.obtenerInstancia().crear(c);
 
-            CursoDAO.obtenerInstancia().crear(request);
-//            imagen = request.getPart("imagen");
-//            imagen.write(request.getParameter("nombre"));
+            imagen = request.getPart("imagen");
+            imagen.write(request.getParameter("nombre"));
+
             URL = "/Cursos";
 
         } catch (Exception ex) {
@@ -443,6 +458,29 @@ public class Administrador extends HttpServlet {
             }
         }
         return "/Cursos";
+    }
+
+    private String print(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        String codigo = request.getParameter("codigo");
+//        Curso curso;
+//        try {
+//            curso = Service.instance().cursosGet(codigo);
+//            ImageData data = ImageDataFactory.create("C:/AAA/images/" + curso.getCodigo());
+//            PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));
+//            Document doc = new Document(pdf, PageSize.A4.rotate());
+//            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+//            doc.add(new Paragraph("CURSO: " + curso.getNombre()));
+//            Image img = new Image(data);
+//            doc.add(img);
+//            doc.add(new Paragraph(""));
+//
+//            doc.close();
+//            response.setContentType("application/pdf");
+//            response.addHeader("Content-disposition", "inline");
+//            return null;
+//        } catch (Exception ex) {
+//            return "/presentation/Error.jsp";
+//        }
     }
 
 }

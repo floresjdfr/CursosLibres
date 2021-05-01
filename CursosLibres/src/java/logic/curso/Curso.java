@@ -28,6 +28,13 @@ public class Curso {
         this.tematica = tematica;
         this.costo = costo;
     }
+
+    public Curso(String nombre, String tematica, String costo, int oferta) {
+        this.nombre = nombre;
+        this.tematica = tematica;
+        this.costo = costo;
+        this.oferta = oferta;
+    }
     
     public int getCodigo() {
         return codigo;
