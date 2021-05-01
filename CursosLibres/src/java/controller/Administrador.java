@@ -481,6 +481,7 @@ public class Administrador extends HttpServlet {
 //        } catch (Exception ex) {
 //            return "/presentation/Error.jsp";
 //        }
+            return "";
     }
 
 }

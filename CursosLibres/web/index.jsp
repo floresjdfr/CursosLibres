@@ -21,8 +21,14 @@
     </head>
     <body class="main-container-simple">
         <%@ include file="header.jsp" %>
-
+        <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
         <div class="main-container">
+            <div class="busqueda-wrapper">
+                <form class="search_box" action="#">
+                    <button type="submit"class="search_btn"><i class="fas fa-search"></i></button>
+                    <input type="text" class="input_search" placeholder="What are you looking for?">
+                </form>
+            </div>
             <div class="table-container">
                 <table>
                     <tr>
