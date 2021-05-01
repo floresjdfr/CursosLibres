@@ -25,7 +25,7 @@ public class CursoCRUD {
     
     
     protected static final String CMD_LISTAR_CURSOS_ACTUALES
-            = "SELECT curso.nombre, grupo.codigo, profesor.nombre, profesor.apellido1, grupo.fecha "
+            = "SELECT curso.nombre, grupo.codigo, profesor.nombre, profesor.apellido1, grupo.fecha, grupo_has_estudiante.nota "
             + "from grupo_has_estudiante "
             + "inner join grupo "
             + "on grupo_has_estudiante.grupo_codigo = grupo.codigo "
