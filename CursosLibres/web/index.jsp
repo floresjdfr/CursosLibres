@@ -41,16 +41,18 @@
             <div class="table-container">
                 <table>
                     <tr>
+                        <th>Imagen curso</th>
                         <th>Curso</th>
-                        <th colspan="3">Precio</th>
+                        <th colspan="2">Precio</th>
                     </tr>
 
                     <% if (lista.cursosList() != null) {%>
                     <%for (Curso c : lista.cursosList()) {%>
                     <tr>
+                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="50" height="50"> </td>
                         <td><%=c.getNombre()%></td>
                         <td><%=c.getCosto()%></td>
-                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="50" height="50"> </td>
+                        
 
                         <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
                     </tr>
