@@ -24,13 +24,15 @@ import logic.usuario.Usuario;
  *
  * @author flore
  */
-@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos", "/agregarGrupo", "/editarGrupo"})
+@WebServlet(name = "Grupo", urlPatterns = {"/ListarGrupos", "/agregarGrupo", "/editarGrupoShow", "/VerGrupo", "/editarGrupoAction", 
+    "/borrarGrupoShow", "/borrarGrupoAction"
+})
 public class Grupo extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * methods. Processes requests for both HTTP <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -51,14 +53,28 @@ public class Grupo extends HttpServlet {
                 URL = agregarGrupo(request);
                 break;
             }
-            case "/editarGrupo": {
-                URL = editarGrupo(request);
+            case "/editarGrupoShow": {
+                URL = editarGrupoShow(request);
+                break;
+            }
+
+            case "/editarGrupoAction": {
+                URL = editarGrupoAction(request);
+                break;
+            }
+
+            case "/borrarGrupoShow": {
+                URL = borrarGrupoShow(request);
+                break;
+            }
+            
+            case "/borrarGrupoAction": {
+                URL = borrarGrupoShow(request);
                 break;
             }
         }
         request.getRequestDispatcher(URL).forward(request, response);
 
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -101,7 +117,7 @@ public class Grupo extends HttpServlet {
     }// </editor-fold>
 
     private String listarGrupos(HttpServletRequest request) {
-        if (validarAdmin(request)){
+        if (validarAdmin(request)) {
             try {
                 String idCursoString = request.getParameter("idCurso");
                 Service listaGrupos = GrupoDAO.obtenerInstancia().listarGrupos(idCursoString);
@@ -109,7 +125,7 @@ public class Grupo extends HttpServlet {
                 return "/presentation/misc/Grupos.jsp";
             } catch (Exception ex) {
                 Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
-            }       
+            }
         }
         return "/Cursos";
     }
@@ -134,18 +150,33 @@ public class Grupo extends HttpServlet {
         return "/Cursos";
     }
 
-    private String editarGrupo(HttpServletRequest request) {
-        try {
-            if (validarAdmin(request)) {
+    private String editarGrupoAction(HttpServletRequest request) {
+        if (validarAdmin(request)) {
+            
 
+            try {
                 logic.grupo.Grupo g = new logic.grupo.Grupo();
-                g.setCodigo(Integer.parseInt(request.getParameter("idGrupo")));
+                 g.setCodigo(Integer.parseInt(request.getParameter("idGrupo")));
                 g.setCurso_codigo(Integer.parseInt(request.getParameter("idCurso")));
                 g.setProfesor_idPreofesor(Integer.parseInt(request.getParameter("idProfesor")));
                 g.setFecha(request.getParameter("fecha"));
-                GrupoDAO.obtenerInstancia().crearGrupo(g);
+                GrupoDAO.obtenerInstancia().updateGrupo(g);
+            } catch (Exception ex) {
+                Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
+                return "/ListarGrupos?idCurso="+ request.getParameter("idGrupo");
+            }
+        }
+        return "/ListarGrupos?idCurso="+ request.getParameter("idGrupo");
+    }
 
-                return "/presentation/misc/Grupos.jsp";
+    private String editarGrupoShow(HttpServletRequest request) {
+        try {
+            if (validarAdmin(request)) {
+                String id = request.getParameter("idGrupo");
+                int x = Integer.parseInt(id);
+                logic.grupo.Grupo profesor = GrupoDAO.obtenerInstancia().recuperar(x);
+                request.setAttribute("GrupoED", profesor);
+                return "/presentation/usuario/Administrador/Curso/editar_grupo.jsp";
             }
         } catch (Exception e) {
 
@@ -156,14 +187,49 @@ public class Grupo extends HttpServlet {
     private Boolean validarAdmin(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Usuario usr = (Usuario) session.getAttribute("usr");
-        if (usr != null)
-            if (usr.getClass().getSimpleName().equals("Administrador"))
         if (usr != null) {
             if (usr.getClass().getSimpleName().equals("Administrador")) {
-                return true;
+                if (usr != null) {
+                    if (usr.getClass().getSimpleName().equals("Administrador")) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
+
+    }
+    
+    private String borrarGrupoShow(HttpServletRequest request){
+    
+    try {
+            if (validarAdmin(request)) {
+                String id = request.getParameter("idGrupo");
+                int x = Integer.parseInt(id);
+                logic.grupo.Grupo profesor = GrupoDAO.obtenerInstancia().recuperar(x);
+                request.setAttribute("GrupoEL", profesor);
+                return "/presentation/usuario/Administrador/Curso/borrar_grupo.jsp";
+            }
+        } catch (Exception e) {
+
+        }
+        return "/Cursos";
+    
+    }
+    
+
+    public String verGrupo(HttpServletRequest request) {
+
+        if (validarAdmin(request)) {
+            try {
+                String Idgrupo = request.getParameter("codigo");
+
+                return "/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp";
+            } catch (Exception ex) {
+                Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return "/Cursos";
 
     }
 

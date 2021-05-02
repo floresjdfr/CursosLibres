@@ -1,12 +1,20 @@
-<%-- 
-    Document   : confirmacion_eliminacion_curso
-    Created on : Apr 26, 2021, 3:10:40 PM
-    Author     : josedf
---%>
 
+
+<%@page import="logic.grupo.Grupo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%
+        Grupo grupo = (Grupo) request.getAttribute("GrupoEL");
+        int codigo = grupo.getCodigo();
+        int codigocurso = grupo.getCurso_codigo();
+        int IDProfesor = grupo.getProfesor_idPreofesor();
+        String fecha = grupo.getFecha();
+        request.setAttribute("idGrupo", codigo);
+        
+    %>
+    
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +32,7 @@
                     <table>
                         <tr>
                             <td class="curso-izquierda">¿Desea eliminar Grupo?:</td>
-                            <td class="curso-derecha">Aqui va el nombre del grupo a eliminar</td>
+                            <td class="curso-derecha"><%= "Grupo N: " + codigo +" en el horario "+ fecha%></td>
                         </tr>
                     </table>
 
@@ -36,7 +44,7 @@
                 <button class="table-btn" onclick="location.href='#'">Aceptar</button>
             </div>
             <div class="enviar-btn">
-                <button class="table-btn" onclick="location.href='#'">Cancelar</button>
+                <button class="table-btn" onclick="location.href='/CursosLibres/ListarGrupos?idCurso=<%=codigocurso%>'">Cancelar</button>
             </div>
         
         </div>

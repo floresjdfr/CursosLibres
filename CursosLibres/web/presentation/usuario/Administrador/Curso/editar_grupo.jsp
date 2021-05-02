@@ -8,11 +8,12 @@
 <!DOCTYPE html>
 <html>
     <%
-        Grupo grupo = (Grupo) request.getAttribute("grupo_editar");
+        Grupo grupo = (Grupo) request.getAttribute("GrupoED");
         int codigo = grupo.getCodigo();
         int codigocurso = grupo.getCurso_codigo();
         int IDProfesor = grupo.getProfesor_idPreofesor();
-        String oferta = grupo.getFecha();
+        String fecha = grupo.getFecha();
+        request.setAttribute("idGrupo", codigo);
     %>
     <head>
         <meta charset="UTF-8">
@@ -26,7 +27,7 @@
         <div class="main-container">
             <%@include file="/header.jsp" %>
             <%
-                String URL = "/CursosLibres/editarGrupo?idGrupo=" + codigo;
+                String URL = "/CursosLibres/editarGrupoAction?idGrupo=" + codigo ;
             %>
             <form method="POST" action="<%=URL%>" class="formulario-container">
                 <div class = "formulario-form">
@@ -34,25 +35,25 @@
                         <tr>
                             <td class="curso-izquierda">ID del curso:</td>
                             <td class="curso-derecha" class="input-curso">
-                                <input class = "curso-derecha" name="idgrupo" type="text">
+                                <input class = "curso-derecha" name="idCurso" type="text" value="<%=codigocurso%>">
                             </td>
                         </tr>
                         <tr>
                             <td class="curso-izquierda">ID del Profesor:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="idProfesor" type="text">
+                                <input class = "curso-derecha" name="idProfesor" type="text" value="<%=IDProfesor%>">
                             </td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td class="curso-izquierda">Cantidad de alumnos:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="cantida-grupo" type="text">
+                                <input class = "curso-derecha" name="cantida-grupo" type="text" value="<%=codigocurso%>">
                             </td>
-                        </tr>
+                        </tr>--%>
                         <tr>
                             <td class="curso-izquierda">Fecha:</td>
                             <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="fecha" type="text">
+                                <input class = "curso-derecha" name="fecha" type="text" value="<%=fecha%>">
                             </td>
                         </tr>
                     </table>
@@ -61,7 +62,7 @@
 
                 <div class="formulario-buttons">
                     <button type="submit" class="table-btn formulario-btn1">Guardar</button>
-                    <button type="button"class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
+                    <button type="button"class="table-btn formulario-btn2" onclick="location.href = /CursosLibres/ListarGrupos?idCurso=<%=codigocurso%>'">Volver</button>
                 </div>
 
 

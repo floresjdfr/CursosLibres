@@ -94,7 +94,7 @@ public class EstudianteDAO {
         String pswd = "";
         String key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             pswd += (key.charAt((int) (Math.random() * key.length())));
         }
 

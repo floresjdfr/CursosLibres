@@ -5,7 +5,7 @@
 <html lang="es">
 
     <%
-        
+
         Usuario usr = (Usuario) session.getAttribute("usr");
 
     %>
@@ -19,7 +19,9 @@
     <body>
         <div class="main-container">
             <%@include file="/header.jsp"%>
+
             <div class="table-container">
+
                 <table>
                     <tr>
                         <th colspan="4">Grupos</th>
@@ -28,11 +30,13 @@
                     <%
                         if (usr != null) {
                             Service service = (Service) request.getAttribute("listaGrupos");
+
                             for (Grupo g : service.gruposList()) {%>
+
                     <tr>
                         <td>Grupo <%=+g.getCodigo()%></td>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp'" >Ver Informacion de Grupo</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp?idGrupo=<%=g.getCodigo()%>'">Ver Informacion de Grupo</button>
                         </td>
 
                         <%
@@ -47,27 +51,34 @@
                             }
                             case "Administrador": {%>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/editar_grupo.jsp'">Editar</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/editarGrupoShow?idGrupo=<%= g.getCodigo() %>'">Editar</button>
                         </td>
                         <td>
-                            <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/borrar_grupo.jsp'" >Eliminar</button>
+                            <button class="table-btn" onclick="location.href = '/CursosLibres/borrarGrupoShow?idGrupo=<%= g.getCodigo() %>'" >Eliminar</button>
                         </td>
                         <%break;
-                                        }
-                                    }%>
-                        </tr>
-                                <%}
-                            }
-                        %>
+                                }
+                            }%>
 
+                    </tr>
+                    <%}
+                        }
+                    %>
+                    
                 </table>
+
             </div>
+
             <%
                 if (usuario != null) {
                     if (usuario.getClass().getSimpleName().equals("Administrador")) {%>
             <div class="volver-btn">
                 <button class="table-btn" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/agregar_grupo.jsp'">Agregar</button>
+
+                <div>  <button class="table-btn" onclick="location.href = '/CursosLibres/Cursos'">Volver  .jsp 78 arregalr </button> </div>
+
             </div>
+            
             <%
                     }
                 }
