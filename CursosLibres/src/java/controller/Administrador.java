@@ -40,6 +40,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import javax.management.relation.Role;
 
 @WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
     "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction",
@@ -61,7 +62,7 @@ public class Administrador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        response.setContentType("text/html;charset=UTF-8");
         String opcion = request.getServletPath();
         String URL = "";
         switch (opcion) {
@@ -166,8 +167,8 @@ public class Administrador extends HttpServlet {
             default:
                 break;
         }
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher(URL).forward(request, response);
+        if (URL != null)
+            request.getRequestDispatcher(URL).forward(request, response);
 
     }
 

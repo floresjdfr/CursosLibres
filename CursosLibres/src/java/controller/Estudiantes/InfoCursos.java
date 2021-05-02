@@ -5,6 +5,16 @@
  */
 package controller.Estudiantes;
 
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.pdfa.PdfADocument;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -25,12 +35,11 @@ import logic.usuario.estudiante.Estudiante;
  *
  * @author flore
  */
-@WebServlet(name = "InfoCursos", urlPatterns = {"/ListaCursosShow"})
+@WebServlet(name = "InfoCursos", urlPatterns = {"/ListaCursosShow", "/ImprimirHistorialAction"})
 public class InfoCursos extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -49,9 +58,15 @@ public class InfoCursos extends HttpServlet {
                 break;
             }
 
+            case "/ImprimirHistorialAction": {
+                URL = imprimirHistorialAction(request, response);
+                break;
+            }
+
         }
-        
-        request.getRequestDispatcher(URL).forward(request, response);
+        if (URL != null) {
+            request.getRequestDispatcher(URL).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,19 +111,19 @@ public class InfoCursos extends HttpServlet {
     private String listaCursosShow(HttpServletRequest request) {
         try {
             if (validarEstudiante(request)) {
-                
+
                 List<CursoActual> listaCursos;
-                
+
                 Estudiante estudiante = (Estudiante) request.getSession().getAttribute("usr");
                 int idEstudiante = estudiante.getCedula();
-                
+
                 listaCursos = (ArrayList<CursoActual>) CursoDAO.obtenerInstancia().listarCursosActuales(idEstudiante);
-                
-                if (listaCursos != null){
+
+                if (listaCursos != null) {
                     request.setAttribute("listaCursos", listaCursos);
                     return "/presentation/usuario/Estudiante/cursosActualesShow.jsp";
                 }
-                    
+
                 throw new Exception("Error al recuperar de la base de datos");
             }
         } catch (Exception ex) {
@@ -121,6 +136,50 @@ public class InfoCursos extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario usr = (Usuario) session.getAttribute("usr");
         return usr != null;
+
+    }
+
+    private String imprimirHistorialAction(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (validarEstudiante(request)) {
+                try {
+                    HttpSession session = request.getSession(true);
+
+                    PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));
+                    Document doc = new Document(pdf, PageSize.A4.rotate());
+
+                    PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+
+                    ArrayList<CursoActual> listaCursos = (ArrayList<CursoActual>) session.getAttribute("listaCursos");
+                    for (CursoActual c : listaCursos) {
+
+                        doc.add(new Paragraph("Curso: " + c.getNombre()));
+                        doc.add(new Paragraph("Profesor: " + c.getNombreProfesor() + c.getApellidoProfesor()));
+                        doc.add(new Paragraph("Horario: " + c.getHorario()));
+                        doc.add(new Paragraph("Nota: " + c.getNota()));
+                        // ImageData data = ImageDataFactory.create("C:/images" + c.getNombre());
+                        //Image img = new Image(data);
+                        //doc.add(img);
+                        doc.add(new Paragraph(""));
+
+                        //return null;
+                    }
+                    
+                    response.setContentType("application/pdf");
+                    response.addHeader("Content-disposition", "inline");
+                    
+                    doc.close();
+                    return null;
+
+                } catch (Exception ex) {
+                    return "/ListaCursosShow";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "/ListaCursosShow";
+        }
+        return "/ListaCursosShow";
 
     }
 

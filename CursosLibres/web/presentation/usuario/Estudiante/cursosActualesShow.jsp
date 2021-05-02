@@ -49,7 +49,7 @@
                 </table>
             </div>
                     <div class="volver-btn">
-            <button class="table-btn" onclick="location.href='/CursosLibres/print'">Imprimir Historial</button>
+            <button class="table-btn" onclick="location.href='/CursosLibres/ImprimirHistorialAction'">Imprimir Historial</button>
             </div>
         </div>
     </body>  
