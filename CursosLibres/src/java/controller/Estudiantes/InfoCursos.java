@@ -164,11 +164,11 @@ public class InfoCursos extends HttpServlet {
 
                         //return null;
                     }
-                    
+                   
                     response.setContentType("application/pdf");
                     response.addHeader("Content-disposition", "inline");
+                     doc.close();
                     
-                    doc.close();
                     return null;
 
                 } catch (Exception ex) {

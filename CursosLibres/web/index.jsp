@@ -29,7 +29,10 @@
                 String URL = "/CursosLibres/GruposMatricularShow?idCurso=";
             %>
 
-            <div class="busqueda-wrapper">
+            
+            <div class="table-container">
+                
+                <div class="busqueda-wrapper">
                 <form class="search_box" action="/CursosLibres/BuscarCursoAction" method="POST">
                     <button type="submit"class="search_btn"><i class="fas fa-search"></i></button>
                         <%
@@ -41,7 +44,7 @@
                     %>
                 </form>
             </div>
-            <div class="table-container">
+                
                 <table>
                     <tr>
                         <th>Imagen curso</th>

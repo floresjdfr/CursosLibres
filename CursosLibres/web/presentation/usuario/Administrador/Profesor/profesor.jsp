@@ -74,6 +74,7 @@
             </table>
 
          </div>
+               
          <div class="volver-btn">
             <button class="table-btn" onclick="location.href = '/CursosLibres/agregarProfesorShow'">Agregar</button>
          </div>
