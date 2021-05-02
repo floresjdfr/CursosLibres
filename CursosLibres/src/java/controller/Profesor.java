@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.grupo.GrupoDAO;
+import logic.usuario.profesor.ProfesorDAO;
+import logic.usuario.profesor.Service;
 
-@WebServlet(name = "Profesor", urlPatterns = {"/notas"})
+@WebServlet(name = "Profesor", urlPatterns = {"/notas", "/BuscarProfeAction"})
 public class Profesor extends HttpServlet {
 
     /**
@@ -36,6 +38,12 @@ public class Profesor extends HttpServlet {
                 URL = displayGrupos(request);
                 break;
             }
+            
+             case "/BuscarProfeAction": {
+              
+                URL = buscarProfeAction(request);
+                break;
+            }
             default:
                 break;
         }
@@ -59,6 +67,24 @@ public class Profesor extends HttpServlet {
         return "/presentation/usuario/Profesor/Grupos.jsp";
 
     }
+    
+   private String buscarProfeAction(HttpServletRequest request) {
+        
+        ProfesorDAO dao = ProfesorDAO.obtenerInstancia();
+        String nombreProfe = request.getParameter("nombreProfe");
+        Service listaProfe = dao.buscarPorNombre(nombreProfe);
+                
+        request.setAttribute("listaProfesores", listaProfe);
+        request.setAttribute("nombreProfe", nombreProfe);
+
+        return "/presentation/usuario/Administrador/Profesor/profesor.jsp";
+    }
+    
+    
+    
+    
+    
+    
 
 //    public String Singin(HttpServletRequest request) {
 //

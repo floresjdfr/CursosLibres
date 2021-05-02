@@ -3,6 +3,7 @@
 
 <%
    Service lista = (Service) request.getAttribute("listaProfesores");
+   String nombreProfe = (String) request.getAttribute("nombreProfe");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,8 +19,25 @@
    </head>
 
    <body>
+        <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
       <div class="main-container">
          <%@ include file="/header.jsp" %>
+        
+         <div class="busqueda-wrapper">
+                <form class="search_box" action="/CursosLibres/BuscarProfeAction" method="POST">
+                    <button type="submit"class="search_btn"><i class="fas fa-search"></i></button>
+                        <%
+                            if (nombreProfe != null) {%>
+                    <input name="nombreProfe" type="text" class="input_search" placeholder=<%=nombreProfe%>>
+                    <%} else {%>
+                    <input name="nombreProfe" type="text" class="input_search" placeholder="Buscar Profesor...">
+                    <%}
+                    %>
+                </form>
+            </div>
+         
+         
+         
 
          <div class="table-container">
 

@@ -21,4 +21,10 @@ public class ProfesorCRUD {
     protected static final String CMD_ELIMINAR
             = "DELETE FROM profesor "
             + "WHERE idProfesor = ?; ";
+    
+     protected static final String CMD_BUSCAR_NOMBRE = "SELECT idProfesor, nombre, apellido1, apellido2, correo, telefono, especialidad, password "
+            + "FROM profesor "
+            + "WHERE nombre LIKE ?;";
+    
+    
 }
