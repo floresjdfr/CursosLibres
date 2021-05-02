@@ -2,11 +2,9 @@
 body{
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    height: 100%;
-    width: 100%;
-    place-items: center;
     background: #150b21;
     background: linear-gradient(-135deg, #1a234e, #51002c);
+    
     /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
 }
 ::selection{

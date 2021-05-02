@@ -47,7 +47,7 @@
                         <tr>
                             <td class="curso-izquierda">Imagen:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="imagen" type="file">
+                                <input class = "curso-derecha" name="imagen" type="file" required>
                             </td>
                         </tr>
                     </table>

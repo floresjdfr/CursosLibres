@@ -30,6 +30,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     <% if (lista.cursosList() != null) {%>
                         <%for (Curso c : lista.cursosList()) {

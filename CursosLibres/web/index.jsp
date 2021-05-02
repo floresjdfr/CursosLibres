@@ -20,10 +20,11 @@
         <link rel="stylesheet" href="fonts/ionicons.min.css">
         <link rel="stylesheet" href="css/Login-Form-Dark.css">
     </head>
-    <body class="main-container-simple">
-        <%@ include file="header.jsp" %>
+    <body>      
+        
         <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
         <div class="main-container">
+            <%@ include file="header.jsp" %>
             <div class="busqueda-wrapper">
                 <form class="search_box" action="/CursosLibres/BuscarCursoAction" method="POST">
                     <button type="submit"class="search_btn"><i class="fas fa-search"></i></button>
@@ -49,7 +50,7 @@
                     <tr>
                         <td><%=c.getNombre()%></td>
                         <td><%=c.getCosto()%></td>
-                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="100" height="100"> </td>
+                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="50" height="50"> </td>
 
                         <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
                     </tr>
