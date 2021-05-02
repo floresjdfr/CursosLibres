@@ -47,7 +47,7 @@
                 <div class="formulario-buttons"> 
                     <button type="submit" class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/agregarGrupo'">Guardar</button>
 
-                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/presentation/misc/Grupos.jsp'">Volver</button>
+                    <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/ListarGrupos'">Volver</button>
                 </div>
             </form>
 

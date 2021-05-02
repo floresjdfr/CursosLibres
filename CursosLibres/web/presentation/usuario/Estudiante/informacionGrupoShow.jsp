@@ -26,7 +26,7 @@
                 <div class = "tabla-info-cursos">
                     <table>
                         <tr>
-                            <td class="curso-izquierda">Nombre del curso:</td>
+                            <td class="curso-izquierda">Nombre del curso: aqui</td>
                             <td class="curso-derecha"><%=nombreCurso%></td>
                         </tr>
                         <tr>

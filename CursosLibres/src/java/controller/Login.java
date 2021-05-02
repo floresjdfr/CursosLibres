@@ -71,20 +71,23 @@ public class Login extends HttpServlet {
             errores = this.validar(request);
             if (errores.isEmpty()) {
                 this.updateModel(request);
-                return "/presentation/login/login.jsp";
+                //return "/presentation/login/login.jsp";
+                return "/Login";
             } else {
                 request.setAttribute("errores", errores);
-                return "/presentation/login/login.jsp";
+                //return "/presentation/login/login.jsp";
+                return "/Login";
             }
         } catch (Exception e) {
             request.setAttribute("errores", errores);
-            return "/presentation/login/login.jsp";
+            //return "/presentation/login/login.jsp";
+            return "/Login";
         }
     }
 
     public Map<String, String> validar(HttpServletRequest request) {
         Map<String, String> errores = new HashMap<>();
-        
+
         if (request.getParameter("usernameText").isEmpty()) {
             errores.put("usernameText", "Cedula requerida");
         }
@@ -93,10 +96,10 @@ public class Login extends HttpServlet {
             errores.put("passwordText", "Clave requerida");
         }
         try {
-            String a= request.getParameter("usernameText");
-           int auz= Integer.parseInt(a);
+            String a = request.getParameter("usernameText");
+            int auz = Integer.parseInt(a);
 
-        } catch(Exception ex)  {
+        } catch (Exception ex) {
             errores.put("usernameText", "No se aceptan letras en el ID");
         }
 
@@ -160,24 +163,31 @@ public class Login extends HttpServlet {
                 if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                     session.setAttribute("usr", DBuser);
                     return "/CursoDisplay";
-                    //return "/index.jsp";
+                   
+                } else {
+                    DBuser = null;
                 }
             } else {
                 DBuser = AdministradorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
-            }
-            if (DBuser != null) {
-                if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
-                    session.setAttribute("usr", DBuser);
-                    return "/CursoDisplay";
-                    //return "/index.jsp";
-                }
-            } else {
-                DBuser = ProfesorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+
                 if (DBuser != null) {
                     if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
                         session.setAttribute("usr", DBuser);
                         return "/CursoDisplay";
-                        //return "/index.jsp";
+                       
+                    } else {
+                        DBuser = null;
+                    }
+                } else {
+                    DBuser = ProfesorDAO.obtenerInstancia().recuperar(model.getUsr().getCedula());
+                    if (DBuser != null) {
+                        if (DBuser.getPassword().equals(model.getUsr().getPassword())) {
+                            session.setAttribute("usr", DBuser);
+                            return "/CursoDisplay";
+                            
+                        } else {
+                            DBuser = null;
+                        }
                     }
                 }
             }

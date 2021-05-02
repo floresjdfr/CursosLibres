@@ -7,6 +7,7 @@
 
     <%
         ArrayList<CursoActual> listaCursos = (ArrayList<CursoActual>) request.getAttribute("listaCursos");
+        session.setAttribute("listaCursos", listaCursos);
     %>
     <head>
         <meta charset="utf-8">
@@ -46,6 +47,9 @@
                     %>
 
                 </table>
+            </div>
+                    <div class="volver-btn">
+            <button class="table-btn" onclick="location.href='/CursosLibres/print'">Imprimir Historial</button>
             </div>
         </div>
     </body>  
