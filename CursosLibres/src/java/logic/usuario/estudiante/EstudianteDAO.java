@@ -62,6 +62,7 @@ public class EstudianteDAO {
         return resultado;
     }
 
+    
    
     public void crear(HttpServletRequest request) throws Exception {
 
@@ -116,7 +117,44 @@ public class EstudianteDAO {
         }
     }
      
-     
+    public void actualizarNota(int idEstudiante, int idGrupo, int nota) throws Exception {
+
+        PreparedStatement stm = Database.instance().prepareStatement(EstudianteCRUD.CMD_ACTUALIZAR_NOTA);
+
+        stm.setInt(1, nota);
+        stm.setInt(2, idGrupo);
+        stm.setInt(3, idEstudiante);
+         
+        int count = Database.instance().executeUpdate(stm);
+        if (count == 0) {
+            throw new Exception("duplicado");
+        }
+    } 
+    
+    public int recuperarNota(int idEstudiante) throws Exception {
+
+        int resultado = 0;
+        try {
+            try (Connection cnx = db.getConnection();
+                    PreparedStatement stm = cnx.prepareStatement(EstudianteCRUD.CDM_RECUPERAR_NOTA)) {
+                stm.clearParameters();
+                stm.setInt(1, idEstudiante);
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        resultado = rs.getInt(1);
+                    }
+                }
+            } catch (URISyntaxException | IOException ex) {
+                Logger.getLogger(EstudianteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return resultado;
+            }
+        } catch (SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            return resultado;
+        }
+        return resultado;
+        
+    } 
     
     
 //    public void updatePassword(HttpServletRequest request) throws Exception {

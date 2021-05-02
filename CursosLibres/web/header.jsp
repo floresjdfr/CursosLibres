@@ -22,7 +22,7 @@
                     <a href="/CursosLibres/Logout">Logout</a>
                 <% } %>
                 <% if (tipoUsr.equals("Profesor")){%>
-                    <a href="#">Grupos y cursos</a>
+                    <a href="/CursosLibres/Profesor/CursosShow">Grupos y cursos</a>
                     <a href="/CursosLibres/Logout">Logout</a>
                 <% }%>  
                 <% if (tipoUsr.equals("Administrador")){%>

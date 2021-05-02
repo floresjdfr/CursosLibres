@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import logic.Database;
 import logic.matricula.MatriculaCRUD;
+import logic.usuario.estudiante.Estudiante;
 
 public class GrupoDAO {
 
@@ -73,6 +74,35 @@ public class GrupoDAO {
         }
         //return listaGrupos;
     }
+    
+    public Service listarGrupos(int idProfesor) {
+        Service listaGrupos;
+        try {
+            listaGrupos = new Service();
+            Connection connection = db.getConnection();
+            PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_LISTAR_GRUPOS_PROFESOR);
+            stm.setInt(1, idProfesor);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Grupo aux = new Grupo();
+                
+                int cedula = result.getInt(1);
+                String horario = result.getString(2);
+                
+                aux.setCodigo(cedula);
+                aux.setFecha(horario);
+                
+                listaGrupos.gruposAdd(aux);
+            }
+            return listaGrupos;
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        //return listaGrupos;
+    }
+    
+    
 
     public Service listarGrupos() {
 
@@ -102,7 +132,8 @@ public class GrupoDAO {
         return listaGrupos;
 
     }
-
+    
+    
     public void matricular(int idGrupo, int idEstudiante) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_MATRICULAR);
@@ -153,7 +184,40 @@ public class GrupoDAO {
             throw new Exception("xxxxxxxxxxxxxxxxxxxx");
         }
     }
-
+    
+    public logic.usuario.estudiante.Service listarEstudiatesGrupo(int idGrupo) {
+        logic.usuario.estudiante.Service listaEstudiantes;
+        try {
+            listaEstudiantes = new logic.usuario.estudiante.Service();
+            Connection connection = db.getConnection();
+            PreparedStatement stm = connection.prepareStatement(GrupoCRUD.CMD_LISTAR_ESTUDIANTES_GRUPO);
+            stm.setInt(1, idGrupo);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                Estudiante aux = new Estudiante();
+                
+                int cedula = result.getInt(1);
+                String nombre = result.getString(2);
+                String apellido1 = result.getString(3);
+                String apellido2 = result.getString(4);
+                int nota = result.getInt(5);
+                
+                aux.setCedula(cedula);
+                aux.setNombre(nombre);
+                aux.setApellido1(apellido1);
+                aux.setApellido2(apellido2);
+                aux.setNota(nota);
+                
+                listaEstudiantes.estudiantesAdd(aux);
+            }
+            return listaEstudiantes;
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(GrupoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        //return listaGrupos;
+    }
+    
     public void crearGrupo(Grupo g) throws Exception {
 
         PreparedStatement stm = Database.instance().prepareStatement(GrupoCRUD.CMD_AGREGAR);

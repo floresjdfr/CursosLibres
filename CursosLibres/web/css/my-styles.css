@@ -383,8 +383,8 @@ input[type="number"]:focus{
 }
 
 .search_box .search_btn{
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     background: linear-gradient(-100deg, #c14949a2, #480048);
     display: flex;
@@ -402,7 +402,7 @@ input[type="number"]:focus{
     border-radius: 50px;
     padding: 15px 20px;
     width: 500px; 
-    height: 35px;
+    height: 45px;
     color: #fff;
 }
 

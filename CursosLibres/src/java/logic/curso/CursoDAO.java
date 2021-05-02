@@ -51,6 +51,37 @@ public class CursoDAO {
         }      
         
     }
+    
+    public Service listarCursosProfesor(int idProfesor) throws SQLException{
+        Service listaCursos = new Service();
+        
+        try(PreparedStatement stm = db.prepareStatement(CursoCRUD.CMD_LISTAR_CURSOS_PROFESOR)){
+            
+            stm.clearParameters();
+            stm.setInt(1, idProfesor);
+            
+            try(ResultSet result = stm.executeQuery()){
+                while(result.next()){
+                    int codigo = result.getInt(1);
+                    String nombre = result.getString(2);
+                    String tematica = result.getString(3);
+                    String costo = result.getString(4);
+                    int oferta = result.getInt(5);
+                    
+                    Curso curso = new Curso(codigo, nombre,
+                    tematica, costo, oferta);
+                    
+                    listaCursos.cursosAdd(curso);
+                }
+                return listaCursos;
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return listaCursos;
+        }      
+        
+    }
 
     public static CursoDAO obtenerInstancia() {
         if (instancia == null) {
