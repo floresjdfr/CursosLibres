@@ -1,9 +1,3 @@
-<%-- 
-    Document   : calificarEstudianteShow
-    Created on : 1/05/2021, 10:14:36 PM
-    Author     : flore
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

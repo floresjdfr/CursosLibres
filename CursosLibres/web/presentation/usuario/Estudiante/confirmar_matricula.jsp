@@ -1,9 +1,3 @@
-<%-- 
-    Document   : confirmar_matricula
-    Created on : Apr 27, 2021, 12:17:05 AM
-    Author     : josedf
---%>
-
 <%@page import="logic.curso.Curso"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

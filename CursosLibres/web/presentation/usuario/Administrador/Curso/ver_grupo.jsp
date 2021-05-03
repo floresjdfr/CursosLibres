@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Ver_Curso
-    Created on : Apr 25, 2021, 6:58:01 PM
-    Author     : josedf
---%>
-
 <%@page import="logic.grupo.GrupoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="logic.usuario.profesor.ProfesorDAO"%>

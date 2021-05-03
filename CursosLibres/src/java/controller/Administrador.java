@@ -1,10 +1,7 @@
 package controller;
 
-//import com.sun.scenario.effect.ImageData;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import logic.curso.CursoDAO;
 import logic.curso.Curso;
 import logic.curso.Service;
@@ -26,25 +22,20 @@ import logic.usuario.Usuario;
 import logic.usuario.profesor.ProfesorDAO;
 import logic.usuario.profesor.Profesor;
 import javax.servlet.http.Part;
-//import javax.swing.text.Document;
 import logic.curso.CursoActual;
 
 import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
-import javax.management.relation.Role;
 
-@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/Grupos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
+@WebServlet(name = "Administrador", urlPatterns = {"/Cursos", "/agregarProfesor", "/Estudiantes", "/agregarCurso", "/agregarCursoShow",
     "/mostrarProfesor", "/agregarProfesorShow", "/verProfeShow", "/editarProfeShow", "/eliminarProfeShow", "/editarProfeAction", "/eliminarProfeAction",
-    "/editarCursoShow", "/eliminarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction", "/image", "/print"
+    "/editarCursoShow", "/verCursoShow", "/eliminarCursoAction", "/editarCursoAction", "/image", "/print"
 })
 
 @MultipartConfig(location = "C:/images")
@@ -52,7 +43,8 @@ import javax.management.relation.Role;
 public class Administrador extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -73,7 +65,7 @@ public class Administrador extends HttpServlet {
             }
             case "/agregarCurso": {
 
-                URL = agregaCurso(request);
+                URL = agregaCurso(request, response);
                 break;
             }
 
@@ -85,7 +77,7 @@ public class Administrador extends HttpServlet {
 
             case "/agregarProfesor": {
 
-                URL = agregarProfesor(request);
+                URL = agregarProfesor(request, response);
                 break;
             }
 
@@ -120,16 +112,11 @@ public class Administrador extends HttpServlet {
             }
 
             case "/editarProfeAction": {
-                URL = editarProfeAction(request);
+                URL = editarProfeAction(request, response);
                 break;
             }
             case "/eliminarProfeAction": {
-                URL = eliminarProfeAction(request);
-                break;
-            }
-
-            case "/eliminarCursoShow": {
-                URL = displayEliminarCurso(request);
+                URL = eliminarProfeAction(request, response);
                 break;
             }
 
@@ -139,17 +126,12 @@ public class Administrador extends HttpServlet {
             }
 
             case "/verCursoShow": {
-                URL = eliminarProfeAction(request);
-                break;
-            }
-
-            case "/eliminarCursoAction": {
-                URL = EliminarCursoAction(request);
+                URL = eliminarProfeAction(request, response);
                 break;
             }
 
             case "/editarCursoAction": {
-                URL = editarCursoAction(request);
+                URL = editarCursoAction(request, response);
                 break;
             }
             case "/image": {
@@ -167,8 +149,9 @@ public class Administrador extends HttpServlet {
             default:
                 break;
         }
-        if (URL != null)
+        if (URL != null) {
             request.getRequestDispatcher(URL).forward(request, response);
+        }
 
     }
 
@@ -195,8 +178,8 @@ public class Administrador extends HttpServlet {
         return null;
     }
 
-    public String agregaCurso(HttpServletRequest request) {
-        String URL = "index.jsp";
+    public String agregaCurso(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
         final Part imagen;
         try {
             String nombre = request.getParameter("nombre");
@@ -210,18 +193,17 @@ public class Administrador extends HttpServlet {
             imagen = request.getPart("imagen");
             imagen.write(request.getParameter("nombre"));
 
-            URL = "/Cursos";
-
+            response.sendRedirect("/CursosLibres/Cursos");           
         } catch (Exception ex) {
             if (ex.getMessage().equals("duplicado")) {
-                URL = "/agregarCurso";
+                response.sendRedirect("/CursosLibres/agregarCurso");
             }
             Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return URL;
+        return null;
     }
 
-    public String agregarProfesor(HttpServletRequest request) {
+    public String agregarProfesor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String URL = "index.jsp";
         int aux = Integer.parseInt(request.getParameter("idProfesor"));
         String n = request.getParameter("nombre");
@@ -236,16 +218,15 @@ public class Administrador extends HttpServlet {
 
         try {
             ProfesorDAO.obtenerInstancia().crear(p);
-            URL = "/mostrarProfesor";
+            response.sendRedirect("/CursosLibres/mostrarProfesor");
 
         } catch (Exception ex) {
             if (ex.getMessage().equals("duplicado")) {
-                URL = "/mostrarProfesor";
+                response.sendRedirect("/CursosLibres/mostrarProfesor");
             }
             Logger.getLogger(Estudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return URL;
-
+        return null;
     }
 
     private Boolean validarUsr(HttpServletRequest request) {
@@ -368,7 +349,7 @@ public class Administrador extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String editarProfeAction(HttpServletRequest request) {
+    private String editarProfeAction(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (validarUsr(request)) {
             String cedulaString = request.getParameter("cedula");
             int cedula = Integer.parseInt(cedulaString);
@@ -384,62 +365,29 @@ public class Administrador extends HttpServlet {
 
             try {
                 ProfesorDAO.obtenerInstancia().actualizar(p);
-                return "/mostrarProfesor";
+                response.sendRedirect("/CursosLibres/mostrarProfesor");
             } catch (Exception ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/mostrarProfesor";
+                response.sendRedirect("/CursosLibres/mostrarProfesor");
             }
         }
-        return "/mostrarProfesor";
+        return null;
     }
 
-    private String eliminarProfeAction(HttpServletRequest request) {
+    private String eliminarProfeAction(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (validarUsr(request)) {
             String p = (String) request.getParameter("idProfesor");
             int cedula = Integer.parseInt(p);
             try {
                 ProfesorDAO.obtenerInstancia().eliminar(cedula);
+                response.sendRedirect("/CursosLibres/mostrarProfesor");
             } catch (Exception ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/mostrarProfesor";
+                response.sendRedirect("/CursosLibres/mostrarProfesor");
             }
-            return "/mostrarProfesor";
+            
         }
-        return "/mostrarProfesor";
-
-    }
-
-    public String displayEliminarCurso(HttpServletRequest request) {
-
-        if (validarUsr(request)) {
-
-            String CodigoCurso = request.getParameter("idCurso");
-            int CursoID = Integer.parseInt(CodigoCurso);
-            Curso c = CursoDAO.obtenerInstancia().recuperar(CursoID);
-            request.setAttribute("curso_editar", c);
-            return "/presentation/usuario/Administrador/Curso/borrar_curso.jsp";
-        }
-        return "/presentation/usuario/Administrador/Curso/curso.jsp";
-
-    }
-
-    public String EliminarCursoAction(HttpServletRequest request) {
-
-        if (validarUsr(request)) {
-            String CodigoCurso = (String) request.getParameter("idCurso");
-            int CursoID = Integer.parseInt(CodigoCurso);
-
-            try {
-                CursoDAO.obtenerInstancia().eliminar(CursoID);
-
-            } catch (Exception ex) {
-                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/Curso";
-            }
-            return "/Cursos";
-        }
-        return "/Cursos";
-
+        return null;
     }
 
     public String displayEditarCurso(HttpServletRequest request) {
@@ -456,7 +404,7 @@ public class Administrador extends HttpServlet {
 
     }
 
-    private String editarCursoAction(HttpServletRequest request) {
+    private String editarCursoAction(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         if (validarUsr(request)) {
 
@@ -473,13 +421,14 @@ public class Administrador extends HttpServlet {
             try {
                 CursoDAO dao = CursoDAO.obtenerInstancia();
                 dao.actualizar(c);
-                return "/Cursos";
+                response.sendRedirect("/CursosLibres/Cursos");
+                
             } catch (Exception ex) {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-                return "/Cursos";
+                response.sendRedirect("/CursosLibres/Cursos");
             }
         }
-        return "/Cursos";
+        return null;
     }
 
     private String print(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -489,7 +438,7 @@ public class Administrador extends HttpServlet {
 
             PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));
             Document doc = new Document(pdf, PageSize.A4.rotate());
-            
+
             PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
 
             ArrayList<CursoActual> listaCursos = (ArrayList<CursoActual>) session.getAttribute("listaCursos");
@@ -509,10 +458,11 @@ public class Administrador extends HttpServlet {
                 //return null;
             }
             return null;
-            
-        } catch (Exception ex) {
-            return "/ListaCursosShow";
+
+        } catch (IOException ex) {
+            response.sendRedirect("/CursosLibres/ListaCursosShow");            
         }
+        return null;
 
     }
 }

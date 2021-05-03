@@ -1,8 +1,3 @@
-<%-- 
-    Document   : ver_informacion
-    Created on : Apr 26, 2021, 10:41:11 PM
-    Author     : josedf
---%>
 <%@page import="logic.usuario.profesor.Profesor" %>" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

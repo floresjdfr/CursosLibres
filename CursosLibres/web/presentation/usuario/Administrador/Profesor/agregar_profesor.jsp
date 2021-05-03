@@ -1,9 +1,3 @@
-<%-- 
-    Document   : agregar_profesor
-    Created on : Apr 26, 2021, 11:35:41 PM
-    Author     : josedf
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -57,19 +57,20 @@ public class Grupo extends HttpServlet {
                 URL = editarGrupoShow(request);
                 break;
             }
-
             case "/editarGrupoAction": {
                 URL = editarGrupoAction(request);
                 break;
             }
-
             case "/borrarGrupoShow": {
                 URL = borrarGrupoShow(request);
                 break;
             }
-            
             case "/borrarGrupoAction": {
                 URL = borrarGrupoShow(request);
+                break;
+            }
+            case "/VerGrupo": {
+                URL = verGrupo(request);
                 break;
             }
         }
@@ -136,16 +137,16 @@ public class Grupo extends HttpServlet {
 
             if (validarAdmin(request)) {
                 logic.grupo.Grupo g = new logic.grupo.Grupo();
-                g.setCurso_codigo(Integer.parseInt(request.getParameter("idCurso")));
+                String idCurso = request.getParameter("idCurso");
+                g.setCurso_codigo(Integer.parseInt(idCurso));
                 g.setProfesor_idPreofesor(Integer.parseInt(request.getParameter("idProfesor")));
                 g.setFecha(request.getParameter("fecha"));
                 GrupoDAO.obtenerInstancia().crearGrupo(g);
-
-                return "/presentation/misc/Grupos.jsp";
+                return "/ListarGrupos?idCurso=" + idCurso;
 
             }
         } catch (Exception e) {
-
+            return "/Cursos";
         }
         return "/Cursos";
     }
@@ -156,17 +157,17 @@ public class Grupo extends HttpServlet {
 
             try {
                 logic.grupo.Grupo g = new logic.grupo.Grupo();
-                 g.setCodigo(Integer.parseInt(request.getParameter("idGrupo")));
+                g.setCodigo(Integer.parseInt(request.getParameter("idGrupo")));
                 g.setCurso_codigo(Integer.parseInt(request.getParameter("idCurso")));
                 g.setProfesor_idPreofesor(Integer.parseInt(request.getParameter("idProfesor")));
                 g.setFecha(request.getParameter("fecha"));
                 GrupoDAO.obtenerInstancia().updateGrupo(g);
             } catch (Exception ex) {
                 Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
-                return "/ListarGrupos?idCurso="+ request.getParameter("idGrupo");
+                return "/ListarGrupos?idCurso="+ request.getParameter("idCurso");
             }
         }
-        return "/ListarGrupos?idCurso="+ request.getParameter("idGrupo");
+        return "/ListarGrupos?idCurso="+ request.getParameter("idCurso");
     }
 
     private String editarGrupoShow(HttpServletRequest request) {
@@ -222,9 +223,9 @@ public class Grupo extends HttpServlet {
 
         if (validarAdmin(request)) {
             try {
-                String Idgrupo = request.getParameter("codigo");
-
-                return "/CursosLibres/presentation/usuario/Administrador/Curso/ver_grupo.jsp";
+                String idGrupo = request.getParameter("idGrupo");
+                request.setAttribute("idGrupo", idGrupo);
+                return "/presentation/usuario/Administrador/Curso/ver_grupo.jsp";
             } catch (Exception ex) {
                 Logger.getLogger(Grupo.class.getName()).log(Level.SEVERE, null, ex);
             }

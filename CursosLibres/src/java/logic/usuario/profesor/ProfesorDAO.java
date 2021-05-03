@@ -37,7 +37,7 @@ public class ProfesorDAO {
         stm.setString(7, p.getEspecialidad());
         stm.setString(8, p.getPassword());
 
-        stm.executeUpdate();
+        
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             throw new Exception("duplicado");

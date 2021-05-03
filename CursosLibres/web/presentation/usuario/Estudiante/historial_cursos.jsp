@@ -1,9 +1,3 @@
-<%-- 
-    Document   : historial_cursos
-    Created on : Apr 27, 2021, 12:23:08 AM
-    Author     : josedf
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
