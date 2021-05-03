@@ -102,7 +102,7 @@ public class Curso extends HttpServlet {
     public String display(HttpServletRequest request) {
 
         CursoDAO dao = CursoDAO.obtenerInstancia();
-        Service listaCursos = dao.listarCursos();
+        Service listaCursos = dao.listarCursosEnOferta();
 
         request.setAttribute("listaCursos", listaCursos);
 

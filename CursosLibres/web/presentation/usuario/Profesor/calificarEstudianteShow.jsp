@@ -41,7 +41,7 @@
             <form method="POST" action="<%=URL%>" class="formulario-container">
                 <div class = "formulario-form">
                     <table>
-                        <tr>
+                        <tr class="titulo-tabla">
                             <td class="curso-izquierda">Calificar estudiante: </td>
                             <td class="curso-derecha"><%=nombre%></td>
                         </tr>

@@ -25,10 +25,9 @@
             <div class="table-container">
               
                 <table>
-                    <tr>
+                    <tr class="titulo-tabla">
+                        <th></th>
                         <th>Cursos</th>
-                        <th></th>
-                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -40,16 +39,19 @@
                         
                         %>
                             <tr>
-                                <td><%=c.getNombre()%></td> <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="100" height="100"> </td>
+                                
+                                <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="60" height="60"> </td>
+                                <td><%=c.getNombre()%></td> 
                                 <td>
                                     <button onclick="location.href='<%=urlVer%>'" class="table-btn">Ver Grupos</button>
                                 </td>
                                 <td>
                                     <button class="table-btn" onclick="location.href='<%=URLeditar%>'">Editar</button>
                                 </td>
-                                <td>
-                                    <button class="table-btn" onclick="location.href='<%=URLeliminar%>'" >Eliminar</button>
+                                <!--<td>
+                                    <button class="table-btn" onclick="location.href='<%//=URLeliminar%>'" >Eliminar</button>
                                 </td>
+                                -->
                             </tr>
                         <%}%>
                     <%}%>

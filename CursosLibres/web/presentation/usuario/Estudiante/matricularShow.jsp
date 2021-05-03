@@ -22,8 +22,9 @@
 
             <div class="table-container">
                 <table>
-                    <tr>
-                        <th colspan="2">Cursos</th>
+                    <tr class="titulo-tabla">
+                        <th>Cursos</th>
+                        <th></th>
                     </tr>
                     
                     <% if (lista.cursosList() != null) {%>

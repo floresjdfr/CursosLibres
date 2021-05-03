@@ -24,8 +24,11 @@
 
             <div class="table-container">
                 <table>
-                    <tr>
-                        <th colspan="4">Cursos actuales</th>
+                    <tr class="titulo-tabla">
+                        <th>Cursos actuales</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     <tr>
                         <td>Nombre del curso</td>

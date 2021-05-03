@@ -192,6 +192,35 @@ public class CursoDAO {
         return listaCursos;
 
     }
+    
+    public Service listarCursosEnOferta() {
+        Service listaCursos = new Service();
+        Curso auxCurso;
+        try (Connection cnx = db.getConnection(); PreparedStatement stm = cnx.prepareStatement(CursoCRUD.CMD_LISTAR)) {
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    auxCurso = new Curso(
+                            rs.getInt("codigo"),
+                            rs.getString("nombre"),
+                            rs.getString("tematica"),
+                            rs.getString("costo"),
+                            rs.getInt("oferta")
+                    );
+                    if (auxCurso.getOferta() == 1)
+                        listaCursos.cursosAdd(auxCurso);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (URISyntaxException | IOException | SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaCursos;
+
+    }
 
     public void eliminar(int p) throws Exception {
 

@@ -21,7 +21,7 @@
 
             <div class="table-container">
                 <table>
-                    <tr>
+                    <tr class="titulo-tabla">
                         <th>Cedula</th>
                         <th>Nombre</th>
                         <th>Nota</th>

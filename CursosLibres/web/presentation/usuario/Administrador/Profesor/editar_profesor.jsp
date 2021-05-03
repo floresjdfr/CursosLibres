@@ -35,7 +35,7 @@
             <form method="POST" action=<%=URL%> class="formulario-container">
                 <div class = "formulario-form">
                     <table>
-                        
+
                         <tr>
                             <td class="curso-izquierda">Nombre:</td>
                             <td class="curso-derecha">
@@ -52,13 +52,23 @@
                         </tr>
                         <tr>
                             <td class="curso-izquierda">Segundo apellido:</td>
-                            <td class="curso-derecha">
 
+                            <%
+                                if (apellido2 != null) {%>
+                            <td class="curso-derecha">
                                 <input class = "curso-derecha" name="apellido2" type="text" value=<%=apellido2%>>
                             </td>
+                            <%    } else{ %>
+                            <td class="curso-derecha">
+                                <input class = "curso-derecha" name="apellido2" type="text">
+                            </td>
+                            <%}
+                            %>
+
+
                         </tr>
-                        
-                        
+
+
                         <tr>
                             <td class="curso-izquierda">Correo:</td>
                             <td class="curso-derecha">

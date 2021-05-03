@@ -23,30 +23,32 @@
 
             <div class="table-container">
                 <table>
-                    <tr>
+                    <tr class="titulo-tabla">
                         <th>Cursos</th>
                         <th></th>
                     </tr>
 
+
+                    <%
+                        if (listaCursos != null) {
+                            for (Curso c : listaCursos.cursosList()) {
+                                String nombre = c.getNombre();
+                                int codigo = c.getCodigo();
+                    %>
                     <tr>
-                        <%
-                            if (listaCursos != null) {
-                                for (Curso c : listaCursos.cursosList()) {
-                                    String nombre = c.getNombre();
-                                    int codigo = c.getCodigo();
-                        %>
                         <td><%=nombre%></td>
                         <td>
                             <button onclick="location.href = '/CursosLibres/Profesor/GruposShow'" class="table-btn">Ver Grupos</button>
                         </td>
-                        <%
-                                }
-                            }
-
-                        %>
-
-
                     </tr>
+                    <%
+                            }
+                        }
+
+                    %>
+
+
+
 
 
 

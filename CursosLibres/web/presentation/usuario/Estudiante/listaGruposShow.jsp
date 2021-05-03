@@ -22,7 +22,7 @@
             <%@include file="/header.jsp"%>
             <div class="table-container">
                 <table>
-                    <tr>
+                    <tr class="titulo-tabla">
                         <th>Grupos</th>
                         <th>Horario</th>
                         <th></th><!-- comment -->

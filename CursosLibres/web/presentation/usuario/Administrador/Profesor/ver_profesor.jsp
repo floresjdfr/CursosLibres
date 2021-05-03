@@ -36,7 +36,16 @@
                   </tr>
                   <tr>
                      <td class="curso-izquierda">Segundo apellido:</td>
-                     <td class="curso-derecha"><%=profesor.getApellido2()%></td>
+                     
+                     <%
+                         if (profesor.getApellido2() != null){ %>
+                            <td class="curso-derecha"><%=profesor.getApellido2()%></td>
+                        <%}
+                         else{%>
+                            <td></td>
+                         <%}
+                     %>
+                     
                   </tr>
                   <tr>
                      <td class="curso-izquierda">Cedula:</td>

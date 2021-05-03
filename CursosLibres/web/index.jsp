@@ -29,10 +29,7 @@
                 String URL = "/CursosLibres/GruposMatricularShow?idCurso=";
             %>
 
-            
-            <div class="table-container">
-                
-                <div class="busqueda-wrapper">
+            <div class="busqueda-wrapper">
                 <form class="search_box" action="/CursosLibres/BuscarCursoAction" method="POST">
                     <button type="submit"class="search_btn"><i class="fas fa-search"></i></button>
                         <%
@@ -43,14 +40,18 @@
                     <%}
                     %>
                 </form>
-            </div>
-                
+            </div> 
+            <div class="table-container">
                 <table>
-                    <tr>
-                        <th>Imagen curso</th>
+                    
+                     <tr class = "titulo-tabla">
+                         <th colspan="5"><h1>Cursos en oferta</h1></th>
+                    </tr>
+                    <tr class = "titulo-tabla">
+                        <th></th>
                         <th>Curso</th>
-                        <th>Oferta</th>
-                        <th colspan="3">Precio</th>
+                        <th>Precio</th>
+                        <th></th>
                     </tr>
 
 
@@ -59,12 +60,11 @@
                     <tr>
 
                     <form  class="formulario-container" method="POST" action=<%=URL%><%=c.getCodigo()%>>
-                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="100" height="100"> </td> 
+                        <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="60" height="60"> </td> 
                         <td><%=c.getNombre()%></td>
-                        <td> <%= ofert(c.getOferta())%> </td>
                         <td><%=c.getCosto()%></td>
-                        
-                        
+
+
                         <td><button type="submit" class="table-btn">Ver/Matricular</button></td>
                         </tr>
                         <%}%>
@@ -77,31 +77,16 @@
                              <td><%=c.getNombre()%></td>
                              <td><%=c.getCosto()%></td>
 
-
                         <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
                     </tr>
                     <%}%>
                     <%}%>--%>
                 </table>
             </div>
-        </div>                               
-
+        </div>
 
         <script src="js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
 
-
-<%!
-    public String ofert(int x) {
-        if (x == 1) {
-            return "Si";
-        } else {
-            return "No";
-        }
-
-    }
-
-
-%>
