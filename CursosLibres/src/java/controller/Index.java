@@ -6,26 +6,20 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import logic.curso.CursoCRUD;
 import logic.curso.CursoDAO;
 import logic.curso.Service;
-import logic.usuario.Usuario;
 
 /**
  *
  * @author josedf
  */
 @WebServlet(name = "CursoDisplay", urlPatterns = {"/CursoDisplay", "/BuscarCursoAction"})
-public class Curso extends HttpServlet {
+public class Index extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

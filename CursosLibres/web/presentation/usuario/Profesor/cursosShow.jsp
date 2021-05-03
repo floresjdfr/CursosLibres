@@ -34,11 +34,12 @@
                             for (Curso c : listaCursos.cursosList()) {
                                 String nombre = c.getNombre();
                                 int codigo = c.getCodigo();
+                                String urlVerGrupos = "/CursosLibres/Profesor/GruposShow?idCurso=" + codigo;
                     %>
                     <tr>
                         <td><%=nombre%></td>
                         <td>
-                            <button onclick="location.href = '/CursosLibres/Profesor/GruposShow'" class="table-btn">Ver Grupos</button>
+                            <button onclick="location.href = '<%=urlVerGrupos%>'" class="table-btn">Ver Grupos</button>
                         </td>
                     </tr>
                     <%

@@ -37,7 +37,7 @@
                     %>
                     <tr>
                         <td>Grupo <%=codigo%></td>
-                        <td>Grupo <%=horario%></td>
+                        <td><%=horario%></td>
                         <td>
                             <button onclick="location.href = '<%=URL%>'" class="table-btn">Ver estudiantes</button>
                         </td>
