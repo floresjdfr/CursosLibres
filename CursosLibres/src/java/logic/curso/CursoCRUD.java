@@ -35,7 +35,7 @@ public class CursoCRUD {
             + "on grupo.profesor_idProfesor = profesor.idProfesor "
             + "where grupo_has_estudiante.codigo = ?;";
     
-    protected static final String CMD_BUSCAR_NOMBRE = "SELECT codigo, nombre, costo "
+    protected static final String CMD_BUSCAR_NOMBRE = "SELECT codigo, nombre, costo, oferta "
             + "FROM curso "
             + "WHERE nombre LIKE ?;";
     

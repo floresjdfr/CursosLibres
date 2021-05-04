@@ -149,13 +149,16 @@ public class CursoDAO {
                 int codigo = result.getInt("codigo");
                 String nombreCurso = result.getString("nombre");
                 String costo = result.getString("costo");
+                int oferta = result.getInt("oferta");
                 
                 Curso curso = new Curso();
                 curso.setCodigo(codigo);
                 curso.setNombre(nombreCurso);
                 curso.setCosto(costo);
+                curso.setOferta(oferta);
                 
-                service.cursos.add(curso);
+                if(oferta == 1)
+                    service.cursos.add(curso);
             }
             return service;
         } catch (SQLException | URISyntaxException | IOException ex) {

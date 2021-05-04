@@ -16,6 +16,8 @@
     </head>
 
     <body>
+        
+        <%String idCurso = (String) request.getAttribute("idCurso");%>
         <div class="main-container">
             <%@include file="/header.jsp" %>
 
@@ -26,7 +28,7 @@
                         <tr>
                             <td class="curso-izquierda">ID Curso:</td>
                             <td class="curso-derecha">
-                                <input class = "curso-derecha" name="idCurso" type="text">
+                                <input class = "curso-derecha" name="idCurso" type="text" value=<%=idCurso%> readonly>
                             </td>
                         </tr>
                         <tr>
@@ -50,12 +52,6 @@
                     <button type="button" class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/ListarGrupos'">Volver</button>
                 </div>
             </form>
-
-
-
-
-
-
         </div>
     </body>
 </html>

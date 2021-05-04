@@ -33,7 +33,6 @@
                     <% if (lista.cursosList() != null) {%>
                         <%for (Curso c : lista.cursosList()) {
                         String URLeditar = "/CursosLibres/editarCursoShow?idCurso=" + c.getCodigo();
-                                String URLeliminar = "/CursosLibres/eliminarCursoShow?idCurso=" + c.getCodigo();
                                 String urlVer="/CursosLibres/ListarGrupos?idCurso=" + c.getCodigo();
                         
                         %>

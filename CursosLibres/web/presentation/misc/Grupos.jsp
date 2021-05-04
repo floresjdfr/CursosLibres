@@ -4,12 +4,9 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <%
-
-        Usuario usr = (Usuario) session.getAttribute("usr");
-        
-
-    %>
+    <%Usuario usr = (Usuario) session.getAttribute("usr");
+        String urlAgregar = null;
+        String idCurso = (String) request.getAttribute("idCurso");%>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,8 +27,7 @@
                         <th></th><!-- comment -->
                     </tr>
 
-                    <%
-                        if (usr != null) {
+                    <%if (usr != null) {
                             Service service = (Service) request.getAttribute("listaGrupos");
 
                             for (Grupo g : service.gruposList()) {%>
@@ -52,7 +48,8 @@
                         </td>
                         <%break;
                             }
-                            case "Administrador": {%>
+                            case "Administrador": {
+                        %>
                         <td>
                             <button class="table-btn" onclick="location.href = '/CursosLibres/editarGrupoShow?idGrupo=<%= g.getCodigo()%>'">Editar</button>
                         </td>
@@ -68,10 +65,11 @@
                 </table>
 
                 <%
-                        if (usuario != null) {
-                            if (usuario.getClass().getSimpleName().equals("Administrador")) {%>
+                    if (usuario != null) {
+                        if (usuario.getClass().getSimpleName().equals("Administrador")) {
+                            urlAgregar = "/CursosLibres/agregarGrupoShow?idCurso=" + idCurso;%>
                 <div class="formulario-buttons">
-                    <button class="table-btn formulario-btn1" onclick="location.href = '/CursosLibres/presentation/usuario/Administrador/Curso/agregar_grupo.jsp'">Agregar</button>
+                    <button class="table-btn formulario-btn1" onclick="location.href = '<%=urlAgregar%>'">Agregar</button>
 
                     <button class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/Cursos'">Volver</button>
 

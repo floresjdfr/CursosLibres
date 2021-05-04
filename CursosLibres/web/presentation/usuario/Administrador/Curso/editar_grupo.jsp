@@ -44,12 +44,6 @@
                                 <input class = "curso-derecha" name="idProfesor" type="text" value="<%=IDProfesor%>">
                             </td>
                         </tr>
-                        <%--<tr>
-                            <td class="curso-izquierda">Cantidad de alumnos:</td>
-                            <td class="curso-derecha" class=" input-curso">
-                                <input class = "curso-derecha" name="cantida-grupo" type="text" value="<%=codigocurso%>">
-                            </td>
-                        </tr>--%>
                         <tr>
                             <td class="curso-izquierda">Fecha:</td>
                             <td class="curso-derecha" class=" input-curso">
@@ -57,19 +51,12 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
-
                 <div class="formulario-buttons">
                     <button type="submit" class="table-btn formulario-btn1">Guardar</button>
-                    <button type="button"class="table-btn formulario-btn2" onclick="location.href = /CursosLibres/ListarGrupos?idCurso=<%=codigocurso%>'">Volver</button>
+                    <button type="button"class="table-btn formulario-btn2" onclick="location.href = '/CursosLibres/ListarGrupos?idCurso=<%=codigocurso%>'">Volver</button>
                 </div>
-
-
             </form>
-
-
-
         </div>
     </body>
 </html>

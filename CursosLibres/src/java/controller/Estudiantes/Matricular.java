@@ -177,7 +177,7 @@ public class Matricular extends HttpServlet {
                         if (profesor != null) {
                             request.setAttribute("cursoID", cursoID);
                             request.setAttribute("nombreCurso", curso.getNombre());
-                            request.setAttribute("nombreProfesor", profesor.getNombre() + profesor.getApellido1());
+                            request.setAttribute("nombreProfesor", profesor.getNombre() + " " + profesor.getApellido1());
                             request.setAttribute("horario", grupo.getFecha());
                             
                             return "/presentation/usuario/Estudiante/informacionGrupoShow.jsp";

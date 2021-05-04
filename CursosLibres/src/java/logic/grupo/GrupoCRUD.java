@@ -8,8 +8,8 @@ public class GrupoCRUD {
     protected static final String CMD_Listar_CODIGO = "SELECT * from grupo WHERE Curso_codigo = ?;";
 
     protected static final String CMD_AGREGAR
-            = "INSERT INTO grupo (codigo, Curso_codigo,profesor_idProfesor,fecha) "
-            + "VALUES (?, ?, ?, ?); ";
+            = "INSERT INTO grupo (Curso_codigo,profesor_idProfesor,fecha) "
+            + "VALUES (?, ?, ?); ";
 
     protected static final String CMD_RECUPERAR
             = "SELECT codigo, Curso_codigo,profesor_idProfesor,fecha FROM grupo "

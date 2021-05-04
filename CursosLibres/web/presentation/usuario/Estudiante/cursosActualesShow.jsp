@@ -29,7 +29,7 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
+                    <tr class="titulo-tabla">
                         <td>Nombre del curso</td>
                         <td>Nombre del profesor</td>
                         <td>Horario</td>

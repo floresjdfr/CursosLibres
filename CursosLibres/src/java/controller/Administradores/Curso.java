@@ -10,9 +10,8 @@ import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +38,7 @@ import logic.usuario.profesor.ProfesorDAO;
     "/image"
 
 })
+@MultipartConfig(location = "C:/images")
 public class Curso extends HttpServlet {
 
     /**
