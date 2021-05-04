@@ -4,7 +4,7 @@
 <%@page import="logic.usuario.administrador.Administrador"%>
 
 <header class="header-container">               
-   <h1 class="header-h1">CursosLibres.com</h1>
+   <h1 class="header-h1">CursosLibres</h1>
     <div class="dropdown">
         <button class="dropbtn">Menu</button>
         <div class="dropdown-content">
