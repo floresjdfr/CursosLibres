@@ -9,7 +9,7 @@ Links para descargar los programas necesarios:
 
 - Java JDK 8: https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-- Netbeans se puede descargar: https://netbeans.apache.org/download/index.html
+- Netbeans: https://netbeans.apache.org/download/index.html
 
 - GlassFish: https://javaee.github.io/glassfish/
 
