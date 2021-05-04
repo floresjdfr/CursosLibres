@@ -20,9 +20,7 @@
         <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
         <div class="main-container">
             <%@ include file="header.jsp" %>
-            <%
-                String URL = "/CursosLibres/GruposMatricularShow?idCurso=";
-            %>
+
 
             <div class="busqueda-wrapper">
                 <form class="search_box" action="/CursosLibres/BuscarCursoAction" method="POST">
@@ -38,9 +36,9 @@
             </div> 
             <div class="table-container">
                 <table>
-                    
-                     <tr class = "titulo-tabla">
-                         <th colspan="5"><h1>Cursos en oferta</h1></th>
+
+                    <tr class = "titulo-tabla">
+                        <th colspan="5"><h1>Cursos en oferta</h1></th>
                     </tr>
                     <tr class = "titulo-tabla">
                         <th></th>
@@ -51,31 +49,18 @@
 
 
                     <% if (lista.cursosList() != null) {%>
-                    <%for (Curso c : lista.cursosList()) {%>
-                    <tr>
+                    <%for (Curso c : lista.cursosList()) {
+                            int idCurso = c.getCodigo();
+                            String URL = "/CursosLibres/GruposMatricularShow?idCurso=" + idCurso;%>
 
-                    <form  class="formulario-container" method="POST" action=<%=URL%><%=c.getCodigo()%>>
+                    <tr>
                         <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="60" height="60"> </td> 
                         <td><%=c.getNombre()%></td>
                         <td><%=c.getCosto()%></td>
-
-
-                        <td><button type="submit" class="table-btn">Ver/Matricular</button></td>
-                        </tr>
-                        <%}%>
-                        <%}%>
-
-                        <%-- <% if (lista.cursosList() != null) {%>
-                         <%for (Curso c : lista.cursosList()) {%>
-                         <tr>
-                             <td> <img src='/CursosLibres/image?nombre=<%=c.getNombre()%>' width="50" height="50"> </td>
-                             <td><%=c.getNombre()%></td>
-                             <td><%=c.getCosto()%></td>
-
-                        <td><button class="table-btn" onclick="location.href = 'presentation/misc/Grupos.jsp'">Ver</button></td>
+                        <td><button type="button" class="table-btn" onclick="location.href='<%=URL%>'">Ver/Matricular</button></td>
                     </tr>
                     <%}%>
-                    <%}%>--%>
+                    <%}%>
                 </table>
             </div>
         </div>
