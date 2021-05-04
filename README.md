@@ -155,6 +155,7 @@ INSERT INTO `cursoslibres`.`administrador` (`idAdministrador`, `nombre`, `apelli
 ```
 
 Usuario: 123.
+
 Contraseña: 123.
 
 ## Lo que falta
