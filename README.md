@@ -160,4 +160,8 @@ Contraseña: 123.
 
 ## Lo que falta
 
+###Importante
+
+Asegurarse que la carpeta en la ruta C:/images existe
+
 Seguidamente simplemente se debe abrir el proyecto en Netbeans, localizar la carpeta de GlassFish (Se debio descomprimir previamente despues de descargar) y ejecutar el sistema.
